@@ -30,25 +30,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npm run test --if-present
-      - name: Set version from Git tag
-        env:
-          INPUT_VERSION_TAG: ${{ inputs.version-tag }}
-        run: |
-          version_tag="${INPUT_VERSION_TAG:-}"
-          if [ -z "$version_tag" ]; then
-            version_tag="$(git tag --points-at "$GITHUB_SHA" --list 'v*.*.*' | sort -V | tail -n1)"
-          fi
-          echo "VITE_VERSION_TAG=${version_tag:-development}" >> "$GITHUB_ENV"
-      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: .
 
   deploy:
     needs: build
