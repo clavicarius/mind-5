@@ -72,4 +72,4 @@ Vor dem Ausbau der vollständigen Engine soll ein kleiner, validierter Aufgabenb
 
 Mind 5 soll mit JavaScript nur dort umgesetzt werden, wo es erforderlich ist. Die lokale Persistenzentscheidung (localStorage oder IndexedDB) wird erst nach Definition des Persistenzschemas getroffen. Der Datenzugriff soll abstrahiert werden, damit später IndexedDB oder Synchronisierung ergänzt werden können.
 
-Vorgesehene persistente Daten umfassen Spielstatus, Tagesrunde und offiziellen Versuch, Rekorde, Streak, Altersgruppe, Zeitquelle, Validierungsstatus sowie Versions- und Migrationsinformationen. V1 speichert keine weitergehende Statistik-Historie.
+Vorgesehene persistente Daten umfassen Spielstatus, Tagesrunde und offiziellen Versuch, Rekorde, Streak, Altersgruppe, Zeitquelle, Validierungsstatus sowie Versions- und Migrationsinformationen. V1 speichert keine weitergehende Statistik-Historie. Persistenz erlaubt ausdrücklich keine Fortsetzung einer laufenden Runde nach dem Schließen des Browsers oder der App; die Runde wird verworfen und eine offizielle Runde nach den Regeln zum Tagesabbruch gewertet.

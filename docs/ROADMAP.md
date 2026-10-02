@@ -49,9 +49,11 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
-- Konkrete Hinweisstufen und Punktabzüge sowie die zentrale Rundungslogik.
+- Konkrete Hinweisstufen und Punktabzüge sowie Rundungsebene und -zeitpunkt (die Rundungsart ist kaufmännisch festgelegt).
 - Vollständiges gemeinsames Bewertungsmodell einschließlich Beispielen verschiedener Mechaniktypen.
 - Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie vollständige Mechanikprofile.
+- Ob übersprungene Memory-Logic-Fragen einen der drei Aufgabenfehler verbrauchen.
+- Ob Rekorde einer Altersgruppe beim Wechsel gelöscht oder nur nicht wiederhergestellt/angezeigt werden.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.
 - Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
 - Zeitquelle, Offline-Abgleich und Zustandsübergänge für Mitternacht und Zeitmanipulation im Detail.

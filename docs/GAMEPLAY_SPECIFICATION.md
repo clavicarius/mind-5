@@ -20,8 +20,7 @@ Pflichtregeln haben Vorrang vor Optimierungszielen. Bereichswiederholungen sind 
 - Pro Tag gibt es genau einen offiziellen Versuch.
 - Er wird mit Abschluss der ersten Aufgabe festgelegt – unabhängig davon, ob sie richtig, falsch, übersprungen oder mit angezeigter Lösung beendet wurde.
 - Eine Runde, die vor Abschluss der ersten Aufgabe verlassen wird, gilt als nicht-offiziell und wird verworfen. Sie kann nicht fortgesetzt werden. Vor dem nächsten Start wird auf die Verwerfung hingewiesen; eine Bestätigung ist erforderlich. Unbegrenztes Neuwürfeln vor dem offiziellen Versuch gibt es nicht.
-- Nach dem offiziellen Versuch sind weitere Runden erlaubt. Sie tragen deutlich die Kennzeichnung **„Weitere Runde – ohne Wertung“** und erfordern eine Bestätigung.
-- Weitere Runden ändern weder offizielles Tagesergebnis noch Streak oder Bestwert. Sie dürfen jedoch eine Bestzeit verbessern.
+- Nach dem offiziellen Versuch sind weitere Runden erlaubt. Sie tragen deutlich die Kennzeichnung **„Weitere Runde – ohne Wertung“** und erfordern eine Bestätigung. „Ohne Wertung“ bedeutet, dass sie weder Tagesergebnis noch Streak oder Bestwert verändern; eine gültige Zeit darf weiterhin die Bestzeit verbessern.
 
 ## Aufgabenbedienung und Fehler
 
@@ -37,17 +36,21 @@ Grundsätzlich hat jede Aufgabe höchstens drei Fehler. Ein relevanter falscher 
 
 ## Punkte, Tagesergebnis und Zeit
 
-Jede Aufgabe liefert grundsätzlich 0–100 Punkte. Alle fünf Aufgaben sind gleichwertig; daraus wird die Tagespunktzahl auf 0–100 normalisiert. Es gilt kaufmännische Rundung auf ganze Punkte. Hinweise können die maximal erreichbaren Punkte senken. Die konkreten Hinweisabzüge, Hinweisstufen und eine gemeinsame Rundungsregel sind noch festzulegen.
+Jede Aufgabe liefert grundsätzlich 0–100 Punkte. Alle fünf Aufgaben sind gleichwertig; daraus wird die Tagespunktzahl auf 0–100 normalisiert. Die Rundung auf ganze Punkte erfolgt kaufmännisch. Hinweise können die maximal erreichbaren Punkte senken. Die konkreten Hinweisabzüge und Hinweisstufen sind noch festzulegen.
+
+> **Klärungsbedarf:** Die Rundungsart (kaufmännisch) ist entschieden, aber die Rundungsebene und der Zeitpunkt noch nicht: etwa bei Teilfragen, Aufgabenpunkten oder erst bei der Tagesnormalisierung sowie das Zusammenspiel mit Hinweisabzügen.
 
 Für die Altersgruppen 8–12 und 13–17 ist der erste Hinweis kostenlos; bei 18+ reduziert er die Punktzahl. Das Tagesergebnis ist nach Abschluss oder Beendigung der offiziellen Runde immer gültig und zeigt Gesamtpunktzahl sowie die Einzelpunkte aller fünf Aufgaben. Nicht abgeschlossene Aufgaben erhalten null Punkte.
 
-Gemessen wird nur die aktive Gesamtzeit der fünf Aufgaben: Beginn mit der ersten Aufgabe, Ende mit Abschluss der fünften. Reihenfolge und Zeit haben keinen Einfluss auf Punkte; Zeit zählt ausschließlich für den Bestzeitrekord. Die Merkphase von Memory Logic zählt nicht zur Spielzeit.
+Gemessen wird nur die aktive Gesamtzeit der fünf Aufgaben: Beginn mit der ersten Aufgabe, Ende mit deren endgültigem Abschluss (also nach der erforderlichen Bestätigung) der fünften. Reihenfolge und Zeit haben keinen Einfluss auf Punkte; Zeit zählt ausschließlich für den Bestzeitrekord. Die Merkphase von Memory Logic zählt nicht zur Spielzeit.
 
-Bei Tabwechsel, Wechsel in den Hintergrund oder Verlassen des Spiels pausiert die Messung automatisch. Zurück im Spiel muss ausdrücklich „Fortsetzen“ gewählt werden, bevor die Zeit weiterläuft. Wird das Spiel geschlossen, wird die laufende Runde verworfen; die aktive Zeit ist keine Bestzeit.
+Bei Tabwechsel, Wechsel in den Hintergrund oder Verlassen des Spiels pausiert die Messung automatisch. Zurück im Spiel muss ausdrücklich „Fortsetzen“ gewählt werden, bevor die Zeit weiterläuft. Wird das Spiel geschlossen, ist keine Fortsetzung möglich und die aktive Zeit ist keine Bestzeit. Eine nicht-offizielle Runde wird verworfen. Bei einem bereits offiziellen Versuch gilt der Tagesabbruch: offene Aufgaben erhalten null Punkte und der Tageswert wird berechnet.
 
 ## Bestwert, Bestzeit und Streak
 
-Rekorde werden pro Altersgruppe getrennt geführt. Es gibt keine gemeinsame Rangliste und in V1 keine Statistik-Historie. Bei einem Altersgruppenwechsel werden Tageswertung und Streak zurückgesetzt; die Rekordführung beginnt für die neue Altersgruppe separat. Die Übergabe besagt, dass frühere Rekorde der alten Altersgruppe beim Wechsel nicht wiederhergestellt werden.
+Rekorde werden pro Altersgruppe getrennt geführt. Es gibt keine gemeinsame Rangliste und in V1 keine Statistik-Historie. Bei einem Altersgruppenwechsel werden Tageswertung und Streak zurückgesetzt; die Rekordführung beginnt für die neue Altersgruppe separat.
+
+> **Klärungsbedarf:** Die Übergabe fordert sowohl getrennte Rekorde je Altersgruppe als auch, dass frühere Rekorde der alten Altersgruppe beim Wechsel nicht wiederhergestellt werden. Es ist nicht eindeutig, ob diese Rekorde gelöscht oder lediglich beim Wechsel nicht angezeigt/aktiviert werden. Vor der Umsetzung festlegen, damit die altersgruppenspezifische Rekordführung nicht unbeabsichtigt verloren geht.
 
 ### Bestwert
 
@@ -101,13 +104,15 @@ Die Informationsanzahl anspruchsvoller Aufgaben wird vor der Merkphase festgeleg
 
 Fragen werden nacheinander gestellt und können beantwortet oder übersprungen werden. Abgeschlossene Fragen sind nicht erneut aufrufbar. Leichte Aufgaben fragen ausschließlich direkt gespeicherte Informationen ab. Anspruchsvolle Aufgaben dürfen mehrere Informationen kombinieren; jede Antwort muss vollständig aus den gezeigten Informationen ableitbar sein.
 
+> **Klärungsbedarf:** Für das Überspringen einer einzelnen Memory-Logic-Frage ist festgelegt, dass sie null Punkte erhält, nicht aber, ob dies zugleich einen der drei Aufgabenfehler verbraucht. Das muss bei der Mechanik-Spezifikation entschieden werden.
+
 Es gibt nur vorgegebene Antwortmöglichkeiten. Leicht hat jede Frage exakt eine richtige Antwort. Anspruchsvoll kann eine oder mehrere richtige Antworten haben; bei mehreren richtigen Antworten wird Multi-Select verwendet. Multi-Select ist nicht zwingend erforderlich. Die Zahl der richtigen Antworten wird nicht verraten. Hinweise zur Auswahl lauten „Wähle eine Antwort.“ oder „Wähle alle richtigen Antworten.“ Die Auswahl kann vor dem Absenden geändert werden; erst die ausdrückliche Bestätigung macht sie verbindlich.
 
 ### Fehler, Lösung und Punkte
 
 Eine falsche bestätigte Antwort zählt als ein Fehler; dieselbe Frage bietet keine zweite Chance und ist danach abgeschlossen. Beim dritten Fehler endet die gesamte Aufgabe, offene Fragen erhalten null Punkte. Falsche Antworten zeigen klares „falsch“-Feedback, aber nicht sofort die Lösung. Die vollständige Lösung aller Fragen wird erst nach Aufgabenabschluss angezeigt – auch nach regulärem Abschluss, Überspringen, drittem Fehler oder anderem vorzeitigem Ende.
 
-Alle Fragen sind gleich gewichtet: bei drei Fragen je ein Drittel, bei fünf Fragen je ein Fünftel der maximalen Aufgabenpunktzahl. Richtige Antworten erhalten ihren Anteil; falsche, übersprungene und offene Fragen null. Hinweise können die maximale Punktzahl reduzieren. Die zentrale Rundungslogik ist noch offen.
+Alle Fragen sind gleich gewichtet: bei drei Fragen je ein Drittel, bei fünf Fragen je ein Fünftel der maximalen Aufgabenpunktzahl. Richtige Antworten erhalten ihren Anteil; falsche, übersprungene und offene Fragen null. Hinweise können die maximale Punktzahl reduzieren. Die Rundungsart ist kaufmännisch; Rundungsebene und -zeitpunkt sind noch offen (siehe Klärungsbedarf im Abschnitt „Punkte, Tagesergebnis und Zeit“).
 
 ### Generierung und Validierung
 
