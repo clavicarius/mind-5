@@ -25,7 +25,7 @@
 10. Lösung / Feedback
 11. Validierung
 
-Anschließend werden die übrigen neun Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben: Memory Logic ist die Referenzmechanik, die anderen neun Profile stehen noch aus.
+Aktuell stehen neun Mechanikprofile aus: Zahlenfolge und die übrigen acht Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die anderen acht Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
 
 ## Priorisierte weitere Arbeit
 

@@ -52,7 +52,7 @@ Jede Mechanik hat grundsätzlich die Stufen **leicht** und **anspruchsvoll**. An
 | 5 | 1 | 4 | Schwer |
 | 6 | 0 | 5 | Extrem |
 
-Nach Rundenbeginn ist das Profil nicht änderbar. Beim Altersgruppenwechsel werden aktuelle Tageswertung und Streak zurückgesetzt; die Rekordführung ist altersgruppenspezifisch. Der Umgang mit bereits bestehenden Rekorden beim Wechsel ist in der Übergabe als Reset beschrieben und bei der Umsetzung entsprechend zu konkretisieren.
+Nach Rundenbeginn ist das Profil nicht änderbar. Beim Altersgruppenwechsel werden aktuelle Tageswertung und Streak zurückgesetzt; Rekorde werden altersgruppenspezifisch geführt und beim Wechsel nicht wiederhergestellt.
 
 ## Qualitätsziele
 
