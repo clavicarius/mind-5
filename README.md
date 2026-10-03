@@ -7,6 +7,11 @@
 
 ![logo](./src/assets/branding/social-preview.png)
 
+## Projektdokumentation
+
+- [Projektübersicht](./docs/PROJECT_OVERVIEW.md): Identität, V1-Umfang und technische Leitlinien
+- [Spiel- und Regelspezifikation](./docs/GAMEPLAY_SPECIFICATION.md): Spielablauf, Wertung und Referenzmechanik
+- [Roadmap und offene Entscheidungen](./docs/ROADMAP.md): Arbeitsstand und priorisierte nächste Schritte
 
 
 # Wartung
