@@ -11,7 +11,7 @@
 
 ## Nächster fachlicher Arbeitsschritt
 
-**Die verbleibenden Mechanikprofile vollständig spezifizieren.** Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik und Visueller Vergleich sind beschrieben. Memory Logic bleibt die Referenzmechanik; offen sind noch Reihenfolge, Wortlogik und Rechenlogik. Dabei dieselbe Struktur verwenden:
+**Mechanik 9 – Wortlogik vollständig spezifizieren.** Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind beschrieben. Memory Logic bleibt die Referenzmechanik.
 
 1. Spielziel
 2. Altersgruppen
@@ -25,7 +25,7 @@
 10. Lösung / Feedback
 11. Validierung
 
-Die Profile für Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik und Visueller Vergleich sind vollständig spezifiziert. Für Reihenfolge, Wortlogik und Rechenlogik stehen die V1-Standardprofile noch aus; Memory Logic bleibt die Referenzmechanik.
+Die Profile für Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind vollständig spezifiziert. Für Wortlogik steht das V1-Standardprofil noch aus; Memory Logic bleibt die Referenzmechanik und benötigt weiterhin die unter „Noch offene Entscheidungen“ aufgeführten Details.
 
 ## Priorisierte weitere Arbeit
 
@@ -33,7 +33,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 | Priorität | Arbeitspaket | Ergebnis |
 | ---: | --- | --- |
-| 1 | Mechaniken | Drei verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
+| 1 | Mechaniken | Ein verbleibendes Mechanikprofil vollständig spezifizieren, jeweils nur V1-Kernumfang. |
 | 2 | Gemeinsames Bewertungsmodell | Einheitliches Modell für Aufgabenpunkte 0–100, Fehler, Überspringen, Lösung, Abschluss, Hinweise, Rundung und Tagesnormalisierung definieren; mindestens drei Mechaniktypen konkret durchrechnen. |
 | 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
 | 4 | Generierung und Validierung | Handgebaut/generiert/hybrid je Mechanik, Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeitsprüfung, redaktionelle Prüfung und Verhalten bei fehlgeschlagener Validierung festlegen. |
@@ -51,7 +51,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 - Konkrete Hinweisstufen und Punktabzüge sowie Rundungsebene und -zeitpunkt (die Rundungsart ist kaufmännisch festgelegt).
 - Vollständiges gemeinsames Bewertungsmodell einschließlich Beispielen verschiedener Mechaniktypen.
-- Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie vollständige Profile der übrigen Mechaniken.
+- Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie das vollständige Profil für Wortlogik.
 - Ob übersprungene Memory-Logic-Fragen einen der drei Aufgabenfehler verbrauchen.
 - Ob Rekorde einer Altersgruppe beim Wechsel gelöscht oder nur nicht wiederhergestellt/angezeigt werden.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.

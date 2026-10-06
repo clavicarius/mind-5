@@ -142,6 +142,10 @@ Das vollständige V1-Standardprofil mit erlaubten Transformationen, Darstellung,
 
 Die vollständige Mechanikbeschreibung einschließlich Regeln für Altersgruppen, Schwierigkeit, Generierung, Eingabe, Fehler, Neustart, Hinweise, Punkte, Feedback und Validierung steht in der [Zahlenfolge-Spezifikation](./profiles/number-sequence.md).
 
+## Reihenfolge
+
+Das vollständige V1-Standardprofil mit Eingabe, Hinweisen, eindeutiger Ordnung und Validierung steht in der [Spezifikation „Reihenfolge“](./profiles/ordering.md).
+
 ## Raster-Logik
 
 Das vollständige V1-Standardprofil mit Rasterregeln, Eingabe, Lösbarkeit, Eindeutigkeit und Validierung steht in der [Raster-Logik-Spezifikation](./profiles/grid-logic.md).
@@ -149,3 +153,7 @@ Das vollständige V1-Standardprofil mit Rasterregeln, Eingabe, Lösbarkeit, Eind
 ## Visueller Vergleich
 
 Das vollständige V1-Standardprofil mit zulässigen Unterschieden, Darstellung, Mehrfachauswahl und Validierung steht in der [Mechanikspezifikation „Visueller Vergleich“](./profiles/visual-comparison.md).
+
+## Rechenlogik
+
+Das vollständige V1-Standardprofil mit mathematischen Voraussetzungen, zusätzlichen Bedingungen, Lösbarkeit und Validierung steht in der [Rechenlogik-Spezifikation](./profiles/arithmetic-logic.md).
