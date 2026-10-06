@@ -25,7 +25,7 @@
 10. Lösung / Feedback
 11. Validierung
 
-Muster fortsetzen und Was passt nicht? sind vollständig spezifiziert. Aktuell stehen sieben Mechanikprofile aus: Zahlenfolge und sechs weitere Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die übrigen sechs Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
+Muster fortsetzen, Was passt nicht? und Drehen & Denken sind vollständig spezifiziert. Aktuell stehen sechs Mechanikprofile aus: Zahlenfolge und fünf weitere Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die übrigen fünf Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
 
 ## Priorisierte weitere Arbeit
 
