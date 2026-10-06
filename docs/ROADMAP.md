@@ -11,7 +11,7 @@
 
 ## Nächster fachlicher Arbeitsschritt
 
-**Mechanik 5 – Raster-Logik vollständig spezifizieren**, bevor die nächste Mechanik bearbeitet wird. Dabei dieselbe Struktur wie bei Memory Logic verwenden:
+**Mechanik 8 – Visueller Vergleich vollständig spezifizieren**, bevor Wortlogik bearbeitet wird. Dabei dieselbe Struktur wie bei Memory Logic verwenden:
 
 1. Spielziel
 2. Altersgruppen
@@ -25,11 +25,7 @@
 10. Lösung / Feedback
 11. Validierung
 
-<<<<<<< HEAD
-Zahlenfolge, Muster fortsetzen, Was passt nicht? und Reihenfolge sind vollständig spezifiziert. Aktuell stehen fünf Mechanikprofile aus: Raster-Logik und vier weitere Mechaniken. Nach der vollständigen Spezifikation der Raster-Logik werden die übrigen vier Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
-=======
-Muster fortsetzen, Was passt nicht? und Drehen & Denken sind vollständig spezifiziert. Aktuell stehen sechs Mechanikprofile aus: Zahlenfolge und fünf weitere Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die übrigen fünf Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
->>>>>>> origin/main
+Muster fortsetzen, Was passt nicht?, Drehen & Denken, Zahlenfolge, Raster-Logik, Reihenfolge und Rechenlogik sind vollständig spezifiziert. Für Visueller Vergleich und Wortlogik fehlen noch vollständige Profile; Memory Logic bleibt die Referenzmechanik und benötigt weiterhin die unter „Noch offene Entscheidungen“ aufgeführten Details.
 
 ## Priorisierte weitere Arbeit
 
@@ -37,7 +33,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 | Priorität | Arbeitspaket | Ergebnis |
 | ---: | --- | --- |
-| 1 | Mechaniken | Fünf verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
+| 1 | Mechaniken | Zwei verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
 | 2 | Gemeinsames Bewertungsmodell | Einheitliches Modell für Aufgabenpunkte 0–100, Fehler, Überspringen, Lösung, Abschluss, Hinweise, Rundung und Tagesnormalisierung definieren; mindestens drei Mechaniktypen konkret durchrechnen. |
 | 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
 | 4 | Generierung und Validierung | Handgebaut/generiert/hybrid je Mechanik, Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeitsprüfung, redaktionelle Prüfung und Verhalten bei fehlgeschlagener Validierung festlegen. |
@@ -55,7 +51,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 - Konkrete Hinweisstufen und Punktabzüge sowie Rundungsebene und -zeitpunkt (die Rundungsart ist kaufmännisch festgelegt).
 - Vollständiges gemeinsames Bewertungsmodell einschließlich Beispielen verschiedener Mechaniktypen.
-- Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie vollständige Profile der übrigen Mechaniken.
+- Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie vollständige Profile für Reihenfolge, Visueller Vergleich und Wortlogik.
 - Ob übersprungene Memory-Logic-Fragen einen der drei Aufgabenfehler verbrauchen.
 - Ob Rekorde einer Altersgruppe beim Wechsel gelöscht oder nur nicht wiederhergestellt/angezeigt werden.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.
