@@ -128,4 +128,4 @@ Build-Zeit-Generierung wird bevorzugt. Handgebaute Aufgaben werden redaktionell 
 
 ## Zahlenfolge
 
-Die vollständige Mechanikbeschreibung einschließlich Regeln für Altersgruppen, Schwierigkeit, Generierung, Eingabe, Fehler, Neustart, Hinweise, Punkte, Feedback und Validierung steht in der [Zahlenfolge-Spezifikation](./ZAHLENFOLGE.md).
+Die vollständige Mechanikbeschreibung einschließlich Regeln für Altersgruppen, Schwierigkeit, Generierung, Eingabe, Fehler, Neustart, Hinweise, Punkte, Feedback und Validierung steht in der [Zahlenfolge-Spezifikation](./profiles/number-sequence.md).
