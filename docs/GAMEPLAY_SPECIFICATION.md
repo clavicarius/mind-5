@@ -128,4 +128,4 @@ Build-Zeit-Generierung wird bevorzugt. Handgebaute Aufgaben werden redaktionell 
 
 ## Was passt nicht?
 
-Das vollständige V1-Standardprofil mit Spielregeln, Altersgruppen- und Schwierigkeitsbeispielen sowie Anforderungen an Eindeutigkeit und Validierung steht in der [Mechanikspezifikation „Was passt nicht?“](./WAS_PASST_NICHT.md).
+Das vollständige V1-Standardprofil mit Spielregeln, Altersgruppen- und Schwierigkeitsbeispielen sowie Anforderungen an Eindeutigkeit und Validierung steht in der [Mechanikspezifikation „Was passt nicht?“](./profiles/rule-violation.md).
