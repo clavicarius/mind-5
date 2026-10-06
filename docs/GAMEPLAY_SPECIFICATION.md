@@ -145,3 +145,7 @@ Die vollständige Mechanikbeschreibung einschließlich Regeln für Altersgruppen
 ## Raster-Logik
 
 Das vollständige V1-Standardprofil mit Rasterregeln, Eingabe, Lösbarkeit, Eindeutigkeit und Validierung steht in der [Raster-Logik-Spezifikation](./profiles/grid-logic.md).
+
+## Visueller Vergleich
+
+Das vollständige V1-Standardprofil mit zulässigen Unterschieden, Darstellung, Mehrfachauswahl und Validierung steht in der [Mechanikspezifikation „Visueller Vergleich“](./profiles/visual-comparison.md).
