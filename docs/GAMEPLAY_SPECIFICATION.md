@@ -134,10 +134,20 @@ Das vollständige V1-Mechanikprofil mit Spielziel, Altersgruppen, Schwierigkeits
 
 Das vollständige V1-Standardprofil mit Spielregeln, Altersgruppen- und Schwierigkeitsbeispielen sowie Anforderungen an Eindeutigkeit und Validierung steht in der [Mechanikspezifikation „Was passt nicht?“](./profiles/odd-one-out.md).
 
+## Drehen & Denken
+
+Das vollständige V1-Standardprofil mit erlaubten Transformationen, Darstellung, Eingabe, Aufgabengenerierung und eindeutiger Lösung steht in der [Mechanikspezifikation „Drehen & Denken“](./profiles/mental-rotation.md).
+
 ## Zahlenfolge
 
 Die vollständige Mechanikbeschreibung einschließlich Regeln für Altersgruppen, Schwierigkeit, Generierung, Eingabe, Fehler, Neustart, Hinweise, Punkte, Feedback und Validierung steht in der [Zahlenfolge-Spezifikation](./profiles/number-sequence.md).
 
+<<<<<<< HEAD
 ## Reihenfolge
 
 Das vollständige V1-Standardprofil mit Eingabe, Hinweisen, eindeutiger Ordnung und Validierung steht in der [Spezifikation „Reihenfolge“](./profiles/ordering.md).
+=======
+## Raster-Logik
+
+Das vollständige V1-Standardprofil mit Rasterregeln, Eingabe, Lösbarkeit, Eindeutigkeit und Validierung steht in der [Raster-Logik-Spezifikation](./profiles/grid-logic.md).
+>>>>>>> origin/main

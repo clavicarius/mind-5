@@ -25,7 +25,11 @@
 10. Lösung / Feedback
 11. Validierung
 
+<<<<<<< HEAD
 Zahlenfolge, Muster fortsetzen, Was passt nicht? und Reihenfolge sind vollständig spezifiziert. Aktuell stehen fünf Mechanikprofile aus: Raster-Logik und vier weitere Mechaniken. Nach der vollständigen Spezifikation der Raster-Logik werden die übrigen vier Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
+=======
+Muster fortsetzen, Was passt nicht? und Drehen & Denken sind vollständig spezifiziert. Aktuell stehen sechs Mechanikprofile aus: Zahlenfolge und fünf weitere Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die übrigen fünf Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
+>>>>>>> origin/main
 
 ## Priorisierte weitere Arbeit
 
