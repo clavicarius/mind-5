@@ -25,7 +25,7 @@
 10. Lösung / Feedback
 11. Validierung
 
-Aktuell stehen neun Mechanikprofile aus: Zahlenfolge und die übrigen acht Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die anderen acht Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
+Aktuell stehen acht Mechanikprofile aus: Zahlenfolge und sieben weitere Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die übrigen sieben Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
 
 ## Priorisierte weitere Arbeit
 
@@ -33,7 +33,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 | Priorität | Arbeitspaket | Ergebnis |
 | ---: | --- | --- |
-| 1 | Mechaniken | Neun verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
+| 1 | Mechaniken | Acht verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
 | 2 | Gemeinsames Bewertungsmodell | Einheitliches Modell für Aufgabenpunkte 0–100, Fehler, Überspringen, Lösung, Abschluss, Hinweise, Rundung und Tagesnormalisierung definieren; mindestens drei Mechaniktypen konkret durchrechnen. |
 | 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
 | 4 | Generierung und Validierung | Handgebaut/generiert/hybrid je Mechanik, Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeitsprüfung, redaktionelle Prüfung und Verhalten bei fehlgeschlagener Validierung festlegen. |
@@ -51,7 +51,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 - Konkrete Hinweisstufen und Punktabzüge sowie Rundungsebene und -zeitpunkt (die Rundungsart ist kaufmännisch festgelegt).
 - Vollständiges gemeinsames Bewertungsmodell einschließlich Beispielen verschiedener Mechaniktypen.
-- Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie vollständige Mechanikprofile.
+- Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie vollständige Profile der übrigen Mechaniken.
 - Ob übersprungene Memory-Logic-Fragen einen der drei Aufgabenfehler verbrauchen.
 - Ob Rekorde einer Altersgruppe beim Wechsel gelöscht oder nur nicht wiederhergestellt/angezeigt werden.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.
