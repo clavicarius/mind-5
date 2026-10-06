@@ -145,3 +145,7 @@ Die vollständige Mechanikbeschreibung einschließlich Regeln für Altersgruppen
 ## Raster-Logik
 
 Das vollständige V1-Standardprofil mit Rasterregeln, Eingabe, Lösbarkeit, Eindeutigkeit und Validierung steht in der [Raster-Logik-Spezifikation](./profiles/grid-logic.md).
+
+## Rechenlogik
+
+Das vollständige V1-Standardprofil mit mathematischen Voraussetzungen, zusätzlichen Bedingungen, Lösbarkeit und Validierung steht in der [Rechenlogik-Spezifikation](./profiles/arithmetic-logic.md).
