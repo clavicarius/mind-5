@@ -60,3 +60,15 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 ## V1 ausdrücklich ausgeschlossen
 
 Story, Social-/Sharing-System, Ranglisten, Accounts, Cloud-Synchronisierung, Langzeitstatistiken, Newsletter, Monetarisierung, Werbung und komplexe Backend-/CMS-Strukturen.
+
+## Release-QA: V1-Ausschlüsse
+
+Vor jeder V1-Veröffentlichung prüfen und abhaken, dass weder die Anwendung noch zugehörige Release-Inhalte ausgeschlossene Funktionen anbieten oder voraussetzen:
+
+- [ ] Keine Story, Social-Funktionen, Sharing-Funktionen oder Ranglisten.
+- [ ] Keine Accounts und keine Cloud-Synchronisierung.
+- [ ] Keine Langzeitstatistiken.
+- [ ] Kein Newsletter, keine Werbung und keine Monetarisierung.
+- [ ] Kein komplexes Backend und kein CMS.
+
+Werden solche Funktionen für die Veröffentlichung benötigt oder sichtbar, ist der V1-QA-Gate nicht bestanden; Umfang und Freigabe müssen zuerst geklärt werden.
