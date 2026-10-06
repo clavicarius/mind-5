@@ -36,7 +36,7 @@ Grundsätzlich hat jede Aufgabe höchstens drei Fehler. Ein relevanter falscher 
 
 ## Punkte, Tagesergebnis und Zeit
 
-Jede Aufgabe liefert grundsätzlich 0–100 Punkte. Alle fünf Aufgaben sind gleichwertig; daraus wird die Tagespunktzahl auf 0–100 normalisiert. Die Rundung auf ganze Punkte erfolgt kaufmännisch. Hinweise können die maximal erreichbaren Punkte senken. Die konkreten Hinweisabzüge und Hinweisstufen sind noch festzulegen.
+Jede Aufgabe liefert grundsätzlich 0–100 Punkte. Alle fünf Aufgaben sind gleichwertig; daraus wird die Tagespunktzahl auf 0–100 normalisiert. Die Rundung auf ganze Punkte erfolgt kaufmännisch. Hinweise können die maximal erreichbaren Punkte senken; konkrete Hinweisstufen und -abzüge werden in den jeweiligen Mechanikprofilen festgelegt.
 
 > **Klärungsbedarf:** Die Rundungsart (kaufmännisch) ist entschieden, aber die Rundungsebene und der Zeitpunkt noch nicht: etwa bei Teilfragen, Aufgabenpunkten oder erst bei der Tagesnormalisierung sowie das Zusammenspiel mit Hinweisabzügen.
 
@@ -89,42 +89,7 @@ Wird Mitternacht während einer laufenden Runde erreicht, wird dies vorher angek
 
 ## Memory Logic – Referenzmechanik
 
-### Informations- und Merkphase
-
-Die Aufgabe präsentiert Einzelfakten oder Beziehungen zwischen genau zwei Objekten, zum Beispiel „Anna trägt Rot“ oder „Anna ist älter als Ben“.
-
-| Schwierigkeit | Informationen | Fragen | Antwortoptionen |
-| --- | ---: | ---: | ---: |
-| Leicht | exakt 4 | 3 | exakt 4 |
-| Anspruchsvoll | zufällig 6, 7 oder 8 | 5 | zufällig 5 oder 6 |
-
-Die Informationsanzahl anspruchsvoller Aufgaben wird vor der Merkphase festgelegt. Das Verhältnis von Einzelfakten und Beziehungen ist frei. Informationen erscheinen einzeln; die spielende Person steuert jeden Wechsel. Bereits gesehene Informationen können nicht erneut aufgerufen werden. Es gibt kein Zeitlimit, und die Merkphase zählt nicht zur Spielzeit. Eine Fortschrittsanzeige (z. B. „3 von 6“) zeigt den Stand. Nach der letzten Information folgt eine eigene Bestätigung; erst danach beginnt die erste Frage.
-
-### Fragen und Antworten
-
-Fragen werden nacheinander gestellt und können beantwortet oder übersprungen werden. Abgeschlossene Fragen sind nicht erneut aufrufbar. Leichte Aufgaben fragen ausschließlich direkt gespeicherte Informationen ab. Anspruchsvolle Aufgaben dürfen mehrere Informationen kombinieren; jede Antwort muss vollständig aus den gezeigten Informationen ableitbar sein.
-
-> **Klärungsbedarf:** Für das Überspringen einer einzelnen Memory-Logic-Frage ist festgelegt, dass sie null Punkte erhält, nicht aber, ob dies zugleich einen der drei Aufgabenfehler verbraucht. Das muss bei der Mechanik-Spezifikation entschieden werden.
-
-Es gibt nur vorgegebene Antwortmöglichkeiten. Leicht hat jede Frage exakt eine richtige Antwort. Anspruchsvoll kann eine oder mehrere richtige Antworten haben; bei mehreren richtigen Antworten wird Multi-Select verwendet. Multi-Select ist nicht zwingend erforderlich. Die Zahl der richtigen Antworten wird nicht verraten. Hinweise zur Auswahl lauten „Wähle eine Antwort.“ oder „Wähle alle richtigen Antworten.“ Die Auswahl kann vor dem Absenden geändert werden; erst die ausdrückliche Bestätigung macht sie verbindlich.
-
-### Fehler, Lösung und Punkte
-
-Eine falsche bestätigte Antwort zählt als ein Fehler; dieselbe Frage bietet keine zweite Chance und ist danach abgeschlossen. Beim dritten Fehler endet die gesamte Aufgabe, offene Fragen erhalten null Punkte. Falsche Antworten zeigen klares „falsch“-Feedback, aber nicht sofort die Lösung. Die vollständige Lösung aller Fragen wird erst nach Aufgabenabschluss angezeigt – auch nach regulärem Abschluss, Überspringen, drittem Fehler oder anderem vorzeitigem Ende.
-
-Alle Fragen sind gleich gewichtet: bei drei Fragen je ein Drittel, bei fünf Fragen je ein Fünftel der maximalen Aufgabenpunktzahl. Richtige Antworten erhalten ihren Anteil; falsche, übersprungene und offene Fragen null. Hinweise können die maximale Punktzahl reduzieren. Die Rundungsart ist kaufmännisch; Rundungsebene und -zeitpunkt sind noch offen (siehe Klärungsbedarf im Abschnitt „Punkte, Tagesergebnis und Zeit“).
-
-### Generierung und Validierung
-
-Die Engine erzeugt Objekte, Informationen, Beziehungen, Fragen, Antwortmöglichkeiten und richtige Antworten. Jede generierte Aufgabe muss automatisiert auf folgende Bedingungen geprüft werden:
-
-- eindeutig lösbar und vollständig aus den angezeigten Informationen ableitbar
-- richtige Antworten vollständig ableitbar
-- falsche Optionen nicht ebenfalls korrekt
-- Multi-Select eindeutig
-- Schwierigkeit eingehalten
-
-Build-Zeit-Generierung wird bevorzugt. Handgebaute Aufgaben werden redaktionell geprüft. Konkrete Inhaltsgrenzen, erlaubte Beziehungen und vollständige Altersgruppen-Beispiele sind noch auszuarbeiten.
+Das verbindliche Referenzprofil mit Alters- und Inhaltsgrenzen, Datenmodell, zulässigen Schlussfolgerungen, Zuständen, Wertung, Validierung und mindestens fünf Beispielen je Altersgruppe und Schwierigkeit steht in der [Memory-Logic-Spezifikation](./profiles/memory-logic.md).
 
 ## Muster fortsetzen
 
