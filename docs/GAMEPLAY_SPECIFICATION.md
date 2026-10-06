@@ -128,4 +128,4 @@ Build-Zeit-Generierung wird bevorzugt. Handgebaute Aufgaben werden redaktionell 
 
 ## Muster fortsetzen
 
-Das vollständige V1-Mechanikprofil mit Spielziel, Altersgruppen, Schwierigkeitsstufen, Aufgabengenerierung, Eingabe, Fehlerbehandlung, Neustart, Hinweisen, Punkten, Feedback und Validierung steht in der [Spezifikation „Muster fortsetzen“](./MUSTER_FORTSETZEN.md).
+Das vollständige V1-Mechanikprofil mit Spielziel, Altersgruppen, Schwierigkeitsstufen, Aufgabengenerierung, Eingabe, Fehlerbehandlung, Neustart, Hinweisen, Punkten, Feedback und Validierung steht in der [Spezifikation „Muster fortsetzen“](./profiles/pattern-completion.md).
