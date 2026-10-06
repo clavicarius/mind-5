@@ -137,3 +137,7 @@ Das vollständige V1-Standardprofil mit Spielregeln, Altersgruppen- und Schwieri
 ## Zahlenfolge
 
 Die vollständige Mechanikbeschreibung einschließlich Regeln für Altersgruppen, Schwierigkeit, Generierung, Eingabe, Fehler, Neustart, Hinweise, Punkte, Feedback und Validierung steht in der [Zahlenfolge-Spezifikation](./profiles/number-sequence.md).
+
+## Raster-Logik
+
+Das vollständige V1-Standardprofil mit Rasterregeln, Eingabe, Lösbarkeit, Eindeutigkeit und Validierung steht in der [Raster-Logik-Spezifikation](./profiles/grid-logic.md).
