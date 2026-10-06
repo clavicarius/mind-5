@@ -141,3 +141,7 @@ Das vollständige V1-Standardprofil mit zulässigen Unterschieden, Darstellung, 
 ## Rechenlogik
 
 Das vollständige V1-Standardprofil mit mathematischen Voraussetzungen, zusätzlichen Bedingungen, Lösbarkeit und Validierung steht in der [Rechenlogik-Spezifikation](./profiles/arithmetic-logic.md).
+
+## Wortlogik
+
+Das vollständige V1-Standardprofil mit Wortbeziehungen, Altersgruppen, Schwierigkeit, Eingabe, Hinweisen, Punkten und Validierung steht in der [Wortlogik-Spezifikation](./profiles/word-logic.md).

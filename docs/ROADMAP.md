@@ -12,7 +12,7 @@
 
 ## Nächster fachlicher Arbeitsschritt
 
-**Mechanik 9 – Wortlogik vollständig spezifizieren.** Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind beschrieben. Memory Logic bleibt die Referenzmechanik.
+**Memory Logic finalisieren.** Das V1-Profil für Wortlogik sowie Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind beschrieben. Memory Logic bleibt die Referenzmechanik.
 
 1. Spielziel
 2. Altersgruppen
@@ -26,7 +26,7 @@
 10. Lösung / Feedback
 11. Validierung
 
-Die Profile für Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind vollständig spezifiziert. Für Wortlogik steht das V1-Standardprofil noch aus; Memory Logic bleibt die Referenzmechanik und benötigt weiterhin die unter „Noch offene Entscheidungen“ aufgeführten Details.
+Die V1-Profile für Wortlogik, Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind vollständig spezifiziert. Memory Logic bleibt die Referenzmechanik und benötigt weiterhin die unter „Noch offene Entscheidungen“ aufgeführten Details.
 
 ## Priorisierte weitere Arbeit
 
@@ -34,7 +34,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 | Priorität | Arbeitspaket | Ergebnis |
 | ---: | --- | --- |
-| 1 | Mechaniken | Ein verbleibendes Mechanikprofil vollständig spezifizieren, jeweils nur V1-Kernumfang. |
+| 1 | Mechaniken | **Abgeschlossen** – alle zehn Mechanikprofile sind beschrieben; offene Details sind unter den jeweiligen Arbeitspaketen erfasst. |
 | 2 | Gemeinsames Bewertungsmodell | **Abgeschlossen** – verbindliche Regeln und Beispiele stehen in der Spiel- und Regelspezifikation. |
 | 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
 | 4 | Generierung und Validierung | Handgebaut/generiert/hybrid je Mechanik, Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeitsprüfung, redaktionelle Prüfung und Verhalten bei fehlgeschlagener Validierung festlegen. |
@@ -50,7 +50,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
-- Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie das vollständige Profil für Wortlogik.
+- Detaillierte Inhalts- und Zustandsregeln der Memory Logic.
 - Ob Rekorde einer Altersgruppe beim Wechsel gelöscht oder nur nicht wiederhergestellt/angezeigt werden.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.
 - Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
