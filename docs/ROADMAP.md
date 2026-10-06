@@ -11,7 +11,7 @@
 
 ## Nächster fachlicher Arbeitsschritt
 
-**Mechanik 2 – Zahlenfolge vollständig spezifizieren**, bevor die nächste Mechanik bearbeitet wird. Dabei dieselbe Struktur wie bei Memory Logic verwenden:
+**Mechanik 5 – Raster-Logik vollständig spezifizieren**, bevor die nächste Mechanik bearbeitet wird. Dabei dieselbe Struktur wie bei Memory Logic verwenden:
 
 1. Spielziel
 2. Altersgruppen
@@ -25,7 +25,11 @@
 10. Lösung / Feedback
 11. Validierung
 
+<<<<<<< HEAD
+Zahlenfolge, Muster fortsetzen, Was passt nicht? und Reihenfolge sind vollständig spezifiziert. Aktuell stehen fünf Mechanikprofile aus: Raster-Logik und vier weitere Mechaniken. Nach der vollständigen Spezifikation der Raster-Logik werden die übrigen vier Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
+=======
 Muster fortsetzen, Was passt nicht? und Drehen & Denken sind vollständig spezifiziert. Aktuell stehen sechs Mechanikprofile aus: Zahlenfolge und fünf weitere Mechaniken. Nach der vollständigen Spezifikation der Zahlenfolge werden die übrigen fünf Mechaniken jeweils mit einem vollständigen Standardprofil für den V1-Kernumfang beschrieben; Memory Logic bleibt die Referenzmechanik.
+>>>>>>> origin/main
 
 ## Priorisierte weitere Arbeit
 
@@ -33,7 +37,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 | Priorität | Arbeitspaket | Ergebnis |
 | ---: | --- | --- |
-| 1 | Mechaniken | Sieben verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
+| 1 | Mechaniken | Fünf verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
 | 2 | Gemeinsames Bewertungsmodell | Einheitliches Modell für Aufgabenpunkte 0–100, Fehler, Überspringen, Lösung, Abschluss, Hinweise, Rundung und Tagesnormalisierung definieren; mindestens drei Mechaniktypen konkret durchrechnen. |
 | 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
 | 4 | Generierung und Validierung | Handgebaut/generiert/hybrid je Mechanik, Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeitsprüfung, redaktionelle Prüfung und Verhalten bei fehlgeschlagener Validierung festlegen. |
