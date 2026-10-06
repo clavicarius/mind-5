@@ -6,7 +6,7 @@ Die Aufgabe zeigt zwei Abbildungen derselben Anordnung. Die spielende Person fin
 
 ## Altersgruppen
 
-Die Grundregel, Anzahl der Antwortmöglichkeiten und Bedienung sind für alle Altersgruppen gleich. Altersgerecht angepasst werden Motive, Merkmale und Gestaltung:
+Die Grundregel, Zahl der Vergleichspaare und Mehrfachauswahl sind für alle Altersgruppen gleich. Altersgerecht angepasst werden Motive, Merkmale und Gestaltung:
 
 - **8–12:** vertraute Gegenstände und leicht unterscheidbare Formen oder Muster; kurze, konkrete Anweisung.
 - **13–17:** neutrale geometrische oder alltagsnahe Motive; knappe, altersneutrale Anweisung.
@@ -21,13 +21,13 @@ Farbe ist nie das einzige Merkmal, durch das eine Veränderung erkennbar wird. G
 | Leicht | exakt 6 | exakt 2 Gegenstände, je eine Veränderung an einem Merkmal |
 | Anspruchsvoll | exakt 8 | exakt 3 Gegenstände, je eine oder zwei Veränderungen an Merkmalen |
 
-Jedes Gegenstandspaar befindet sich an derselben Position in beiden Abbildungen. Erlaubte veränderliche Merkmale sind Form, Füllung oder Muster, eine Orientierung in festen unterscheidbaren Schritten sowie eine klar unterscheidbare Größe. Die Position und Anordnung der Gegenstände, ihre Anzahl und ihre Zuordnung zueinander bleiben gleich. Farbe allein ist kein zulässiger Unterschied. Anspruchsvoll verlangt den Vergleich mehrerer Paare und gegebenenfalls das Prüfen mehrerer Merkmale, nicht bloß feinere Details.
+Jedes Gegenstandspaar befindet sich an derselben Position in beiden Abbildungen. Erlaubte veränderliche Merkmale sind Form, Füllung oder Muster aus vorab geprüften Wertemengen, eine Orientierung in 90°-Schritten sowie eine von drei klar unterscheidbaren Größenstufen. Eine Orientierungsänderung ist nur für Formen zulässig, bei denen die verwendeten Ausrichtungen visuell unterscheidbar sind. Position und Anordnung der Gegenstände, ihre Anzahl und ihre Zuordnung zueinander bleiben gleich. Farbe allein ist kein zulässiger Unterschied. Anspruchsvoll verlangt den Vergleich mehrerer Paare und gegebenenfalls das Prüfen mehrerer Merkmale, nicht bloß feinere Details.
 
 ## Darstellung und relevante Unterschiede
 
 Die beiden Abbildungen zeigen dieselbe Anordnung in gleicher Größe und Ausrichtung. Gegenstände und Abstände sind klar voneinander getrennt; ihre korrespondierenden Positionen sind durch ein gleiches Raster oder eine gleichbleibende Anordnung erkennbar. Die linke Abbildung ist die Antwortfläche. Auf kleinen Bildschirmen dürfen die Abbildungen untereinander angeordnet werden, sofern die Zuordnung jeder Position weiterhin eindeutig bleibt.
 
-Als relevante Unterschiede gelten ausschließlich sichtbare Änderungen eines erlaubten Merkmals an einem Gegenstand. Bei unveränderten Positionen stimmen alle Merkmale überein. Nicht als Unterschiede gewertet werden Darstellungsartefakte, abweichende Kanten durch Skalierung, Schatten, zufällige Farbabweichungen oder Änderungen an Hintergrund und Dekoration. Hinzufügen, Entfernen, Verschieben oder Vertauschen von Gegenständen ist in V1 nicht erlaubt.
+Als relevante Unterschiede gelten ausschließlich sichtbare Änderungen eines erlaubten Merkmals an einem Gegenstand. Bei unveränderten Positionen stimmen alle Merkmale überein. Eine Änderung muss im vorgesehenen Darstellungsmaßstab zuverlässig erkennbar sein. Nicht als Unterschiede gewertet werden Darstellungsartefakte, abweichende Kanten durch Skalierung, Schatten, zufällige Farbabweichungen oder Änderungen an Hintergrund und Dekoration. Hinzufügen, Entfernen, Verschieben oder Vertauschen von Gegenständen ist in V1 nicht erlaubt.
 
 ## Aufgabengenerierung und Eindeutigkeit
 
@@ -65,12 +65,12 @@ Nach jeder bestätigten Auswahl wird klar und nicht allein durch Farbe angezeigt
 
 Jede Aufgabe wird vor der Anzeige automatisiert geprüft:
 
-1. Anzahl der Vergleichspaare, Anzahl veränderter Positionen und Anzahl geänderter Merkmale entsprechen Altersgruppe und Schwierigkeitsstufe.
+1. Leichte Aufgaben enthalten genau 6 Vergleichspaare und 2 veränderte Positionen mit je einer geänderten Eigenschaft; anspruchsvolle Aufgaben enthalten genau 8 Vergleichspaare und 3 veränderte Positionen mit je einer oder zwei geänderten Eigenschaften.
 2. Jeder Gegenstand ist in beiden Abbildungen genau einer Position zugeordnet; Anordnung und Positionen sind unverändert.
 3. Die gespeicherten Unterschiede entsprechen exakt den tatsächlich veränderten, erlaubten Merkmalen.
 4. Nicht als verändert gespeicherte Gegenstände sind in allen relevanten Merkmalen identisch; es gibt keine unbeabsichtigten oder durch Darstellung entstandenen Unterschiede.
 5. Die Antwortmenge enthält genau alle und nur die veränderten Positionen; die Aufgabe hat damit genau eine richtige Antwort.
-6. Änderungen beschränken sich auf erlaubte Merkmale und enthalten weder reine Farbunterschiede noch Verschieben, Hinzufügen, Entfernen oder Vertauschen von Gegenständen.
+6. Änderungen beschränken sich auf erlaubte Merkmale und deren vorab geprüfte Wertemengen; Orientierungen und Größenstufen sind unterscheidbar. Es gibt weder reine Farbunterschiede noch Verschieben, Hinzufügen, Entfernen oder Vertauschen von Gegenständen.
 7. Abbildungen und Antwortfläche sind ausreichend kontrastreich, unterscheidbar, altersgerecht und auch bei responsiver Darstellung eindeutig bedienbar; die Lösung wird nicht durch Position, Reihenfolge, Größe oder Dekoration verraten.
 8. Gespeicherte Merkmale, Lösung und Lösungserklärung stimmen überein.
 
