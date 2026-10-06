@@ -126,6 +126,10 @@ Die Engine erzeugt Objekte, Informationen, Beziehungen, Fragen, Antwortmöglichk
 
 Build-Zeit-Generierung wird bevorzugt. Handgebaute Aufgaben werden redaktionell geprüft. Konkrete Inhaltsgrenzen, erlaubte Beziehungen und vollständige Altersgruppen-Beispiele sind noch auszuarbeiten.
 
+## Muster fortsetzen
+
+Das vollständige V1-Mechanikprofil mit Spielziel, Altersgruppen, Schwierigkeitsstufen, Aufgabengenerierung, Eingabe, Fehlerbehandlung, Neustart, Hinweisen, Punkten, Feedback und Validierung steht in der [Spezifikation „Muster fortsetzen“](./profiles/pattern-completion.md).
+
 ## Was passt nicht?
 
 Das vollständige V1-Standardprofil mit Spielregeln, Altersgruppen- und Schwierigkeitsbeispielen sowie Anforderungen an Eindeutigkeit und Validierung steht in der [Mechanikspezifikation „Was passt nicht?“](./profiles/odd-one-out.md).
