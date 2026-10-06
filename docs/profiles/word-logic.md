@@ -15,11 +15,11 @@ Jede Aufgabe verwendet genau eine Beziehung aus einem vorab geprüften Katalog: 
 
 Die Beziehung und Bedienung bleiben gleich; Wortschatz, Kontext und Darstellung sind altersgerecht. Die Beispiele zeigen die vorgesehenen Beispielpaare und die richtige Ergänzung. Antwortoptionen werden bei der Aufgabengenerierung nach denselben Eindeutigkeitsregeln erstellt.
 
-| Altersgruppe | Leicht: Beispielpaar; Lücke → Lösung | Anspruchsvoll: Beispielpaare; Lücke → Lösung |
+| Altersgruppe | Leicht: Beispielpaar; Auswahl → Lösung | Anspruchsvoll: Beispielpaare; Auswahl → Lösung |
 | --- | --- | --- |
-| 8–12 | **Hund : Welpe = Katze : ?** → Kätzchen. Beziehung: Tier und Jungtier. | **Hund : Welpe; Katze : Kätzchen; Pferd : ?** → Fohlen. Zwei Beispiele bestätigen die Beziehung „Tier und Jungtier“. |
-| 13–17 | **heiß : kalt = schnell : ?** → langsam. Beziehung: Gegensatz. | **heiß : kalt; hell : dunkel; laut : ?** → leise. Zwei Gegensatzpaare bestimmen die gesuchte Beziehung. |
-| 18+ | **Frage : Antwort = Problem : ?** → Lösung. Beziehung: eine passende Antwort oder Behebung. | **Frage : Antwort; Rätsel : Lösung; Streit : ?** → Einigung. Die zweite Wörtergruppe bezeichnet jeweils ein passendes Ergebnis oder eine Behebung des ersten Begriffs. |
+| 8–12 | **Hund : Welpe = Katze : ?** Auswahl: Kätzchen, Lamm, Fohlen, Küken. → **Kätzchen**. Beziehung: Tier und Jungtier. | **Hund : Welpe; Katze : Kätzchen; Pferd : ?** Auswahl: Fohlen, Kalb, Ferkel, Lamm, Küken. → **Fohlen**. Zwei Beispiele bestätigen die Beziehung „Tier und Jungtier“. |
+| 13–17 | **heiß : kalt = schnell : ?** Auswahl: langsam, rasch, zügig, flink. → **langsam**. Beziehung: Gegensatz. | **heiß : kalt; hell : dunkel; laut : ?** Auswahl: leise, hell, schnell, schwer, rund. → **leise**. Zwei Gegensatzpaare bestimmen die gesuchte Beziehung. |
+| 18+ | **Frage : Antwort = Problem : ?** Auswahl: Lösung, Ursache, Frage, Thema. → **Lösung**. Beziehung: eine passende Antwort oder Behebung. | **Gewinn : Verlust; Zustimmung : Ablehnung; Vorteil : ?** Auswahl: Nachteil, Gewinn, Absicht, Menge, Vorteil. → **Nachteil**. Die Beispielpaare bezeichnen jeweils Gegensätze. |
 
 Beispiele veranschaulichen das Prinzip; verwendete Wörter und Beziehungen müssen vor Aufnahme in den Aufgabenbestand redaktionell auf Eindeutigkeit geprüft werden. Synonyme, Gegensätze oder Wortverwendungen, die regional, zeitabhängig, fachsprachlich oder stark kontextabhängig sind, werden vermieden.
 
