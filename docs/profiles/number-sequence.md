@@ -51,11 +51,11 @@ Ein Neustart ist nur nach Bestätigung möglich. Er leert die Eingabe und entfer
 
 Es gibt höchstens zwei aufeinander aufbauende Hinweise. Der erste benennt die Regelart, ohne einen Folgenterm zu nennen. Der zweite erläutert die wiederkehrende Veränderung, nennt aber nicht ausdrücklich die gesuchte nächste Zahl.
 
-Für 8–12 und 13–17 ist der erste Hinweis kostenlos. Für 18+ reduziert er die erreichbaren Punkte um 10. Der zweite Hinweis reduziert die erreichbaren Punkte für alle Altersgruppen zusätzlich um 20. Abzüge werden von 100 Punkten berechnet und können die erreichbare Punktzahl nicht unter null senken.
+Für 8–12 und 13–17 ist der erste Hinweis kostenlos. Für 18+ reduziert er die erreichbaren Punkte um 10. Der zweite Hinweis reduziert die erreichbaren Punkte für alle Altersgruppen zusätzlich um 20. Die Abzüge werden gemäß dem gemeinsamen Bewertungsmodell vom ungerundeten Aufgaben-Ausgangswert abgezogen und können die erreichbare Punktzahl nicht unter null senken.
 
 ## Punkte
 
-Bei richtiger Antwort erhält die Aufgabe 100 Punkte abzüglich 15 Punkten je zuvor abgegebener falscher Antwort und der anwendbaren Hinweisabzüge. Das Ergebnis wird auf ganze Punkte begrenzt: mindestens null, höchstens 100. Fehler beeinflussen die Punkte nicht zusätzlich, wenn die dritte falsche Antwort die Aufgabe bereits beendet; dann gelten null Punkte. Überspringen, Lösung anzeigen und sonstiger vorzeitiger Abbruch werden gemäß den allgemeinen Aufgabenregeln mit null Punkten gewertet.
+Bei richtiger Antwort erhält die Aufgabe die nach dem gemeinsamen Bewertungsmodell erreichbaren Punkte. Falsche Versuche bringen keine Teilpunkte und ziehen keine zusätzlichen Punkte ab; die dritte falsche Antwort beendet die Aufgabe mit null Punkten. Überspringen, Lösung anzeigen und sonstiger vorzeitiger Abbruch werden gemäß den allgemeinen Aufgabenregeln mit null Punkten gewertet. Die Aufgabenpunkte werden erst bei endgültigem Abschluss kaufmännisch gerundet.
 
 ## Lösung und Feedback
 

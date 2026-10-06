@@ -7,6 +7,7 @@
 - Sechs feste Schwierigkeitsprofile; die Engine wählt Mechaniken und Aufgaben.
 - Höchstens zwei Aufgaben mit derselben Mechanik und mindestens drei verschiedene Mechaniken pro Runde.
 - Regeln für offiziellen Tagesversuch, weitere Runden, Fehler, Überspringen, Hinweise, Tageswert, Rekorde, Streak, aktive Zeit und `Europe/Berlin` sind in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgehalten.
+- Das gemeinsame Bewertungsmodell für Aufgaben- und Tagespunkte einschließlich Fehlern, Abschluss, Hinweisen und Rundung ist in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgelegt und mit drei Mechaniktypen durchgerechnet.
 - Memory Logic ist die erste vollständig auszuarbeitende Referenzmechanik.
 
 ## Nächster fachlicher Arbeitsschritt
@@ -34,7 +35,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 | Priorität | Arbeitspaket | Ergebnis |
 | ---: | --- | --- |
 | 1 | Mechaniken | Ein verbleibendes Mechanikprofil vollständig spezifizieren, jeweils nur V1-Kernumfang. |
-| 2 | Gemeinsames Bewertungsmodell | Einheitliches Modell für Aufgabenpunkte 0–100, Fehler, Überspringen, Lösung, Abschluss, Hinweise, Rundung und Tagesnormalisierung definieren; mindestens drei Mechaniktypen konkret durchrechnen. |
+| 2 | Gemeinsames Bewertungsmodell | **Abgeschlossen** – verbindliche Regeln und Beispiele stehen in der Spiel- und Regelspezifikation. |
 | 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
 | 4 | Generierung und Validierung | Handgebaut/generiert/hybrid je Mechanik, Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeitsprüfung, redaktionelle Prüfung und Verhalten bei fehlgeschlagener Validierung festlegen. |
 | 5 | Rundengenerierung | Gewichtung der Puzzlebereiche konkretisieren; Pflichtregeln und Schwierigkeitsverteilung bleiben vorrangig. |
@@ -49,10 +50,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
-- Konkrete Hinweisstufen und Punktabzüge sowie Rundungsebene und -zeitpunkt (die Rundungsart ist kaufmännisch festgelegt).
-- Vollständiges gemeinsames Bewertungsmodell einschließlich Beispielen verschiedener Mechaniktypen.
 - Detaillierte Inhalts- und Zustandsregeln der Memory Logic sowie das vollständige Profil für Wortlogik.
-- Ob übersprungene Memory-Logic-Fragen einen der drei Aufgabenfehler verbrauchen.
 - Ob Rekorde einer Altersgruppe beim Wechsel gelöscht oder nur nicht wiederhergestellt/angezeigt werden.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.
 - Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
