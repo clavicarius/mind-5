@@ -37,11 +37,11 @@ Vor dem Absenden kann die Anordnung ohne Fehler geändert werden. Eine bestätig
 
 Es gibt höchstens zwei Hinweise pro Aufgabe. Der erste lenkt auf die Art eines relevanten Hinweises (zum Beispiel eine feste Position oder unmittelbare Nachbarschaft), ohne die vollständige Reihenfolge offenzulegen. Der zweite nennt eine einzelne hilfreiche Beziehung oder einen daraus folgenden Zwischenschritt, aber nicht die vollständige Ordnung. Hinweise können nicht zurückgenommen werden und bleiben auch nach einem Neustart verbraucht.
 
-Für 8–12 und 13–17 ist der erste Hinweis kostenlos. Für 18+ reduziert er die erreichbaren Punkte um 10. Der zweite Hinweis reduziert die erreichbaren Punkte für alle Altersgruppen zusätzlich um 20. Abzüge werden von 100 Punkten berechnet und können die erreichbare Punktzahl nicht unter null senken.
+Für 8–12 und 13–17 ist der erste Hinweis kostenlos. Für 18+ reduziert er die erreichbaren Punkte um 10. Der zweite Hinweis reduziert die erreichbaren Punkte für alle Altersgruppen zusätzlich um 20. Die Abzüge werden gemäß dem gemeinsamen Bewertungsmodell vom ungerundeten Aufgaben-Ausgangswert abgezogen und können die erreichbare Punktzahl nicht unter null senken.
 
 ## Punkte
 
-Eine korrekt bestätigte Reihenfolge erhält 100 Punkte abzüglich 15 Punkten je zuvor falsch bestätigter Reihenfolge und der anwendbaren Hinweisabzüge. Das Ergebnis liegt zwischen 0 und 100 Punkten. Der dritte Fehler, Überspringen, Lösung anzeigen und ein sonstiger vorzeitiger Abbruch ergeben null Punkte. Für die Rundung gelten die gemeinsamen Bewertungsregeln.
+Eine korrekt bestätigte vollständige Reihenfolge erhält die nach dem gemeinsamen Bewertungsmodell erreichbaren Punkte; falsche Versuche bringen keine Teilpunkte und ziehen keine zusätzlichen Punkte ab. Der dritte Fehler, Überspringen, Lösung anzeigen und ein sonstiger vorzeitiger Abbruch ergeben null Punkte. Aufgabenabschluss und Rundung richten sich nach den gemeinsamen Bewertungsregeln.
 
 ## Lösung und Feedback
 

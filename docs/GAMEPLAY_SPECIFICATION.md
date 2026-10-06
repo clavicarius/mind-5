@@ -36,11 +36,30 @@ Grundsätzlich hat jede Aufgabe höchstens drei Fehler. Ein relevanter falscher 
 
 ## Punkte, Tagesergebnis und Zeit
 
-Jede Aufgabe liefert grundsätzlich 0–100 Punkte. Alle fünf Aufgaben sind gleichwertig; daraus wird die Tagespunktzahl auf 0–100 normalisiert. Die Rundung auf ganze Punkte erfolgt kaufmännisch. Hinweise können die maximal erreichbaren Punkte senken; konkrete Hinweisstufen und -abzüge werden in den jeweiligen Mechanikprofilen festgelegt.
+### Gemeinsames Bewertungsmodell
 
-> **Klärungsbedarf:** Die Rundungsart (kaufmännisch) ist entschieden, aber die Rundungsebene und der Zeitpunkt noch nicht: etwa bei Teilfragen, Aufgabenpunkten oder erst bei der Tagesnormalisierung sowie das Zusammenspiel mit Hinweisabzügen.
+Die folgenden Regeln gelten für alle Mechaniken und haben Vorrang vor abweichenden älteren Formulierungen in Mechanikprofilen. Profile legen nur fest, welche Antwort- oder Teilaufgabeneinheiten gewertet werden und was eine gültige Antwort beziehungsweise ein Fehler ist.
 
-Für die Altersgruppen 8–12 und 13–17 ist der erste Hinweis kostenlos; bei 18+ reduziert er die Punktzahl. Das Tagesergebnis ist nach Abschluss oder Beendigung der offiziellen Runde immer gültig und zeigt Gesamtpunktzahl sowie die Einzelpunkte aller fünf Aufgaben. Nicht abgeschlossene Aufgaben erhalten null Punkte.
+- **Ausgangswert:** Eine Aufgabe hat höchstens 100 Punkte. Ihre vorher festgelegten Wertungseinheiten sind gleich gewichtet. Eine vollständig richtige Einheit zählt als richtig; eine falsch abgeschlossene, übersprungene oder offene Einheit zählt als falsch. Der ungerundete Ausgangswert ist `100 × richtige Einheiten ÷ alle Einheiten`. Eine Mechanik mit nur einer Wertungseinheit ist damit ganz oder gar nicht richtig; es gibt keine Teilpunkte innerhalb einer Einheit.
+- **Fehler:** Eine gültige, ausdrücklich bestätigte falsche Antwort verbraucht genau einen der höchstens drei Aufgabenfehler. Ungültige, unvollständige, nicht bestätigte oder noch änderbare Eingaben verbrauchen keinen Fehler. Fehlversuche ziehen für sich allein keine Punkte ab; eine nachfolgend richtige Antwort kann die Einheit noch retten, sofern das Mechanikprofil sie nicht bereits endgültig schließt. Ein übersprungener Teil zählt null, aber nicht als Fehler. Der dritte Fehler beendet die Aufgabe sofort mit null Punkten, auch wenn bereits Teilpunkte erzielt wurden.
+- **Aufgabe beenden:** Bestätigtes Überspringen der ganzen Aufgabe, bestätigtes Anzeigen der Lösung und ein Abbruch vor dem regulären Ende schließen die Aufgabe mit null Punkten ab; spätere Neubewertung ist ausgeschlossen. Regulär erzielte Punkte werden erst mit der erforderlichen Bestätigung („Weiter“ oder „Abschließen“) endgültig. Bis dahin ist das Ergebnis vorläufig; wird die offene Aufgabe verlassen, erhält sie null Punkte. Eine abgeschlossene Aufgabe behält ihre Punkte, auch wenn die offizielle Runde später abgebrochen wird.
+- **Hinweise:** Pro Aufgabe gibt es höchstens zwei aufeinander aufbauende Hinweisstufen. Stufe 1 kostet für 8–12 und 13–17 **0 Punkte**, für 18+ **10 Punkte**. Stufe 2 kostet für alle Altersgruppen **weitere 20 Punkte**. Die Kosten sind feste Abzüge vom ungerundeten Ausgangswert, werden pro Stufe genau einmal berechnet und bleiben nach Neustart bestehen. Hinweise werden nur angeboten, wenn die jeweilige Mechanik sie inhaltlich ausarbeiten kann. Der resultierende Aufgabenwert ist `max(0, Ausgangswert − Hinweisabzüge)`; er kann 100 nicht überschreiten.
+- **Rundung und Abschlusszeitpunkt:** Fehler- und Hinweisregeln sowie die Anzahl richtiger Einheiten werden bei der endgültigen Aufgabenbestätigung ausgewertet. Erst dann wird der Aufgabenwert kaufmännisch auf ganze Punkte gerundet (positive halbe Punkte aufwärts) und auf 0–100 begrenzt. Vorläufige Werte und zwischenzeitliche Einheiten werden nicht einzeln gerundet.
+- **Tagesnormalisierung:** Das offizielle Tagesergebnis ist der gleich gewichtete Mittelwert der fünf endgültigen Aufgabenwerte: `Summe der fünf Aufgabenpunkte ÷ 5`. Eine nicht abgeschlossene Aufgabe zählt als null. Der Mittelwert wird erst beim Abschluss oder der Beendigung der offiziellen Runde kaufmännisch auf ganze Punkte gerundet und auf 0–100 begrenzt. Es gibt keine zusätzliche Gewichtung nach Mechanik, Reihenfolge, Schwierigkeit oder Zeit. Weitere Runden ohne Wertung verändern das Tagesergebnis nicht.
+
+Damit bleibt die Tageswertung nach Abschluss oder Beendigung der offiziellen Runde immer gültig und zeigt Gesamtpunktzahl sowie die Einzelpunkte aller fünf Aufgaben. Die Zeit beeinflusst keine Punkte.
+
+### Rechenbeispiele
+
+Die Beispiele verwenden die Regeln oben; ein bestätigter Fehlversuch kostet keine zusätzlichen Punkte, solange er nicht den dritten Fehler auslöst.
+
+| Mechaniktyp und Altersgruppe | Wertung | Berechnung der Aufgabenpunkte |
+| --- | --- | --- |
+| **Memory Logic**, drei gleich gewichtete Fragen, 13–17 | Zwei richtige Fragen, eine bestätigte falsche Antwort; Hinweisstufe 1 und 2 genutzt | Die falsche Antwort schließt diese Frage mit null und zählt als ein Fehler. Stufe 1 kostet 0, Stufe 2 kostet 20. `100 × 2 ÷ 3 − 20 = 46,666…`; bei endgültigem Abschluss kaufmännisch gerundet: **47 Punkte**. |
+| **Zahlenfolge**, eine Antwort, 18+ | Zwei gültige falsche Antworten, dann richtige Antwort; beide Hinweisstufen genutzt | Die falschen Versuche zählen als zwei Fehler, aber ziehen keine weiteren Punkte ab. Hinweise kosten zusammen 30. `100 − 30 =` **70 Punkte**. Bei einem dritten Fehler wäre die Aufgabe stattdessen sofort **0 Punkte**. |
+| **Reihenfolge**, eine vollständige Ordnung, 8–12 | Erst eine falsche bestätigte Ordnung, dann richtige Ordnung; beide Hinweisstufen genutzt | Die falsche Ordnung zählt als ein Fehler; die vollständige Ordnung ist eine Wertungseinheit und erhält keine Teilpunkte. Stufe 1 kostet 0, Stufe 2 kostet 20. `100 − 20 =` **80 Punkte**. |
+
+Beispiel für die Tagesnormalisierung: Aufgabenwerte **47, 70, 80, 100 und 0** ergeben `297 ÷ 5 = 59,4`, also **59 Tagespunkte**. Das Ergebnis einer offenen oder nicht abgeschlossenen Aufgabe würde als 0 in denselben Mittelwert eingehen.
 
 Gemessen wird nur die aktive Gesamtzeit der fünf Aufgaben: Beginn mit der ersten Aufgabe, Ende mit deren endgültigem Abschluss (also nach der erforderlichen Bestätigung) der fünften. Reihenfolge und Zeit haben keinen Einfluss auf Punkte; Zeit zählt ausschließlich für den Bestzeitrekord. Die Merkphase von Memory Logic zählt nicht zur Spielzeit.
 
@@ -122,3 +141,7 @@ Das vollständige V1-Standardprofil mit zulässigen Unterschieden, Darstellung, 
 ## Rechenlogik
 
 Das vollständige V1-Standardprofil mit mathematischen Voraussetzungen, zusätzlichen Bedingungen, Lösbarkeit und Validierung steht in der [Rechenlogik-Spezifikation](./profiles/arithmetic-logic.md).
+
+## Wortlogik
+
+Das vollständige V1-Standardprofil mit Wortbeziehungen, Altersgruppen, Schwierigkeit, Eingabe, Hinweisen, Punkten und Validierung steht in der [Wortlogik-Spezifikation](./profiles/word-logic.md).
