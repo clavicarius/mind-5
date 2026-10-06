@@ -11,7 +11,7 @@
 
 ## Nächster fachlicher Arbeitsschritt
 
-**Die verbleibenden Mechanikprofile vollständig spezifizieren.** Dabei dieselbe Struktur wie bei Memory Logic verwenden:
+**Mechanik 8 – Visueller Vergleich vollständig spezifizieren**, bevor Wortlogik bearbeitet wird. Dabei dieselbe Struktur wie bei Memory Logic verwenden:
 
 1. Spielziel
 2. Altersgruppen
@@ -25,7 +25,7 @@
 10. Lösung / Feedback
 11. Validierung
 
-Muster fortsetzen, Was passt nicht?, Drehen & Denken, Zahlenfolge, Raster-Logik und Rechenlogik sind vollständig spezifiziert. Für Reihenfolge, Visueller Vergleich und Wortlogik fehlen noch vollständige Profile; Memory Logic bleibt die Referenzmechanik und benötigt weiterhin die unter „Noch offene Entscheidungen“ aufgeführten Details.
+Muster fortsetzen, Was passt nicht?, Drehen & Denken, Zahlenfolge, Raster-Logik, Reihenfolge und Rechenlogik sind vollständig spezifiziert. Für Visueller Vergleich und Wortlogik fehlen noch vollständige Profile; Memory Logic bleibt die Referenzmechanik und benötigt weiterhin die unter „Noch offene Entscheidungen“ aufgeführten Details.
 
 ## Priorisierte weitere Arbeit
 
@@ -33,7 +33,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 | Priorität | Arbeitspaket | Ergebnis |
 | ---: | --- | --- |
-| 1 | Mechaniken | Drei verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
+| 1 | Mechaniken | Zwei verbleibende Mechaniken vollständig spezifizieren, jeweils nur V1-Kernumfang. |
 | 2 | Gemeinsames Bewertungsmodell | Einheitliches Modell für Aufgabenpunkte 0–100, Fehler, Überspringen, Lösung, Abschluss, Hinweise, Rundung und Tagesnormalisierung definieren; mindestens drei Mechaniktypen konkret durchrechnen. |
 | 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
 | 4 | Generierung und Validierung | Handgebaut/generiert/hybrid je Mechanik, Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeitsprüfung, redaktionelle Prüfung und Verhalten bei fehlgeschlagener Validierung festlegen. |
