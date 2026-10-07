@@ -52,7 +52,7 @@ Jede Mechanik hat grundsätzlich die Stufen **leicht** und **anspruchsvoll**. An
 | 5 | 1 | 4 | Schwer |
 | 6 | 0 | 5 | Extrem |
 
-Nach Rundenbeginn ist das Profil nicht änderbar. Beim Altersgruppenwechsel werden aktuelle Tageswertung und Streak zurückgesetzt; Rekorde werden altersgruppenspezifisch geführt und beim Wechsel nicht wiederhergestellt.
+Nach Rundenbeginn ist das Profil nicht änderbar. Beim Altersgruppenwechsel werden aktuelle Tageswertung und Streak zurückgesetzt. Bestwert und Bestzeit bleiben getrennt je Altersgruppe erhalten und werden bei der Rückkehr zu dieser Altersgruppe wieder angezeigt.
 
 ## Qualitätsziele
 
@@ -74,4 +74,4 @@ Die verbindliche Content-Herkunft, Freigabe, Prüfung und Fehlerbehandlung je Me
 
 Mind 5 soll mit JavaScript nur dort umgesetzt werden, wo es erforderlich ist. Die lokale Persistenzentscheidung (localStorage oder IndexedDB) wird erst nach Definition des Persistenzschemas getroffen. Der Datenzugriff soll abstrahiert werden, damit später IndexedDB oder Synchronisierung ergänzt werden können.
 
-Vorgesehene persistente Daten umfassen Spielstatus, Tagesrunde und offiziellen Versuch, Rekorde, Streak, Altersgruppe, Zeitquelle, Validierungsstatus sowie Versions- und Migrationsinformationen. V1 speichert keine weitergehende Statistik-Historie. Persistenz erlaubt ausdrücklich keine Fortsetzung einer laufenden Runde nach dem Schließen des Browsers oder der App; die Runde wird verworfen und eine offizielle Runde nach den Regeln zum Tagesabbruch gewertet.
+Vorgesehene persistente Daten umfassen Spielstatus, Tagesrunde und offiziellen Versuch, altersgruppenspezifische Bestwerte und Bestzeiten, Streak, Altersgruppe, Zeitquelle, Validierungsstatus sowie Versions- und Migrationsinformationen. V1 speichert keine weitergehende Statistik-Historie. Persistenz erlaubt ausdrücklich keine Fortsetzung einer laufenden Runde nach dem Schließen des Browsers oder der App; die Runde wird verworfen und eine offizielle Runde nach den Regeln zum Tagesabbruch gewertet.

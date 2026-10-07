@@ -69,9 +69,7 @@ Bei Tabwechsel, Wechsel in den Hintergrund oder Verlassen des Spiels pausiert di
 
 ## Bestwert, Bestzeit und Streak
 
-Rekorde werden pro Altersgruppe getrennt geführt. Es gibt keine gemeinsame Rangliste und in V1 keine Statistik-Historie. Bei einem Altersgruppenwechsel werden Tageswertung und Streak zurückgesetzt; die Rekordführung beginnt für die neue Altersgruppe separat.
-
-> **Klärungsbedarf:** Die Übergabe fordert sowohl getrennte Rekorde je Altersgruppe als auch, dass frühere Rekorde der alten Altersgruppe beim Wechsel nicht wiederhergestellt werden. Es ist nicht eindeutig, ob diese Rekorde gelöscht oder lediglich beim Wechsel nicht angezeigt/aktiviert werden. Vor der Umsetzung festlegen, damit die altersgruppenspezifische Rekordführung nicht unbeabsichtigt verloren geht.
+Bestwert und Bestzeit werden getrennt pro Altersgruppe dauerhaft gespeichert. Ein Altersgruppenwechsel löscht diese Rekorde nicht: Es werden nur die Rekorde der aktuell gewählten Altersgruppe angezeigt; bei der Rückkehr zu einer Altersgruppe erscheinen deren bisherige Rekorde wieder. Beim Wechsel werden die aktuelle Tageswertung und der Streak zurückgesetzt. Es gibt keine gemeinsame Rangliste und in V1 keine Statistik-Historie.
 
 ### Bestwert
 

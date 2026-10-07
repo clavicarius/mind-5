@@ -7,6 +7,7 @@
 - Sechs feste Schwierigkeitsprofile; die Engine wählt Mechaniken und Aufgaben.
 - Höchstens zwei Aufgaben mit derselben Mechanik und mindestens drei verschiedene Mechaniken pro Runde.
 - Regeln für offiziellen Tagesversuch, weitere Runden, Fehler, Überspringen, Hinweise, Tageswert, Rekorde, Streak, aktive Zeit und `Europe/Berlin` sind in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgehalten.
+- Bestwert und Bestzeit bleiben pro Altersgruppe erhalten und werden bei einem späteren Wechsel zurück zu dieser Altersgruppe wieder angezeigt; Tageswertung und Streak werden beim Altersgruppenwechsel zurückgesetzt.
 - Das gemeinsame Bewertungsmodell für Aufgaben- und Tagespunkte einschließlich Fehlern, Abschluss, Hinweisen und Rundung ist in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgelegt und mit drei Mechaniktypen durchgerechnet.
 - Memory Logic ist die erste vollständig auszuarbeitende Referenzmechanik.
 
@@ -51,7 +52,6 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 ## Noch offene Entscheidungen
 
 - Detaillierte Inhalts- und Zustandsregeln der Memory Logic.
-- Ob Rekorde einer Altersgruppe beim Wechsel gelöscht oder nur nicht wiederhergestellt/angezeigt werden.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.
 - Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
 - Zeitquelle, Offline-Abgleich und Zustandsübergänge für Mitternacht und Zeitmanipulation im Detail.
