@@ -2,11 +2,9 @@
 
 ## Spielziel und Aufgabenaufbau
 
-Die Aufgabe zeigt genau fünf auswählbare Elemente. Vier Elemente erfüllen eine erkennbare gemeinsame Regel; genau ein Element verletzt sie. Die Regel wird nicht vorab genannt. Die spielende Person wählt genau ein Element als Regelverletzer aus und bestätigt die Auswahl. Vor der Bestätigung ist die Auswahl änderbar. Eine falsche bestätigte Auswahl zählt als Fehler, wird als falsch markiert und kann nicht erneut gewählt werden; die Lösung wird dabei nicht verraten. Nach einer richtigen Auswahl oder einem vorzeitigen Aufgabenende wird die Regel samt Lösung erklärt. Es gelten die allgemeinen Regeln für drei Fehler, Überspringen, Lösung anzeigen und Aufgabenabschluss.
+Die Aufgabe zeigt genau fünf auswählbare Elemente. Vier Elemente erfüllen eine erkennbare gemeinsame Regel; genau ein Element verletzt sie. Die Regel wird nicht vorab genannt. Die spielende Person wählt genau ein Element als Regelverletzer aus. Die Aufgabe ist eine Wertungseinheit ohne Teilpunkte.
 
 Die fünf Elemente bleiben in beiden Schwierigkeitsstufen gleich zahlreich. **Leicht** verwendet eine konkrete, unmittelbar erkennbare Regel mit einem Merkmal. **Anspruchsvoll** erfordert eine gedankliche Verknüpfung, etwa das Prüfen einer Gleichheit oder einer allgemeinen Beziehung; mehr Elemente allein machen eine Aufgabe nicht anspruchsvoller. In beiden Stufen muss die Regel aus der Aufgabe selbst erschließbar sein und darf kein Spezialwissen voraussetzen.
-
-Die Aufgabe hat genau eine Antwort und keine Teilpunkte: Eine richtige bestätigte Auswahl erhält die nach den allgemeinen Regeln erreichbaren Punkte; falsche, übersprungene und offene Aufgaben erhalten null Punkte.
 
 ## Altersgruppen und Beispielaufgaben
 
@@ -24,6 +22,30 @@ Die Altersgruppe verändert Darstellung, Wortschatz und Komplexität des Inhalts
 - Die vier passenden Elemente müssen die Regel erfüllen; das fünfte muss sie verletzen. Die Lösung ist genau dieses eine Element. Ein bloß anderer Geschmack, eine subjektive Assoziation oder externes Faktenwissen darf keine alternative Lösung begründen.
 - Alle fünf Elemente sind plausible Auswahlkandidaten: Die vier passenden Elemente teilen einzelne Merkmale mit dem Regelverletzer, und dieser ist ein plausibler Beinahe-Treffer statt eines offensichtlich sachfremden Elements. Position, Farbe oder Textlänge dürfen die Lösung nicht systematisch verraten; die Position wird gemischt.
 - Eine Aufgabe wird verworfen, wenn ein Element mehrere relevante Regelverletzungen aufweist, mehr oder weniger als vier Elemente die Regel erfüllen oder eine andere zugelassene Regel zu einem anderen einzelnen Regelverletzer führt. Bei semantischen Regeln ist zusätzlich eine redaktionelle Prüfung nötig, da reine Merkmalsprüfung Mehrdeutigkeit nicht ausschließt.
+
+## Eingabe
+
+Die Antwort besteht aus genau einer Auswahl unter den fünf Elementen und wird durch Tippen, Maus oder Tastatur getroffen. Die Auswahl kann vor „Prüfen“ geändert oder aufgehoben werden; erst die ausdrückliche Bestätigung wertet sie als Antwort. Eine leere oder nicht bestätigte Auswahl zählt nicht als Fehler. Freitext und Mehrfachauswahl gibt es nicht. Auswahl und Rückmeldung sind auch per Tastatur und Screenreader verständlich; Farbe ist nie das einzige Signal.
+
+## Fehler
+
+Eine falsch bestätigte Auswahl zählt als ein Fehler. Das Element wird als falsch markiert und die Lösung wird nicht verraten. Danach kann eine weitere Auswahl bestätigt werden; jede falsch bestätigte Auswahl zählt als Fehler. Der dritte Fehler beendet die Aufgabe automatisch mit null Punkten. Überspringen, Lösung anzeigen und vorzeitiger Aufgabenabbruch folgen den gemeinsamen Aufgabenregeln.
+
+## Undo und Neustart
+
+Vor dem Absenden kann die Auswahl geändert oder aufgehoben werden. Eine bestätigte Antwort kann nicht rückgängig gemacht werden. Ein bestätigter Neustart zeigt dieselbe Aufgabe erneut und hebt Auswahl sowie Rückmeldung auf; verbrauchte Fehler und verwendete Hinweise samt Punktabzügen bleiben erhalten. Neustarts sind nur möglich, solange die Aufgabe offen und noch kein dritter Fehler erreicht ist.
+
+## Hinweise
+
+Es gibt höchstens zwei aufeinander aufbauende Hinweise. Der erste lenkt auf die Art des gemeinsamen Merkmals oder der Regel, ohne ein Element zu benennen. Der zweite präzisiert eine relevante Eigenschaft oder Verknüpfung, verrät aber weder den Regelverletzer noch die Lösung. Hinweise lassen sich nicht zurücknehmen und bleiben nach einem Neustart verbraucht; ihre Kosten folgen den gemeinsamen Hinweisregeln.
+
+## Punkte und Abschluss
+
+Eine richtige bestätigte Auswahl erhält die nach dem gemeinsamen Bewertungsmodell erreichbaren Punkte; falsche Versuche ziehen keine zusätzlichen Punkte ab. Es gibt keine Teilpunkte. Überspringen, Lösung anzeigen, dritter Fehler und nicht abgeschlossene Aufgaben ergeben null Punkte. Die Aufgabe wird nach einer richtigen Auswahl erst mit der gemeinsamen Abschlussbestätigung endgültig gewertet; Rundung und Tagesnormalisierung folgen den gemeinsamen Regeln.
+
+## Lösung und Feedback
+
+Nach jeder bestätigten Auswahl wird eindeutig und nicht allein durch Farbe angezeigt, ob sie richtig oder falsch war. Falsches Feedback verrät weder die Regel noch die Lösung. Beim endgültigen Abschluss werden der Regelverletzer, die gemeinsame Regel und eine kurze Begründung für alle fünf Elemente gezeigt. Die Lösung und Erklärung werden auch nach Überspringen, Anzeigen der Lösung oder Aufgabenende durch den dritten Fehler angezeigt.
 
 ## Generierung und Validierung
 
