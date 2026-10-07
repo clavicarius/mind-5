@@ -2,6 +2,8 @@
 
 Dieses Dokument hält die verbindlichen Spielregeln des Übergabestands fest. Noch nicht entschiedene Details sind ausdrücklich als offen markiert.
 
+Die verbindliche Strategie für Erzeugung, Freigabe und Fehlerbehandlung aller Mechaniken steht in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md).
+
 ## Tagesrunde und Auswahl
 
 Eine Runde umfasst genau fünf Aufgaben. Die Engine bestimmt Mechanik, Reihenfolge, Schwierigkeit sowie die konkrete Aufgabe. Bei der Zusammenstellung gilt folgende Priorität:

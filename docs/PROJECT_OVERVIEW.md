@@ -68,6 +68,8 @@ V1 wird nur auf Deutsch ausgeliefert. UI-Texte sollen auslagerbar sein, Content 
 
 Vor dem Ausbau der vollständigen Engine soll ein kleiner, validierter Aufgabenbestand für alle zehn Mechaniken vorhanden sein. Handgebaute Aufgaben werden redaktionell geprüft; generierte Aufgaben automatisiert validiert. Eine Mischung aus handgebauten, algorithmisch generierten und hybriden Aufgaben ist vorgesehen.
 
+Die verbindliche Content-Herkunft, Freigabe, Prüfung und Fehlerbehandlung je Mechanik ist in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md) festgelegt.
+
 ## Technische Leitlinien
 
 Mind 5 soll mit JavaScript nur dort umgesetzt werden, wo es erforderlich ist. Die lokale Persistenzentscheidung (localStorage oder IndexedDB) wird erst nach Definition des Persistenzschemas getroffen. Der Datenzugriff soll abstrahiert werden, damit später IndexedDB oder Synchronisierung ergänzt werden können.
