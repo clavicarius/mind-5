@@ -9,25 +9,11 @@
 - Regeln für offiziellen Tagesversuch, weitere Runden, Fehler, Überspringen, Hinweise, Tageswert, Rekorde, Streak, aktive Zeit und `Europe/Berlin` sind in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgehalten.
 - Bestwert und Bestzeit bleiben pro Altersgruppe erhalten und werden bei einem späteren Wechsel zurück zu dieser Altersgruppe wieder angezeigt; Tageswertung und Streak werden beim Altersgruppenwechsel zurückgesetzt.
 - Das gemeinsame Bewertungsmodell für Aufgaben- und Tagespunkte einschließlich Fehlern, Abschluss, Hinweisen und Rundung ist in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgelegt und mit drei Mechaniktypen durchgerechnet.
-- Memory Logic ist die erste vollständig auszuarbeitende Referenzmechanik.
+- Memory Logic ist als Referenzmechanik vollständig spezifiziert; Details stehen im [Referenzprofil](./profiles/memory-logic.md).
 
-## Nächster fachlicher Arbeitsschritt
+## Abgeschlossene fachliche Grundlage
 
-**Memory Logic finalisieren.** Das V1-Profil für Wortlogik sowie Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind beschrieben. Memory Logic bleibt die Referenzmechanik.
-
-1. Spielziel
-2. Altersgruppen
-3. leicht / anspruchsvoll
-4. Aufgabengenerierung
-5. Eingabe
-6. Fehler
-7. Undo / Neustart
-8. Hinweise
-9. Punkte
-10. Lösung / Feedback
-11. Validierung
-
-Die V1-Profile für Wortlogik, Zahlenfolge, Muster fortsetzen, Was passt nicht?, Drehen & Denken, Raster-Logik, Reihenfolge, Rechenlogik und Visueller Vergleich sind vollständig spezifiziert. Memory Logic bleibt die Referenzmechanik und benötigt weiterhin die unter „Noch offene Entscheidungen“ aufgeführten Details.
+Alle zehn V1-Mechanikprofile, das gemeinsame Bewertungsmodell sowie die Generierungs- und Validierungsstrategie sind dokumentiert. Memory Logic ist die Referenzmechanik; die gemeinsamen Spielregeln und das Profil legen auch Überspringen, Fehler, Hinweise, Punkte, Rundung und Feedback fest.
 
 ## Priorisierte weitere Arbeit
 
@@ -37,10 +23,10 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 | ---: | --- | --- |
 | 1 | Mechaniken | **Abgeschlossen** – alle zehn Mechanikprofile sind beschrieben; offene Details sind unter den jeweiligen Arbeitspaketen erfasst. |
 | 2 | Gemeinsames Bewertungsmodell | **Abgeschlossen** – verbindliche Regeln und Beispiele stehen in der Spiel- und Regelspezifikation. |
-| 3 | Memory Logic finalisieren | Erlaubte Themen/Begriffe, Satzlänge, Abstraktionsgrad und Ausschlüsse; Objekt-, Fakten- und Beziehungsmodell; Ableitungen und Fragearten; mindestens fünf Beispiele je Altersgruppe und Schwierigkeit; Aktionen, Zeit, Fehler, Punkte und Abbruch für jeden Zustand definieren. |
+| 3 | Memory Logic als Referenzprofil | **Abgeschlossen** – Inhalte, Zustände, Beispiele, Fehler, Punkte und Validierung stehen im [Referenzprofil](./profiles/memory-logic.md). |
 | 4 | Generierung und Validierung | **Abgeschlossen** – Strategie je Mechanik einschließlich Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeit, Redaktion und Fehlerbehandlung steht in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 5 | Rundengenerierung | Gewichtung der Puzzlebereiche konkretisieren; Pflichtregeln und Schwierigkeitsverteilung bleiben vorrangig. |
-| 6 | Content-Menge | Mindestzahlen, Wiederholung, inhaltliche Gleichheit und Verhalten bei erschöpftem Content bestimmen. |
+| 6 | Content-Menge | Mindestumfang, Wiederholungsregeln und inhaltliche Gleichheit des Aufgabenbestands festlegen; das Verhalten bei erschöpftem Inhalt steht in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 7 | Persistenz | Zuerst Persistenzschema entwerfen, danach localStorage oder IndexedDB entscheiden. |
 | 8 | Zeit und Tageswechsel | Zustandsmodell und Tests für aktive Zeit, Pause, Tabwechsel, Offline, Mitternacht, Gerätewechsel, Zeitquellen, Manipulation sowie offizielle/weitere/verwarfene Runde festlegen. |
 | 9 | UI/UX | Gemeinsames Grundgerüst entwerfen, danach mechanikspezifische Oberflächen darauf aufbauen. |
@@ -51,7 +37,6 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
-- Detaillierte Inhalts- und Zustandsregeln der Memory Logic.
 - Rundengenerator-Gewichtung, Mindestumfang und Erschöpfungsregeln für Inhalte.
 - Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
 - Zeitquelle, Offline-Abgleich und Zustandsübergänge für Mitternacht und Zeitmanipulation im Detail.
