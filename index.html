@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mind-5</title>
+  <meta name="description" content="Mind 5: fünf Denkaufgaben in einer täglichen Runde. Kostenlos, werbefrei und auf Deutsch.">
+  <title>Mind 5 – 5 Denkaufgaben, eine Runde täglich</title>
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -16,18 +15,74 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background-color: #141c2e;
+      margin: 0;
+      padding: 2rem 1.25rem;
+      background: #141c2e;
+      color: #f5f6fa;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-align: center;
     }
 
     img {
-      max-width: 80vw;
-      max-height: 80vh;
-      width: auto;
+      display: block;
+      width: min(100%, 25rem);
       height: auto;
+      margin: 0 auto 1.5rem;
+    }
+
+    main {
+      width: min(100%, 38rem);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 6vw, 2.75rem);
+      line-height: 1.15;
+    }
+
+    p {
+      color: #d0d5e2;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .status {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      border: 1px solid #46516b;
+      border-radius: 0.75rem;
+      background: #1c263b;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    a {
+      color: #9fc4ff;
+      font-weight: 600;
+    }
+
+    a:focus-visible {
+      outline: 3px solid #f5f6fa;
+      outline-offset: 4px;
     }
   </style>
 </head>
 <body>
-  <img src="src/assets/branding/main-logo-dark.png" alt="mind-5 Logo">
+  <main>
+    <img src="src/assets/branding/main-logo-dark.png" alt="Mind 5">
+    <h1>5 Denkaufgaben. Eine Runde täglich.</h1>
+    <p>Mind 5 ist das kostenlose, werbefreie Denkspiel für jeden Tag – mit abwechslungsreichen Aufgaben für deine grauen Zellen.</p>
+    <p class="status">Das Spiel entsteht gerade. Bald findest du hier deine tägliche Runde.</p>
+    <nav aria-label="Weitere Informationen">
+      <a href="https://github.com/clavicarius/mind-5">Projekt auf GitHub</a>
+      <a href="https://github.com/clavicarius/mind-5/wiki">Projekt-Wiki</a>
+    </nav>
+  </main>
 </body>
 </html>
