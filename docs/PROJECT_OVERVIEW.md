@@ -66,9 +66,9 @@ V1 wird nur auf Deutsch ausgeliefert. UI-Texte sollen auslagerbar sein, Content 
 
 ### Aufgabenqualität
 
-Vor dem Ausbau der vollständigen Engine soll ein kleiner, validierter Aufgabenbestand für alle zehn Mechaniken vorhanden sein. Handgebaute Aufgaben werden redaktionell geprüft; generierte Aufgaben automatisiert validiert. Eine Mischung aus handgebauten, algorithmisch generierten und hybriden Aufgaben ist vorgesehen.
+Vor dem Ausbau der vollständigen Engine soll ein validierter Aufgabenbestand für alle zehn Mechaniken vorhanden sein: mindestens fünf unterschiedliche, freigegebene Aufgaben je Mechanik, Altersgruppe und Schwierigkeit. Handgebaute Aufgaben werden redaktionell geprüft; generierte Aufgaben automatisiert validiert. Eine Mischung aus handgebauten, algorithmisch generierten und hybriden Aufgaben ist vorgesehen.
 
-Die verbindliche Content-Herkunft, Freigabe, Prüfung und Fehlerbehandlung je Mechanik ist in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md) festgelegt.
+Die verbindlichen Regeln zu Content-Herkunft, Freigabe, Prüfung, Mindestbestand, Wiederholung und Erschöpfung je Mechanik stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md).
 
 ## Technische Leitlinien
 
