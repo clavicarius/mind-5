@@ -6,16 +6,34 @@ Die verbindliche Strategie für Erzeugung, Freigabe und Fehlerbehandlung aller M
 
 ## Tagesrunde und Auswahl
 
-Eine Runde umfasst genau fünf Aufgaben. Die Engine bestimmt Mechanik, Reihenfolge, Schwierigkeit sowie die konkrete Aufgabe. Bei der Zusammenstellung gilt folgende Priorität:
+Eine Runde umfasst genau fünf Aufgaben. Die Engine bestimmt Mechanik, Reihenfolge, Schwierigkeit sowie die konkrete Aufgabe. Für die Bereichsgewichtung hat jede Aufgabe genau einen primären Puzzlebereich:
 
-1. Pflichtregeln einhalten: genau fünf Aufgaben, höchstens zweimal dieselbe Mechanik, mindestens drei verschiedene Mechaniken.
+| Puzzlebereich | Zugeordnete Mechaniken |
+| --- | --- |
+| **Logik und Deduktion** | Memory Logic, Was passt nicht?, Raster-Logik, Reihenfolge |
+| **Mustererkennung** | Zahlenfolge, Muster fortsetzen |
+| **Visuelle Wahrnehmung** | Visueller Vergleich |
+| **Räumliches Denken** | Drehen & Denken |
+| **Zahlen und Mathematik** | Rechenlogik |
+| **Text und Sprache** | Wortlogik |
+
+Die Bereiche erhalten das gleiche Gewicht von **1**. Zuerst werden alle Zusammenstellungen ausgeschlossen, die Pflichtregeln oder das gewählte Schwierigkeitsprofil verletzen. Unter den verbleibenden Zusammenstellungen wird die höchstmögliche Zahl verschiedener Bereiche ermittelt. Bei der schrittweisen Auswahl bleiben nur Bereiche und Mechaniken zulässig, mit denen diese Zahl noch erreicht werden kann. Bei gleicher Bereichsvielfalt werden zunächst Zusammenstellungen ohne Mechaniken des Vortags bevorzugt. Unter den danach gleichwertigen Bereichen erhält jeder Bereich Gewicht 1; innerhalb des gewählten Bereichs werden die zulässigen Mechaniken ebenfalls gleich gewichtet. Eine Auswahl wird nur getroffen, wenn danach noch mindestens eine vollständige gültige Zusammenstellung möglich ist.
+
+Die Zusammenstellung folgt dieser Priorität:
+
+1. Pflichtregeln einhalten: genau fünf Aufgaben, höchstens zweimal dieselbe Mechanik und mindestens drei verschiedene Mechaniken.
 2. Das gewählte Schwierigkeitsprofil exakt einhalten.
-3. Mindestens drei verschiedene Mechaniken sicherstellen.
-4. Puzzlebereiche möglichst vielfältig abdecken.
-5. Mechaniken des Vortags möglichst vermeiden.
-6. Unter den verbleibenden Möglichkeiten zufällig auswählen.
+3. Die Zahl verschiedener Puzzlebereiche maximieren.
+4. Bei gleicher Bereichsvielfalt Mechaniken des Vortags möglichst vermeiden.
+5. Unter den danach gleichwertigen Möglichkeiten zufällig und gleich gewichtet auswählen.
 
-Pflichtregeln haben Vorrang vor Optimierungszielen. Bereichswiederholungen sind erlaubt, wenn die übrigen Regeln sie erforderlich machen. Die Auswahl bleibt grundsätzlich zufällig.
+Die Bereichsgewichtung ist ein Optimierungsziel, keine zusätzliche Pflichtregel: Eine Runde muss nicht fünf verschiedene Bereiche enthalten, und ein Bereich kann mehrfach vorkommen. Weniger Bereichsvielfalt ist gültig, wenn das für eine vollständige Runde mit dem gewählten Schwierigkeitsprofil und den Pflichtregeln erforderlich ist. Bereichswiederholungen machen eine Runde nicht allein deshalb unmöglich.
+
+**Beispiele:**
+
+- **Gültig, ausgewogen:** Profil 3 (3 leicht, 2 anspruchsvoll): Memory Logic (leicht, Logik und Deduktion), Zahlenfolge (anspruchsvoll, Mustererkennung), Visueller Vergleich (leicht, visuelle Wahrnehmung), Drehen & Denken (anspruchsvoll, räumliches Denken) und Rechenlogik (leicht, Zahlen und Mathematik). Fünf verschiedene Mechaniken und Bereiche; der Bereich Text und Sprache bleibt unberücksichtigt.
+- **Gültig mit Bereichswiederholung:** Eine Zusammenstellung mit fünf Aufgaben aus mindestens drei Mechaniken und exakt der Profilverteilung bleibt gültig, wenn ein Bereich wiederholt werden muss, weil für die noch benötigten Schwierigkeitsstufen keine vollständige regelkonforme Auswahl aus bislang unberücksichtigten Bereichen möglich ist.
+- **Nicht möglich:** Fünf Aufgaben derselben Mechanik verletzen die Höchstzahl von zwei je Mechanik und die Mindestzahl von drei verschiedenen Mechaniken. Ebenso ist eine Runde mit einer anderen Leicht/Anspruchsvoll-Verteilung als im gewählten Profil ungültig, auch wenn ihre Bereiche vielfältig sind.
 
 ## Offizieller Versuch und weitere Runden
 
