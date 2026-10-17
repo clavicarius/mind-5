@@ -26,7 +26,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 | 2 | Gemeinsames Bewertungsmodell | **Abgeschlossen** – verbindliche Regeln und Beispiele stehen in der Spiel- und Regelspezifikation. |
 | 3 | Memory Logic als Referenzprofil | **Abgeschlossen** – Inhalte, Zustände, Beispiele, Fehler, Punkte und Validierung stehen im [Referenzprofil](./profiles/memory-logic.md). |
 | 4 | Generierung und Validierung | **Abgeschlossen** – Strategie je Mechanik einschließlich Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeit, Redaktion und Fehlerbehandlung steht in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
-| 5 | Rundengenerierung | Gewichtung der Puzzlebereiche konkretisieren; Pflichtregeln und Schwierigkeitsverteilung bleiben vorrangig. |
+| 5 | Rundengenerierung | **Abgeschlossen** – Gewichtung der Puzzlebereiche und Auswahlpriorität stehen in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md); Inhaltsumfang und Erschöpfungsregeln stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 6 | Content-Menge | **Abgeschlossen** – Mindestumfang, Wiederholungsregeln, inhaltliche Gleichheit und Verhalten bei erschöpftem Bestand stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 7 | Persistenz | Zuerst Persistenzschema entwerfen, danach localStorage oder IndexedDB entscheiden. |
 | 8 | Zeit und Tageswechsel | Zustandsmodell und Tests für aktive Zeit, Pause, Tabwechsel, Offline, Mitternacht, Gerätewechsel, Zeitquellen, Manipulation sowie offizielle/weitere/verwarfene Runde festlegen. |
@@ -38,7 +38,6 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
-- Rundengenerator-Gewichtung.
 - Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
 - Zeitquelle, Offline-Abgleich und Zustandsübergänge für Mitternacht und Zeitmanipulation im Detail.
 - Konkrete technische Ausgestaltung des UI-Grundgerüsts und der Internationalisierungsvorbereitung.
