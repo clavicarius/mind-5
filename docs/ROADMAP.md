@@ -8,6 +8,7 @@
 - Höchstens zwei Aufgaben mit derselben Mechanik und mindestens drei verschiedene Mechaniken pro Runde.
 - Regeln für offiziellen Tagesversuch, weitere Runden, Fehler, Überspringen, Hinweise, Tageswert, Rekorde, Streak, aktive Zeit und `Europe/Berlin` sind in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgehalten.
 - Bestwert und Bestzeit bleiben pro Altersgruppe erhalten und werden bei einem späteren Wechsel zurück zu dieser Altersgruppe wieder angezeigt; Tageswertung und Streak werden beim Altersgruppenwechsel zurückgesetzt.
+- Persistenzmodell für Spielzustand, offiziellen Versuch, altersgruppenspezifische Rekorde, Streak, Zeitquelle und Migrationen steht in der [Persistenzspezifikation](./PERSISTENCE_SCHEMA.md). Die Speichertechnologie bleibt offen.
 - Das gemeinsame Bewertungsmodell für Aufgaben- und Tagespunkte einschließlich Fehlern, Abschluss, Hinweisen und Rundung ist in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgelegt und mit drei Mechaniktypen durchgerechnet.
 - Memory Logic ist als Referenzmechanik vollständig spezifiziert; Details stehen im [Referenzprofil](./profiles/memory-logic.md).
 - Mindestumfang, inhaltliche Gleichheit, Wiederholungsfenster sowie Verhalten bei erschöpftem Bestand und fehlgeschlagener Generierung stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md).
@@ -28,7 +29,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 | 4 | Generierung und Validierung | **Abgeschlossen** – Strategie je Mechanik einschließlich Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeit, Redaktion und Fehlerbehandlung steht in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 5 | Rundengenerierung | **Abgeschlossen** – Gewichtung der Puzzlebereiche und Auswahlpriorität stehen in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md); Inhaltsumfang und Erschöpfungsregeln stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 6 | Content-Menge | **Abgeschlossen** – Mindestumfang, Wiederholungsregeln, inhaltliche Gleichheit und Verhalten bei erschöpftem Bestand stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
-| 7 | Persistenz | Zuerst Persistenzschema entwerfen, danach localStorage oder IndexedDB entscheiden. |
+| 7 | Persistenz | **Schema abgeschlossen** – logisches Modell und Migrationen stehen in der [Persistenzspezifikation](./PERSISTENCE_SCHEMA.md); localStorage oder IndexedDB bei der Implementierung entscheiden. |
 | 8 | Zeit und Tageswechsel | Zustandsmodell und Tests für aktive Zeit, Pause, Tabwechsel, Offline, Mitternacht, Gerätewechsel, Zeitquellen, Manipulation sowie offizielle/weitere/verwarfene Runde festlegen. |
 | 9 | UI/UX | Gemeinsames Grundgerüst entwerfen, danach mechanikspezifische Oberflächen darauf aufbauen. |
 | 10 | Barrierearmut | Parallel zur UI-Entwicklung berücksichtigen, nicht nachträglich ergänzen. |
@@ -38,7 +39,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
-- Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
+- Wahl zwischen localStorage und IndexedDB und technische Umsetzung der Persistenz.
 - Zeitquelle, Offline-Abgleich und Zustandsübergänge für Mitternacht und Zeitmanipulation im Detail.
 - Konkrete technische Ausgestaltung des UI-Grundgerüsts und der Internationalisierungsvorbereitung.
 

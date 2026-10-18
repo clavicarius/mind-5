@@ -71,18 +71,20 @@ wird:
 
 `kind` ist `official` oder `extra`; `state` ist `in-progress`, `paused` oder
 `finished`. Aufgaben enthalten die zur Wiederherstellung und Abbruchwertung
-nötigen Aufgabensnapshots, Validierungsstatus, Fortschritt, Fehler, verwendete
-Hinweise und endgültige Aufgabenpunkte. Es werden keine Eingaben oder
-Zwischenergebnisse über die für diesen Zweck nötigen Daten hinaus archiviert.
-`activeTimeMs` zählt ausschließlich aktive Spielzeit. Monotone Laufzeitwerte
-werden nicht als Zeitquelle über einen Neustart hinweg verwendet.
+nötigen Aufgabensnapshots einschließlich Inhalts-/Validierungsversion,
+Validierungsstatus, Fortschritt, Fehler, verwendete Hinweise und endgültige
+Aufgabenpunkte. Es werden keine Eingaben oder Zwischenergebnisse über die für
+diesen Zweck nötigen Daten hinaus archiviert. `activeTimeMs` zählt ausschließlich
+aktive Spielzeit. Monotone Laufzeitwerte werden nicht als Zeitquelle über einen
+Neustart hinweg verwendet.
 
 Der offizielle Versuch wird beim endgültigen Abschluss der ersten Aufgabe
 angelegt. Sein Zustand ist `in-progress`, `completed` oder `abandoned`; er
-enthält Start-/Endzeit, die fünf Aufgabenpunkte und den Tageswert, sobald diese
-feststehen. Auch ein Abbruch nach Festlegung zählt als der eine offizielle
-Versuch des Tages. Ein vor Abschluss der ersten Aufgabe verworfener Start
-verbraucht ihn nicht. Für `extra`-Runden wird kein Tagesversuch angelegt.
+enthält Altersgruppe, Start-/Endzeit, fünf Aufgabenpunkte (noch offene Aufgaben
+als `null` bis zur Wertung) und den Tageswert, sobald diese feststehen. Auch ein
+Abbruch nach Festlegung zählt als der eine offizielle Versuch des Tages. Ein
+vor Abschluss der ersten Aufgabe verworfener Start verbraucht ihn nicht. Für
+`extra`-Runden wird kein Tagesversuch angelegt.
 
 Es wird nur der Zustand des aktuellen Berliner Kalendertags gespeichert. Beim
 Tageswechsel wird ein vorhandenes offizielles Ergebnis zuerst nach den
@@ -105,10 +107,11 @@ Bestwert- und Bestzeitvergleich folgen ausschließlich den Regeln in der
 nicht durch einen Gleichstand ersetzt.
 
 Der Streak ist global, nicht altersgruppenspezifisch. `lastCountedDay` ist der
-Tag des letzten begonnenen offiziellen Versuchs. Beim Tagesabschluss wird die
-Zahl verpasster Tage anhand der Berliner Kalendertage ermittelt: null verpasste
-Tage verlängern den Streak, genau ein verpasster Tag erlaubt die Fortsetzung,
-mindestens zwei verpasste Tage setzen ihn vor dem nächsten Zählen zurück.
+Tag, an dem die erste Aufgabe des offiziellen Versuchs endgültig abgeschlossen
+wurde. Der Streak wird dann gezählt, unabhängig vom Ergebnis dieser Aufgabe.
+Die Zahl verpasster Tage wird anhand der Berliner Kalendertage ermittelt: null
+verpasste Tage verlängern den Streak, genau ein verpasster Tag erlaubt die
+Fortsetzung, mindestens zwei verpasste Tage setzen ihn vor dem nächsten Zählen zurück.
 Altersgruppenwechsel setzt `count` auf `0` und `lastCountedDay` auf `null`;
 Rekorde bleiben unverändert.
 
@@ -137,8 +140,10 @@ Bei einem Wechsel:
 1. Ein noch nicht offizieller, aktiver Lauf wird verworfen. Ein bereits
    festgelegter offizieller Lauf wird nach den Abbruchregeln beendet; offene
    Aufgaben zählen null und das Tagesergebnis wird berechnet.
-2. Die aktuelle Tageswertung wird zurückgesetzt und `streak` wird wie oben
-   beschrieben geleert.
+2. Die aktuelle Tageswertung wird für die Anzeige zurückgesetzt und `streak`
+   wird wie oben beschrieben geleert. Der Marker, dass der offizielle Versuch
+   für diesen Tag bereits verbraucht ist, bleibt bestehen; der Versuch wird
+   dadurch nicht erneut freigegeben.
 3. Bestwert und Bestzeit werden **nicht** gelöscht oder umgeschrieben. Es
    werden nur die Rekorde der neu gewählten Altersgruppe angezeigt. Bei einer
    späteren Rückkehr erscheinen deren Rekorde wieder.
