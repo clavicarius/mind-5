@@ -72,6 +72,6 @@ Die verbindlichen Regeln zu Content-Herkunft, Freigabe, Prüfung, Mindestbestand
 
 ## Technische Leitlinien
 
-Mind 5 soll mit JavaScript nur dort umgesetzt werden, wo es erforderlich ist. V1 verwendet nach Definition des Persistenzschemas wegen des kleinen, dokumentbasierten Datenbestands `localStorage`; der asynchrone Speichervertrag hält die Spiellogik von der konkreten Speichertechnik unabhängig. Schema, Lebenszyklus und Vertrag sind in der [Persistenzspezifikation](./PERSISTENCE.md) festgelegt. Accounts und Synchronisierung sind nicht Teil von V1.
+Mind 5 soll mit JavaScript nur dort umgesetzt werden, wo es erforderlich ist. Das logische Persistenzschema, die Migrationsregeln, die begründete Wahl von `localStorage` für V1 und der asynchrone Speichervertrag sind in der [Persistenzspezifikation](./PERSISTENCE_SCHEMA.md) festgelegt. Accounts und Synchronisierung sind nicht Teil von V1.
 
 Persistiert werden der aktuelle Tageszustand und offizielle Versuch, altersgruppenspezifische Bestwerte und Bestzeiten, Streak, Altersgruppe, Zeitquelle, Validierungsstatus sowie Schema- und Migrationsinformationen. V1 speichert keine weitergehende Statistik-Historie. Persistenz erlaubt ausdrücklich keine Fortsetzung einer laufenden Runde nach dem Schließen des Browsers oder der App; die Runde wird verworfen und eine offizielle Runde nach den Regeln zum Tagesabbruch gewertet.
