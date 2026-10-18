@@ -118,19 +118,42 @@ Rekorde bleiben unverändert.
 ### Zeitquelle und Integrität
 
 - `source` ist `external`, `offline-estimate` oder `device`. Eine externe
-  Zeitquelle hat Vorrang. Offline wird der letzte vertrauenswürdige externe
-  Zeitpunkt um die verstrichene lokale Zeit fortgeschrieben; ohne bekannten
-  externen Zeitpunkt wird die Gerätezeit verwendet.
+  Zeitquelle hat Vorrang. Solange die Anwendung geöffnet bleibt, wird offline
+  der letzte vertrauenswürdige externe Zeitpunkt um monotone Laufzeit
+  fortgeschrieben. Diese Laufzeit wird nicht über Schließen/Neuladen hinweg
+  persistiert. Ohne externe Zeitquelle nach einem Neustart oder ohne jemals
+  erfolgten externen Abgleich wird die Gerätezeit für den Spielbetrieb
+  verwendet, aber als unbestätigt behandelt.
 - `lastTrustedInstant` speichert den letzten abgeglichenen Zeitpunkt.
   `lastExternalSync` speichert den Zeitpunkt des letzten erfolgreichen
   Abgleichs oder ist `null`, wenn keiner stattgefunden hat.
 - `integrity` ist `trusted`, `unverified` oder `suspected-manipulation`.
-  Verdacht auf Manipulation sperrt gemäß Spielregeln Wertung und offiziellen
-  Status und setzt den dort genannten Tageswert, Streak und Bestwert zurück.
-  Unzuverlässige Zeitmessung darf keine Bestzeit erzeugen.
+  Ein plausibler externer Abgleich setzt die Integrität auf `trusted`; ohne
+  externe Bestätigung bleibt sie `unverified`. Offline-Ergebnisse mit externem
+  Anker dürfen normal gewertet werden. Ein daraus entstandener Bestzeitkandidat
+  bleibt nur bis zum Abgleich im Arbeitsspeicher und wird nur bei erfolgreicher,
+  plausibler Bestätigung übernommen. Nach Schließen/Neuladen verfällt er.
+  Unbestätigte Gerätezeit darf keine Bestzeit erzeugen. Verdacht auf
+  Manipulation sperrt gemäß Spielregeln Wertung und offiziellen Status und setzt
+  den dort genannten Tageswert, Streak und Bestwert zurück.
+- Ein Zeitabgleich verwendet den monotonen Abstand seit dem letzten externen
+  Abgleich, solange die Anwendung ununterbrochen geöffnet war. Ein rückwärts
+  laufender Zeitpunkt oder eine Abweichung außerhalb der zugelassenen
+  Toleranz setzt `suspected-manipulation`; ein Rücksprung ist unabhängig von
+  der Toleranz unzulässig. Nach Schließen/Neuladen ist kein monotoner Vergleich
+  über die Unterbrechung möglich; die Gerätezeit ist daher unbestätigt und
+  kann nicht allein die externe Vertrauensbasis fortschreiben.
 - Ein lokaler Browserdatensatz ist manipulierbar und stellt keinen
   Manipulationsschutz dar. Zeitangaben allein sind kein Beweis für einen
   gültigen Versuch.
+
+Zeit-Zustände, Hintergrundpause, Fortsetzen, Mitternachtsbehandlung und die
+Auswirkungen auf Tageswertung und Bestzeit sind in der
+[Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) verbindlich
+festgelegt. Beim Tageswechsel wird anhand des aktuellen Berliner Datums
+beendet, auch wenn der Tab verborgen war; nach Rückkehr wird zunächst die Zeit
+geprüft und dann ein gegebenenfalls bereits überschrittener Tageswechsel
+unmittelbar verarbeitet.
 
 ## Altersgruppenwechsel
 
@@ -212,7 +235,11 @@ gespeichert werden konnten.
 Der lokale Speicher ist geräte- und browsergebunden und kein Backend. V1 führt
 weder Konten noch Übertragung oder Synchronisierung ein.
 
-Tests müssen mindestens offizielle und verworfene Starts, Abbruch und
-Tageswechsel, Altersgruppenwechsel mit erhaltenen Rekorden, ungültige Zeiten,
-jeden Migrationsschritt, wiederholte Migration, beschädigte Daten sowie eine
-unbekannte höhere Schema-Version abdecken.
+Tests müssen mindestens offizielle und verworfene Starts, Aktiv/Pause/
+Fortsetzen bei Tabwechsel, Abbruch und Tageswechsel im Vorder- und
+Hintergrund, Offline-Fortschreibung und externen Abgleich, unbestätigte
+Gerätezeit, rückwärts laufende und unplausibel abweichende Zeit, Bestzeit-
+Eligibility einschließlich verworfener Offline-Kandidaten,
+Altersgruppenwechsel mit erhaltenen Rekorden, jeden Migrationsschritt,
+wiederholte Migration, beschädigte Daten sowie eine unbekannte höhere
+Schema-Version abdecken.

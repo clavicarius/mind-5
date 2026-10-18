@@ -81,9 +81,36 @@ Die Beispiele verwenden die Regeln oben; ein bestätigter Fehlversuch kostet kei
 
 Beispiel für die Tagesnormalisierung: Aufgabenwerte **47, 70, 80, 100 und 0** ergeben `297 ÷ 5 = 59,4`, also **59 Tagespunkte**. Das Ergebnis einer offenen oder nicht abgeschlossenen Aufgabe würde als 0 in denselben Mittelwert eingehen.
 
-Gemessen wird nur die aktive Gesamtzeit der fünf Aufgaben: Beginn mit der ersten Aufgabe, Ende mit deren endgültigem Abschluss (also nach der erforderlichen Bestätigung) der fünften. Reihenfolge und Zeit haben keinen Einfluss auf Punkte; Zeit zählt ausschließlich für den Bestzeitrekord. Die Merkphase von Memory Logic zählt nicht zur Spielzeit.
+Gemessen wird nur die aktive Gesamtzeit der fünf Aufgaben: Beginn mit der ersten Aufgabe, Ende mit deren endgültigem Abschluss (also nach der erforderlichen Bestätigung) der fünften. Die Uhr läuft ausschließlich im Zustand **aktiv** und wird mit einer monotonen Laufzeituhr gemessen; Uhrzeitkorrekturen ändern die Dauer nicht. Reihenfolge und Zeit haben keinen Einfluss auf Punkte; Zeit zählt ausschließlich für den Bestzeitrekord. Die Merkphase von Memory Logic zählt nicht zur Spielzeit.
 
-Bei Tabwechsel, Wechsel in den Hintergrund oder Verlassen des Spiels pausiert die Messung automatisch. Zurück im Spiel muss ausdrücklich „Fortsetzen“ gewählt werden, bevor die Zeit weiterläuft. Wird das Spiel geschlossen, ist keine Fortsetzung möglich und die aktive Zeit ist keine Bestzeit. Eine nicht-offizielle Runde wird verworfen. Bei einem bereits offiziellen Versuch gilt der Tagesabbruch: offene Aufgaben erhalten null Punkte und der Tageswert wird berechnet.
+#### Zeit- und Rundenzustände
+
+Eine Runde befindet sich in genau einem dieser Zeit-Zustände:
+
+| Zustand | Verhalten und Übergang |
+| --- | --- |
+| **Nicht gestartet** | Noch keine Zeitmessung. Sie beginnt mit der Anzeige der ersten Aufgabe. |
+| **Aktiv** | Aufgaben können bearbeitet werden; ausschließlich hier läuft die aktive Zeit. |
+| **Pausiert** | Die Zeit steht. Tabwechsel, `visibilitychange` in den Hintergrund, Verlust des Fensters oder Verlassen des Spiels pausieren sofort. Beim Zurückkehren bleibt die Runde pausiert, bis die Person ausdrücklich **„Fortsetzen“** wählt. |
+| **Beendet** | Endzustand; eine beendete oder verworfene Runde kann nicht fortgesetzt werden. |
+
+Die Zustandsfolge ist `Nicht gestartet → Aktiv ↔ Pausiert → Beendet`. Die fünfte endgültig bestätigte Aufgabe beendet die Runde regulär. Schließen oder Neuladen beendet sie ebenfalls, statt sie wiederherzustellen: Vor dem offiziellen Versuch wird sie verworfen; danach wird sie als offizieller Tagesabbruch gewertet. Bereits endgültig abgeschlossene Aufgaben behalten ihre Punkte, offene Aufgaben zählen null. Für keine durch Schließen/Neuladen unterbrochene Runde ist eine Bestzeit gültig.
+
+#### Zeitquelle und Offline-Fortschreibung
+
+Die Tageskennung und Tageszeit richten sich nach `Europe/Berlin`, einschließlich Sommer-/Winterzeit; Mitternacht ist der Wechsel des Berliner Kalenderdatums. Für aktuelle Zeit gilt folgende Priorität:
+
+1. Eine verfügbare, erfolgreiche externe Zeitquelle ist maßgeblich. Ein neuer Wert wird mit dem letzten vertrauenswürdigen Zeitpunkt abgeglichen.
+2. Offline wird ein vorhandener externer Zeitpunkt um die seither verstrichene monotone Laufzeit fortgeschrieben, solange die Anwendung ohne Unterbrechung geöffnet bleibt. Diese Schätzung dient auch zur Erkennung des Tageswechsels. Nach Neuladen oder Schließen ist die monotone Laufzeit nicht verfügbar; eine lokale Gerätezeit kann dann nur als unbestätigte Zeit dienen.
+3. Ohne jemals abgeglichene externe Zeit wird die Gerätezeit für den Kalender- und Spielbetrieb verwendet und als **unbestätigt** behandelt.
+
+Beim nächsten externen Abgleich wird die Schätzung mit der externen Zeit verglichen. Ist der Verlauf rückwärts oder außerhalb der für den Abgleich zugelassenen Abweichung, wird Zeitmanipulation vermutet; ein Offline-Ergebnis darf bis zu diesem Abgleich keine Bestzeit begründen. Ein unbestätigter Gerätezeitverlauf kann das Spiel und die Tageswertung ermöglichen, aber keine Bestzeit erzeugen. Die konkrete Abweichungstoleranz ist Implementierungsparameter und darf nicht dazu führen, dass ein Rücksprung als gültige Zeit akzeptiert wird.
+
+#### Tageswechsel und Zeitintegrität
+
+Ein erkannter Tageswechsel wird angekündigt. Genau um 00:00 Uhr Berliner Zeit wird eine aktive Runde automatisch beendet; ist der Tab verborgen, erfolgt die Beendigung unmittelbar nach Rückkehr und Zeitprüfung. Eine noch nicht-offizielle Runde wird verworfen und die nächste Tagesrunde erfordert Bestätigung. Ein offizieller Versuch wird als Tagesabbruch beendet: offene Aufgaben erhalten null Punkte und der Tageswert wird berechnet. Eine weitere Runde endet ohne Wertung. In keinem Fall wird eine durch Mitternacht automatisch beendete, unvollständige Runde für eine Bestzeit zugelassen. Die abgeschlossene offizielle Tageswertung darf den Bestwert aktualisieren; eine weitere Runde darf weiterhin weder Tageswert noch Bestwert oder Streak ändern.
+
+Eine externe Zeitkorrektur ändert niemals nachträglich die Tageskennung eines bereits festgelegten Versuchs. Stellt der Abgleich eine rückwärts laufende oder unplausibel abweichende Uhr fest, wird der Zustand **Zeitmanipulation vermutet** gesetzt: Scoring und offizieller Status sind gesperrt, der aktuelle Tageswert wird zurückgesetzt sowie Streak und Bestwert werden zurückgesetzt; das Spiel bleibt grundsätzlich spielbar. Der Abgleich darf eine so gesperrte Runde nicht nachträglich gültig machen. Ohne Manipulationsverdacht führt ein Abgleich lediglich die Zeitquelle und den aktuellen Berliner Tag nach.
 
 ## Bestwert, Bestzeit und Streak
 
@@ -105,7 +132,7 @@ Die Bestzeit ist unabhängig vom Bestwert und enthält Zeit, zugehörige Punktza
 2. Bei gleicher Zeit aktualisiert eine höhere Punktzahl den Rekord.
 3. Bei gleicher Zeit und gleicher oder niedrigerer Punktzahl bleibt der Rekord unverändert.
 
-Eine gültige Bestzeit darf aus dem offiziellen Versuch oder einer weiteren Runde stammen. Null-Punkte-Ergebnisse sind zulässig. Bei Gerätewechsel entsteht keine gültige Zeit. Ohne Rekord wird **„Noch keine Bestzeit“** angezeigt.
+Eine gültige Bestzeit darf aus dem offiziellen Versuch oder einer weiteren Runde stammen, sofern alle fünf Aufgaben endgültig abgeschlossen wurden, die Runde nicht geschlossen/neu geladen oder durch Mitternacht beendet wurde und die Zeitquelle vertrauenswürdig ist (externe Zeit oder Offline-Schätzung mit externem Anker). Eine offline beendete Runde liefert zunächst nur einen vorläufigen Bestzeitkandidaten. Er wird erst nach erfolgreichem, plausiblen externen Abgleich übernommen; wird die Anwendung vorher geschlossen oder neu geladen, verfällt der Kandidat. Null-Punkte-Ergebnisse sind zulässig. Bei Gerätewechsel, unbestätigter Gerätezeit oder vermuteter Manipulation entsteht keine gültige Zeit. Ohne Rekord wird **„Noch keine Bestzeit“** angezeigt.
 
 ### Streak
 
