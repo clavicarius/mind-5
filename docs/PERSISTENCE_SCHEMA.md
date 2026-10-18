@@ -179,12 +179,40 @@ verwenden eigene Inhalts-/Validierungsversionen in den Aufgabensnapshots;
   und als frischer, gültiger V1-Zustand gestartet; Rekorde werden nur erhalten,
   wenn sie einzeln validiert werden können.
 
-## Speicherentscheidung und Tests
+## Speicherentscheidung und Zugriff
 
-Die Wahl zwischen localStorage und IndexedDB bleibt eine Implementierungsfrage.
-Die Datenzugriffsschicht muss atomare Ersetzung, Schemaerkennung und
-Migrationsfehler behandeln können. Tests müssen mindestens offizielle und
-verworfene Starts, Abbruch und Tageswechsel, Altersgruppenwechsel mit
-erhaltenen Rekorden, ungültige Zeiten, jeden Migrationsschritt,
-wiederholte Migration, beschädigte Daten sowie eine unbekannte höhere
-Schema-Version abdecken.
+V1 verwendet `localStorage`. Der Datensatz umfasst nur wenige Kilobyte an
+Einstellungen, aktuellem Tageszustand, Rekorden, Streak und Zeitmetadaten. Es
+gibt weder große Binärdaten noch eine Statistik-Historie oder lokale
+Aufgabenbibliothek. Ein einzelnes versioniertes JSON-Dokument ist dafür
+ausreichend; IndexedDBs Transaktions- und API-Aufwand ist für diesen Umfang
+nicht erforderlich.
+
+Die Spiellogik greift ausschließlich über diesen asynchronen Vertrag auf den
+Zustand zu:
+
+```text
+StateStore {
+  read(): Promise<PersistedState | null>
+  write(state: PersistedState): Promise<void>
+  clear(): Promise<void>
+}
+```
+
+Die V1-Implementierung liest und schreibt den vollständigen, validierten
+Datensatz unter einem festen `localStorage`-Schlüssel. Die asynchrone
+Schnittstelle entkoppelt Aufrufer von der synchronen Browser-API und lässt
+einen späteren Wechsel etwa zu IndexedDB zu, ohne Spiellogik an die
+Speichertechnik zu binden. Der Speichervertrag implementiert keine
+Spielfachregeln. Schreibfehler werden weitergegeben und dürfen nicht als
+erfolgreiches Speichern gemeldet werden; die Anwendung kann die Sitzung ohne
+Persistenz fortsetzen und weist darauf hin, dass Fortschritte nicht dauerhaft
+gespeichert werden konnten.
+
+Der lokale Speicher ist geräte- und browsergebunden und kein Backend. V1 führt
+weder Konten noch Übertragung oder Synchronisierung ein.
+
+Tests müssen mindestens offizielle und verworfene Starts, Abbruch und
+Tageswechsel, Altersgruppenwechsel mit erhaltenen Rekorden, ungültige Zeiten,
+jeden Migrationsschritt, wiederholte Migration, beschädigte Daten sowie eine
+unbekannte höhere Schema-Version abdecken.
