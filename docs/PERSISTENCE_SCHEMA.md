@@ -31,6 +31,7 @@ noch kein entsprechender Wert vorliegt.
   "appVersion": "0.1.0",
   "selectedAgeGroup": "13-17",
   "activeRound": null,
+  "pendingConfirmations": [],
   "currentDay": {
     "day": "2026-10-18",
     "officialAttempt": null
@@ -70,7 +71,9 @@ wird:
 ```
 
 `kind` ist `official` oder `extra`; `state` ist `in-progress`, `paused` oder
-`finished`. Aufgaben enthalten die zur Wiederherstellung und Abbruchwertung
+`finished`. `finished` ist nur ein Übergangszustand beim Abschluss und wird
+zusammen mit der Aktualisierung des Tageszustands aus `activeRound` entfernt.
+Aufgaben enthalten die zur Abbruchwertung
 nötigen Aufgabensnapshots einschließlich Inhalts-/Validierungsversion,
 Validierungsstatus, Fortschritt, Fehler, verwendete Hinweise und endgültige
 Aufgabenpunkte. Es werden keine Eingaben oder Zwischenergebnisse über die für
@@ -86,11 +89,46 @@ Abbruch nach Festlegung zählt als der eine offizielle Versuch des Tages. Ein
 vor Abschluss der ersten Aufgabe verworfener Start verbraucht ihn nicht. Für
 `extra`-Runden wird kein Tagesversuch angelegt.
 
+### Wiederherstellung nach Schließen oder Neuladen
+
+`activeRound` ist kein fortsetzbarer Spielstand. `paused` kennzeichnet nur eine
+Pause während der laufenden Sitzung; nach Schließen oder Neuladen wird keine
+Aufgabe erneut geöffnet. Beim nächsten Start dient ein vorhandener Lauf
+ausschließlich zur einmaligen Abwicklung:
+
+| Gespeicherter Lauf | Wiederherstellung |
+| --- | --- |
+| `extra` oder `official`, bevor die erste Aufgabe endgültig abgeschlossen wurde | `activeRound` verwerfen. Kein offizieller Versuch, Tagesergebnis, Streak oder Bestwert wird angelegt oder geändert. |
+| `official` mit bereits angelegtem `officialAttempt` | Versuch als `abandoned` beenden, offene bzw. noch nicht endgültig gewertete Aufgaben auf null Punkte setzen, Tagesergebnis berechnen und den offiziellen Bestwert prüfen. Eine bereits gezählte Streak wird nicht erneut verändert. Die aktive Zeit ist ungültig und erzeugt keine Bestzeit. |
+| `extra` nach Beginn | Lauf ohne Wertung verwerfen. Tagesergebnis, Streak und Bestwert bleiben unverändert; der Abbruch erzeugt keine Bestzeit. |
+
+Nach jeder Abwicklung wird `activeRound` auf `null` gesetzt. Es werden weder
+Eingaben noch Aufgabenfortschritt wiederhergestellt. `pendingConfirmations`
+enthält bis zur Bestätigung die noch anzuzeigenden Hinweise
+`discarded-round` (ein nicht-offizieller Lauf wurde verworfen) und/oder
+`new-day` (die Tagesrunde des neuen Berliner Kalendertags beginnt). Bei der
+Wiederherstellung gemäß erster und dritter Tabellenzeile wird
+`discarded-round` hinzugefügt. Die Bestätigung entfernt jeweils den
+zugehörigen Eintrag; vor einer neuen Runde müssen alle ausstehenden
+Bestätigungen erledigt sein. So bleibt der Hinweis auch dann erhalten, wenn
+die App direkt nach dem Wiederherstellen erneut geschlossen wird.
+
+Die offizielle Abbruchwertung verwendet die endgültigen Punkte bereits
+abgeschlossener Aufgaben unverändert. Eine offene Aufgabe und jede noch nicht
+endgültig bestätigte Aufgabe zählen null; der Tageswert ist der gerundete
+Mittelwert aus fünf Aufgabenwerten. Das Ergebnis wird auch bei null Punkten im
+offiziellen Versuch gespeichert. Nur ein positives Ergebnis kann den
+Bestwert der Altersgruppe verbessern; ein Abbruch kann nie eine Bestzeit
+erzeugen. Eine abgeschlossene zusätzliche Runde ändert weder Tagesergebnis noch
+Streak oder Bestwert; nur ihre gültige, vollständig gemessene Zeit kann eine
+Bestzeit verbessern.
+
 Es wird nur der Zustand des aktuellen Berliner Kalendertags gespeichert. Beim
-Tageswechsel wird ein vorhandenes offizielles Ergebnis zuerst nach den
-Spielregeln abgeschlossen; danach wird `currentDay` auf den neuen Tag gesetzt.
-Eine beendete zusätzliche Runde ändert weder Tagesergebnis noch Streak oder
-Bestwert.
+Tageswechsel wird ein aktiver Lauf für den bisherigen Tag zuerst nach den
+Wiederherstellungsregeln abgewickelt. Danach wird `currentDay` auf den neuen
+Tag gesetzt und `new-day` zu `pendingConfirmations` hinzugefügt. Noch
+ausstehende Bestätigungen bleiben dabei erhalten. Eine beendete zusätzliche
+Runde ändert weder Tagesergebnis noch Streak oder Bestwert.
 
 ### Altersgruppenspezifische Rekorde und Streak
 
@@ -150,6 +188,15 @@ Bei einem Wechsel:
 4. Die Runde verwendet unveränderlich die Altersgruppe, mit der sie begonnen
    wurde. Aufgaben, Punkte und Rekorde werden niemals nachträglich einer
    anderen Altersgruppe zugeordnet.
+
+## Gerätewechsel
+
+Der V1-Speicher ist an Browser und Gerät gebunden. Ein Wechsel auf ein anderes
+Gerät überträgt weder `activeRound` noch Tageszustand, Bestwerte, Bestzeiten
+oder Streak; es gibt keine Wiederherstellung oder Synchronisierung. Ein Lauf
+auf dem ursprünglichen Gerät bleibt dort den Wiederherstellungsregeln
+unterworfen. Geräteübergreifend fortgeschriebene oder anderweitig nicht
+verlässlich gemessene Zeit ist ungültig und darf keine Bestzeit erzeugen.
 
 ## Versionierung und Migration
 
