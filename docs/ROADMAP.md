@@ -28,7 +28,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 | 4 | Generierung und Validierung | **Abgeschlossen** – Strategie je Mechanik einschließlich Parameter, Lösbarkeit, Eindeutigkeit, Schwierigkeit, Redaktion und Fehlerbehandlung steht in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 5 | Rundengenerierung | **Abgeschlossen** – Gewichtung der Puzzlebereiche und Auswahlpriorität stehen in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md); Inhaltsumfang und Erschöpfungsregeln stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
 | 6 | Content-Menge | **Abgeschlossen** – Mindestumfang, Wiederholungsregeln, inhaltliche Gleichheit und Verhalten bei erschöpftem Bestand stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md). |
-| 7 | Persistenz | Zuerst Persistenzschema entwerfen, danach localStorage oder IndexedDB entscheiden. |
+| 7 | Persistenz | **Entschieden** – versioniertes Schema, localStorage für V1 und abstrakter Speichervertrag stehen in der [Persistenzspezifikation](./PERSISTENCE.md). |
 | 8 | Zeit und Tageswechsel | Zustandsmodell und Tests für aktive Zeit, Pause, Tabwechsel, Offline, Mitternacht, Gerätewechsel, Zeitquellen, Manipulation sowie offizielle/weitere/verwarfene Runde festlegen. |
 | 9 | UI/UX | Gemeinsames Grundgerüst entwerfen, danach mechanikspezifische Oberflächen darauf aufbauen. |
 | 10 | Barrierearmut | Parallel zur UI-Entwicklung berücksichtigen, nicht nachträglich ergänzen. |
@@ -38,7 +38,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
-- Persistenzschema und darauf basierende Wahl zwischen localStorage und IndexedDB.
+- Technische Implementierung und Tests des in der [Persistenzspezifikation](./PERSISTENCE.md) festgelegten Speichervertrags.
 - Zeitquelle, Offline-Abgleich und Zustandsübergänge für Mitternacht und Zeitmanipulation im Detail.
 - Konkrete technische Ausgestaltung des UI-Grundgerüsts und der Internationalisierungsvorbereitung.
 
