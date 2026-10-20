@@ -39,6 +39,7 @@ Die Arbeitsweise bleibt schrittweise und entscheidungsorientiert: möglichst gen
 
 ## Noch offene Entscheidungen
 
+- Zielplattform und Engine: Die aktuelle V1-Planung ist ein Browsergame. Zu klären ist, ob der Browserzugang erforderlich ist oder eine plattformübergreifende App, etwa mit Unity für iOS, Android, Windows und macOS, besser passt. Gemeinsame Spielregeln bleiben engine-unabhängig; Bedienung, Speicherung und Veröffentlichung sind je Zielplattform zu berücksichtigen.
 - Technische Implementierung und Tests des in der [Persistenzspezifikation](./PERSISTENCE_SCHEMA.md) festgelegten Speichervertrags.
 - Technische Implementierung und Tests der festgelegten Zeit-Zustände, Offline-Abgleiche und Mitternachtsbehandlung.
 - Konkrete technische Ausgestaltung des UI-Grundgerüsts und der Internationalisierungsvorbereitung.
