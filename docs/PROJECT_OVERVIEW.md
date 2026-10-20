@@ -6,7 +6,7 @@
 | --- | --- |
 | Name | Mind 5 |
 | Repository | `clavicarius/mind-5` (`mind-5`) |
-| Produkt | Kostenloses, werbefreies tägliches Browser-Puzzlespiel |
+| Produkt | Kostenloses, werbefreies tägliches Puzzlespiel; Browser ist die aktuelle V1-Planung |
 | Tagesrunde | Genau fünf Denkaufgaben |
 | V1-Sprache | Deutsch |
 | Tageszeitzone | `Europe/Berlin` |
@@ -18,7 +18,7 @@ Der Name „Mind 5“ verweist auf die fünf Denkaufgaben einer Tagesrunde. V1 e
 - Die Engine wählt Aufgabenmechaniken, Reihenfolge, Schwierigkeit und konkrete Inhalte. Spielende wählen keine Mechaniken.
 - Eine Tagesrunde verwendet fünf Aufgaben aus zehn Mechaniken. Eine Mechanik kommt höchstens zweimal vor; damit sind mindestens drei Mechaniken vertreten.
 - Alle zehn Mechaniken stehen grundsätzlich allen drei Altersgruppen zur Verfügung: 8–12, 13–17 und 18+.
-- Mind 5 ist zunächst ein backend-freies Browsergame für Mobilgeräte, Tablets und Desktop. Touch, Maus, Tastatur und teilweise Offline-Nutzung sind zu berücksichtigen.
+- Mind 5 ist aktuell als backend-freies Browsergame für Mobilgeräte, Tablets und Desktop geplant. Ob ein Browserzugang erforderlich ist oder stattdessen eine plattformübergreifende App, zum Beispiel mit Unity, umgesetzt wird, ist noch zu entscheiden. Touch, Maus, Tastatur und teilweise Offline-Nutzung sind zu berücksichtigen.
 - Die Architektur soll spätere Accounts, Synchronisierung und weitere Sprachen ermöglichen, ohne diese Funktionen in V1 umzusetzen.
 - Explizit nicht Teil von V1 sind Story, Social-/Sharing-Funktionen, Ranglisten, Accounts, Cloud-Synchronisierung, Langzeitstatistiken, Newsletter, Werbung, Monetarisierung und ein komplexes Backend.
 
