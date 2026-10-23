@@ -8,7 +8,7 @@
 - Höchstens zwei Aufgaben mit derselben Mechanik und mindestens drei verschiedene Mechaniken pro Runde.
 - Regeln für offiziellen Tagesversuch, weitere Runden, Fehler, Überspringen, Hinweise, Tageswert, Rekorde, Streak, aktive Zeit und `Europe/Berlin` sind in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgehalten.
 - Bestwert und Bestzeit bleiben pro Altersgruppe erhalten und werden bei einem späteren Wechsel zurück zu dieser Altersgruppe wieder angezeigt; Tageswertung und Streak werden beim Altersgruppenwechsel zurückgesetzt.
-- Persistenzmodell für Spielzustand, offiziellen Versuch, altersgruppenspezifische Rekorde, Streak, Zeitquelle und Migrationen steht in der [Persistenzspezifikation](./PERSISTENCE_SCHEMA.md). Die Speichertechnologie bleibt offen.
+- Persistenzmodell für Spielzustand, offiziellen Versuch, altersgruppenspezifische Rekorde, Streak, Zeitquelle und Migrationen sowie die V1-Speicherentscheidung `localStorage` stehen in der [Persistenzspezifikation](./PERSISTENCE_SCHEMA.md).
 - Das gemeinsame Bewertungsmodell für Aufgaben- und Tagespunkte einschließlich Fehlern, Abschluss, Hinweisen und Rundung ist in der [Spiel- und Regelspezifikation](./GAMEPLAY_SPECIFICATION.md) festgelegt und mit drei Mechaniktypen durchgerechnet.
 - Memory Logic ist als Referenzmechanik vollständig spezifiziert; Details stehen im [Referenzprofil](./profiles/memory-logic.md).
 - Mindestumfang, inhaltliche Gleichheit, Wiederholungsfenster sowie Verhalten bei erschöpftem Bestand und fehlgeschlagener Generierung stehen in der [Generierungs- und Validierungsstrategie](./GENERATION_VALIDATION.md).
