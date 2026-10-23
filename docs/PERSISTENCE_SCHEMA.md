@@ -1,8 +1,9 @@
 # Mind 5 – Persistenzschema und Migrationen
 
-Dieses Dokument definiert das logische Persistenzmodell für V1. Es legt weder
-localStorage noch IndexedDB als Speicher fest. Der Zugriff erfolgt über eine
-Speicherschnittstelle; die fachlichen Regeln bleiben unabhängig vom Backend.
+Dieses Dokument definiert das logische Persistenzmodell für V1. Als Speicher
+wird `localStorage` verwendet; der Zugriff erfolgt über eine
+Speicherschnittstelle, sodass die fachlichen Regeln unabhängig vom Backend
+bleiben.
 
 ## Grundsätze
 
