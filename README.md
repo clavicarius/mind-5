@@ -13,6 +13,7 @@
 - [Spiel- und Regelspezifikation](./docs/GAMEPLAY_SPECIFICATION.md): Spielablauf, Wertung und Referenzmechanik
 - [Roadmap und offene Entscheidungen](./docs/ROADMAP.md): Arbeitsstand und priorisierte nächste Schritte
 - [Branching Model](./docs/BRANCHING_MODEL.md): Branch-Namensregeln, Pull Requests und Release-Ablauf
+- [Tests](./docs/TESTING.md): Tests lokal ausführen und CI-Verhalten
 
 
 # Wartung

@@ -1,0 +1,7 @@
+{
+  "name": "mind-5",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
