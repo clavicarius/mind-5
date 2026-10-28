@@ -4,85 +4,141 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Mind 5: fünf Denkaufgaben in einer täglichen Runde. Kostenlos, werbefrei und auf Deutsch.">
+  <meta name="theme-color" content="#141c2e">
   <title>Mind 5 – 5 Denkaufgaben, eine Runde täglich</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 2rem 1.25rem;
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #141c2e;
       color: #f5f6fa;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      text-align: center;
+      font-synthesis: none;
     }
 
-    img {
-      display: block;
-      width: min(100%, 25rem);
-      height: auto;
-      margin: 0 auto 1.5rem;
-    }
+    * { box-sizing: border-box; }
 
-    main {
-      width: min(100%, 38rem);
-    }
-
-    h1 {
+    body {
+      min-width: 20rem;
+      min-height: 100vh;
       margin: 0;
-      font-size: clamp(1.8rem, 6vw, 2.75rem);
-      line-height: 1.15;
+      padding: 1.5rem 1rem 2rem;
     }
 
-    p {
-      color: #d0d5e2;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    .status {
-      margin: 1.5rem 0;
-      padding: 1rem;
+    main { width: min(100%, 48rem); margin: 0 auto; }
+    header { text-align: center; margin-bottom: 1.5rem; }
+    header img { width: min(100%, 15rem); height: auto; }
+    h1 { margin: 0.5rem 0; font-size: clamp(1.7rem, 5vw, 2.4rem); }
+    h2 { margin-top: 0; }
+    p { color: #d0d5e2; line-height: 1.55; }
+    .card {
+      margin: 1rem 0;
+      padding: clamp(1rem, 4vw, 1.5rem);
       border: 1px solid #46516b;
-      border-radius: 0.75rem;
+      border-radius: 1rem;
       background: #1c263b;
     }
-
-    nav {
+    .muted, .fine-print { color: #b9c3d8; }
+    .fine-print { font-size: 0.9rem; }
+    .choices, .actions, .progress {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem 1.5rem;
-      margin-top: 1.5rem;
+      gap: 0.75rem;
     }
-
-    a {
-      color: #9fc4ff;
-      font-weight: 600;
+    .choices { margin: 1rem 0; }
+    .choice, button, select {
+      min-height: 2.8rem;
+      border: 1px solid #65728d;
+      border-radius: 0.6rem;
+      padding: 0.65rem 0.9rem;
+      color: #f5f6fa;
+      background: #26344f;
+      font: inherit;
     }
-
-    a:focus-visible {
-      outline: 3px solid #f5f6fa;
-      outline-offset: 4px;
+    button { cursor: pointer; font-weight: 650; }
+    button:hover, .choice:hover { background: #354765; }
+    button:disabled { cursor: not-allowed; opacity: 0.6; }
+    button.primary { color: #101a2b; background: #b7d2ff; border-color: #b7d2ff; }
+    button.primary:hover { background: #d1e2ff; }
+    button.danger { background: #4a2934; }
+    select { width: 100%; }
+    label { display: block; margin: 1rem 0 0.4rem; font-weight: 650; }
+    .profile-grid, .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+      gap: 0.7rem;
+      margin: 0.8rem 0 1rem;
+    }
+    .profile-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      min-height: 4.4rem;
+      padding: 0.75rem;
+      border: 1px solid #46516b;
+      border-radius: 0.65rem;
+      text-align: left;
+      background: #202c42;
+    }
+    .profile-option[aria-pressed="true"] { border-color: #b7d2ff; box-shadow: 0 0 0 2px #b7d2ff; }
+    .profile-option span { display: block; }
+    .profile-option small { display: block; margin-top: 0.2rem; color: #c3ccdc; }
+    .status { min-height: 1.5rem; color: #ffdda1; }
+    .progress { gap: 0.45rem; margin: 1rem 0; }
+    .progress span {
+      flex: 1 1 3rem;
+      padding: 0.5rem 0.25rem;
+      border: 1px solid #65728d;
+      border-radius: 0.5rem;
+      color: #d0d5e2;
+      font-size: 0.85rem;
+    }
+    .progress .current { border-color: #b7d2ff; color: #fff; background: #354765; }
+    .progress .done { border-color: #8ed3b1; color: #c6f2da; }
+    .question { margin: 1.5rem 0; font-size: clamp(1.2rem, 4vw, 1.6rem); font-weight: 650; }
+    .choice { flex: 1 1 8rem; text-align: center; }
+    .choice:focus-visible, button:focus-visible, select:focus-visible, a:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+    dialog {
+      width: min(calc(100% - 2rem), 30rem);
+      border: 1px solid #65728d;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      color: #f5f6fa;
+      background: #1c263b;
+    }
+    dialog::backdrop { background: rgb(5 10 20 / 75%); }
+    nav { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
+    a { color: #b7d2ff; font-weight: 600; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; }
     }
   </style>
 </head>
 <body>
   <main>
-    <img src="src/assets/branding/main-logo-dark.png" alt="Mind 5">
-    <h1>5 Denkaufgaben. Eine Runde täglich.</h1>
-    <p>Mind 5 ist das kostenlose, werbefreie Denkspiel für jeden Tag – mit abwechslungsreichen Aufgaben für deine grauen Zellen.</p>
-    <p class="status">Das Spiel entsteht gerade. Bald findest du hier deine tägliche Runde.</p>
+    <header>
+      <img src="src/assets/branding/main-logo-dark.png" alt="Mind 5">
+      <h1>5 Denkaufgaben. Eine Runde täglich.</h1>
+      <p>Wähle deine Altersgruppe und Schwierigkeit und starte deine Runde.</p>
+    </header>
+    <div id="game" aria-live="polite">
+      <p>Das Spiel wird geladen …</p>
+    </div>
     <nav aria-label="Weitere Informationen">
       <a href="https://github.com/clavicarius/mind-5">Projekt auf GitHub</a>
       <a href="https://github.com/clavicarius/mind-5/wiki">Projekt-Wiki</a>
     </nav>
   </main>
+  <dialog id="result-dialog" aria-labelledby="dialog-title">
+    <h2 id="dialog-title">Aufgabe abgeschlossen</h2>
+    <p id="dialog-message"></p>
+    <div class="actions">
+      <button id="dialog-continue" class="primary" type="button">Weiter</button>
+      <button id="dialog-finish" type="button" hidden>Abschließen</button>
+    </div>
+  </dialog>
+  <script type="module" src="src/game.mjs"></script>
 </body>
 </html>
