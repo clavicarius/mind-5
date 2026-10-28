@@ -29,9 +29,9 @@ Bindestriche enthalten. Die vollständige Regel lautet:
 Beispiele: `feature/daily-round`, `bugfix/score-reset`,
 `copilot/update-gameplay-docs`.
 
-Der Workflow `Validate Branch Name` prüft die Quell-Branch-Namen aller Pull Requests
-nach `main`. Dieser Workflow sollte in den Branch-Protection-Regeln für `main` als
-erforderlicher Status-Check eingetragen werden.
+Der Workflow `Validate Branch Name` prüft die Quell-Branch-Namen von Pull Requests
+nach `main`, außer bei PRs von Dependabot und Copilot. Dieser Workflow sollte in den
+Branch-Protection-Regeln für `main` als erforderlicher Status-Check eingetragen werden.
 
 ## Release-Ablauf
 
