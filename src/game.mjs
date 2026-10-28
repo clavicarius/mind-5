@@ -451,13 +451,13 @@ if (host) {
       const progress = round.tasks.map((item, index) => `<span class="${index < round.currentIndex ? 'done' : ''} ${index === round.currentIndex ? 'current' : ''}" aria-current="${index === round.currentIndex ? 'step' : 'false'}">Aufgabe ${index + 1}</span>`).join('');
       const choices = task.options.map((option) => `<button class="choice" type="button" data-answer="${escapeHtml(option)}">${escapeHtml(option)}</button>`).join('');
       host.innerHTML = `${alert}<section class="card">
-        <p class="fine-print">${round.kind === 'extra' ? '<strong>Weitere Runde – ohne Wertung</strong> · ' : ''}${escapeHtml(task.mechanic)} · ${task.difficulty}</p>
-        <h2>Aufgabe ${round.currentIndex + 1} von 5</h2>
+        <p class="fine-print">${round.kind === 'extra' ? '<strong>Weitere Runde – ohne Wertung</strong> · ' : ''}${escapeHtml(task.mechanic)} · ${escapeHtml(task.difficulty)}</p>
+        <h2>Aufgabe ${escapeHtml(round.currentIndex + 1)} von 5</h2>
         <div class="progress" aria-label="Rundenfortschritt">${progress}</div>
         <p class="question">${escapeHtml(task.question)}</p>
         <div class="choices">${choices}</div>
         <p id="feedback" class="status" role="status" aria-live="polite"></p>
-        <p class="fine-print">Fehler: ${task.errors} von 3</p>
+        <p class="fine-print">Fehler: ${escapeHtml(task.errors)} von 3</p>
         <div class="actions"><button id="skip" type="button">Überspringen</button><button id="solution" type="button">Lösung anzeigen</button><button id="pause" type="button">Pause</button></div>
       </section>`;
       host.querySelectorAll('[data-answer]').forEach((button) => {
