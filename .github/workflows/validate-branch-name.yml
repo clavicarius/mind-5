@@ -13,11 +13,11 @@ jobs:
     name: Validate branch name
     runs-on: ubuntu-latest
     # Dependabot and Copilot generate branch names outside the naming policy.
-    if: github.actor != 'dependabot[bot]' && !contains(github.actor, 'copilot')
+    if: github.event.pull_request.user.login != 'dependabot[bot]' && !contains(github.event.pull_request.user.login, 'copilot')
 
     steps:
       - name: Checkout ci-platform validator
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: clavicarius/ci-platform
           ref: v1
