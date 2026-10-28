@@ -12,6 +12,8 @@ jobs:
   validate-branch-name:
     name: Validate branch name
     runs-on: ubuntu-latest
+    # Dependabot and Copilot generate branch names outside the naming policy.
+    if: github.actor != 'dependabot[bot]' && !contains(github.actor, 'copilot')
 
     steps:
       - name: Checkout ci-platform validator
