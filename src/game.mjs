@@ -814,7 +814,7 @@ if (host) {
 
     host.innerHTML = `${alert}<section class="card">
       <p class="fine-print">${round.kind === 'extra' ? '<strong>Weitere Runde – ohne Wertung</strong> · ' : ''}Memory Logic · ${escapeHtml(task.difficulty)}</p>
-      <h2>Aufgabe ${round.currentIndex + 1} von 5 · ${phaseHeading}</h2>
+      <h2>Aufgabe ${escapeHtml(round.currentIndex + 1)} von 5 · ${escapeHtml(phaseHeading)}</h2>
       <div class="progress" aria-label="${phaseProgressLabel}">${progressItems}</div>
       ${content}
       ${taskActions}
