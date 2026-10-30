@@ -582,6 +582,7 @@ if (host) {
   let state = loadState();
   let storageAvailable = saveState(state);
   let pendingTaskPoints = null;
+  let touchDragStartIndex = null;
 
   function persist() {
     storageAvailable = saveState(state);
@@ -762,7 +763,7 @@ if (host) {
       const progress = round.tasks.map((item, index) => `<span class="${index < round.currentIndex ? 'done' : ''} ${index === round.currentIndex ? 'current' : ''}" aria-current="${index === round.currentIndex ? 'step' : 'false'}">Aufgabe ${index + 1}</span>`).join('');
       const choices = task.options?.map((option) => `<button class="choice ${task.incorrectAnswers.includes(option) ? 'incorrect' : ''}" type="button" aria-pressed="${task.selectedAnswer === option}" data-answer="${escapeHtml(option)}">${escapeHtml(option)}${task.incorrectAnswers.includes(option) ? '<span class="fine-print"> · zuvor falsch gewählt</span>' : ''}</button>`).join('');
       const ordering = task.surface === 'ordering'
-        ? `<p class="fine-print">Verschiebe die Elemente. Mit den Schaltflächen lassen sie sich auch vollständig per Tastatur ordnen.</p><ol id="order-list" class="order-list" aria-label="Deine Reihenfolge">${task.currentOrder.map((item, index) => `<li class="order-item" draggable="true" data-order-index="${index}"><span>${escapeHtml(item)}</span><span class="actions"><button type="button" data-move="${index}" data-direction="-1" aria-label="${escapeHtml(item)} nach links">←</button><button type="button" data-move="${index}" data-direction="1" aria-label="${escapeHtml(item)} nach rechts">→</button></span></li>`).join('')}</ol>`
+        ? `<p class="fine-print">Verschiebe die Elemente per Ziehen oder mit den Schaltflächen, die auch vollständig per Tastatur bedienbar sind.</p><ol id="order-list" class="order-list" aria-label="Deine Reihenfolge">${task.currentOrder.map((item, index) => `<li class="order-item" draggable="true" data-order-index="${index}"><span class="drag-handle" aria-hidden="true">⠿</span><span>${escapeHtml(item)}</span><span class="actions"><button type="button" data-move="${index}" data-direction="-1" aria-label="${escapeHtml(item)} nach links">←</button><button type="button" data-move="${index}" data-direction="1" aria-label="${escapeHtml(item)} nach rechts">→</button></span></li>`).join('')}</ol>`
         : '';
       const wordExamples = task.surface === 'word-logic'
         ? `<p class="fine-print"><strong>Beispiele:</strong> ${task.examples.map(([first, second]) => `${escapeHtml(first)} : ${escapeHtml(second)}`).join(' · ')}</p><p class="question">${escapeHtml(task.target)} : ?</p>`
@@ -898,6 +899,27 @@ if (host) {
     host.querySelector('#start-official').addEventListener('click', () => startRound('official'));
     host.querySelector('#start-extra').addEventListener('click', () => startRound('extra'));
   }
+
+  host.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'touch') return;
+    const handle = event.target.closest?.('.drag-handle');
+    const item = handle?.closest('[data-order-index]');
+    if (item) touchDragStartIndex = Number(item.dataset.orderIndex);
+  });
+  host.addEventListener('pointerup', (event) => {
+    if (touchDragStartIndex === null) return;
+    const from = touchDragStartIndex;
+    touchDragStartIndex = null;
+    const target = document.elementFromPoint(event.clientX, event.clientY)?.closest('#order-list [data-order-index]');
+    const to = Number(target?.dataset.orderIndex);
+    const activeTask = state.activeRound?.tasks[state.activeRound.currentIndex];
+    if (!target || from === to || activeTask?.surface !== 'ordering') return;
+    const [moved] = activeTask.currentOrder.splice(from, 1);
+    activeTask.currentOrder.splice(to, 0, moved);
+    persist();
+    render();
+  });
+  host.addEventListener('pointercancel', () => { touchDragStartIndex = null; });
 
   continueButton.addEventListener('click', advanceTask);
   finishButton.addEventListener('click', () => {
