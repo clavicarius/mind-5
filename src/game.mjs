@@ -1,3 +1,10 @@
+import {
+  calculateMemoryScore,
+  createMemoryTask,
+  isMemoryAnswerCorrect,
+  memorySolution,
+} from './memory-logic.mjs';
+
 export const AGE_GROUPS = ['8-12', '13-17', '18+'];
 
 export const DIFFICULTY_PROFILES = [
@@ -10,17 +17,7 @@ export const DIFFICULTY_PROFILES = [
 ];
 
 export const TASKS = [
-  {
-    mechanic: 'Memory Logic',
-    question: 'Alle Miras sind blau. Nela ist eine Mira. Welche Aussage stimmt?',
-    options: ['Nela ist blau', 'Nela ist rot', 'Nela ist keine Mira'],
-    answer: 'Nela ist blau',
-    challenging: {
-      question: 'Alle Varo sind Teli. Kein Teli ist Marn. Suni ist ein Varo. Was muss stimmen?',
-      options: ['Suni ist kein Marn', 'Suni ist ein Marn', 'Suni ist kein Teli'],
-      answer: 'Suni ist kein Marn',
-    },
-  },
+  { mechanic: 'Memory Logic' },
   {
     mechanic: 'Zahlenfolge',
     question: 'Welche Zahl setzt die Folge fort? 3 · 6 · 9 · 12 · ?',
@@ -187,6 +184,13 @@ export function createRound({ kind = 'official', ageGroup, profileId, random = M
     startedAt: Date.now(),
     tasks: selectedTasks.map((task, index) => {
       const taskDifficulty = difficulty[index];
+      if (task.mechanic === 'Memory Logic') {
+        return {
+          mechanic: task.mechanic,
+          difficulty: taskDifficulty,
+          ...createMemoryTask({ ageGroup, difficulty: taskDifficulty, random }),
+        };
+      }
       const content = taskDifficulty === 'anspruchsvoll' ? task.challenging : task;
       return {
         mechanic: task.mechanic,
@@ -285,9 +289,11 @@ if (host) {
   const dialogMessage = document.querySelector('#dialog-message');
   const continueButton = document.querySelector('#dialog-continue');
   const finishButton = document.querySelector('#dialog-finish');
+  dialog.addEventListener('cancel', (event) => event.preventDefault());
   let state = loadState();
   let storageAvailable = saveState(state);
   let pendingTaskPoints = null;
+  let pendingRoundExit = false;
 
   function persist() {
     storageAvailable = saveState(state);
@@ -318,13 +324,15 @@ if (host) {
     persist();
   }
 
-  function showTaskResult(points, reason) {
+  function showTaskResult(points, reason, detail = '', exitRound = false) {
     pendingTaskPoints = points;
-    const finalTask = state.activeRound.currentIndex === 4;
+    pendingRoundExit = exitRound;
+    const finalTask = exitRound || state.activeRound.currentIndex === 4;
     document.querySelector('#dialog-title').textContent = reason;
-    dialogMessage.textContent = points === 0
+    const result = points === 0
       ? 'Diese Aufgabe zählt mit 0 Punkten.'
       : `Gut gemacht! Diese Aufgabe zählt mit ${points} Punkten.`;
+    dialogMessage.textContent = [result, detail].filter(Boolean).join('\n\n');
     continueButton.textContent = 'Weiter';
     continueButton.hidden = finalTask;
     finishButton.hidden = !finalTask;
@@ -336,7 +344,13 @@ if (host) {
     pendingTaskPoints = null;
     dialog.close();
     const round = state.activeRound;
-    if (round.currentIndex === 4) {
+    if (pendingRoundExit) {
+      pendingRoundExit = false;
+      round.state = 'finished';
+      if (round.kind === 'official') finishAttempt('abandoned');
+      else if (!state.currentDay.officialAttempt) state.pendingConfirmations.push('discarded-round');
+      state.activeRound = null;
+    } else if (round.currentIndex === 4) {
       round.state = 'finished';
       if (round.kind === 'official') finishAttempt('completed');
       state.activeRound = null;
@@ -349,6 +363,11 @@ if (host) {
 
   function abandonRound() {
     const round = state.activeRound;
+    const task = round.tasks[round.currentIndex];
+    if (task.mechanic === 'Memory Logic') {
+      completeMemoryTask(task, 0, 'Aufgabe abgebrochen', true);
+      return;
+    }
     if (round.kind === 'official' && state.currentDay.officialAttempt) {
       finishAttempt('abandoned');
     } else if (!state.currentDay.officialAttempt) {
@@ -388,6 +407,14 @@ if (host) {
 
   function beginTaskAction(action) {
     const task = state.activeRound.tasks[state.activeRound.currentIndex];
+    if (task.mechanic === 'Memory Logic') {
+      const message = action === 'skip'
+        ? 'Aufgabe überspringen? Sie wird endgültig mit 0 Punkten gewertet.'
+        : 'Lösung anzeigen? Die Aufgabe wird endgültig mit 0 Punkten gewertet.';
+      if (!window.confirm(message)) return;
+      completeMemoryTask(task, 0, action === 'skip' ? 'Aufgabe übersprungen' : 'Lösung angezeigt');
+      return;
+    }
     if (action === 'skip') {
       if (!window.confirm('Aufgabe überspringen? Sie wird endgültig mit 0 Punkten gewertet.')) return;
       completeActiveTask(0);
@@ -416,6 +443,164 @@ if (host) {
     }
     persist();
     render();
+  }
+
+  function completeMemoryTask(task, points, reason, exitRound = false) {
+    task.memoryPhase = 'complete';
+    task.points = points;
+    showTaskResult(points, reason, memorySolution(task), exitRound);
+  }
+
+  function renderMemoryTask(round, task, alert) {
+    const inQuestions = task.memoryPhase === 'questions';
+    const question = task.questions[task.questionIndex];
+    const progressItems = (inQuestions ? task.questions : task.information).map((_, index) => {
+      const currentIndex = inQuestions ? task.questionIndex : task.informationIndex;
+      const label = inQuestions ? `Frage ${index + 1}` : `Information ${index + 1}`;
+      const status = index < currentIndex ? 'done' : index === currentIndex ? 'current' : '';
+      return `<span class="${status}" aria-current="${index === currentIndex ? 'step' : 'false'}">${label}</span>`;
+    }).join('');
+    const phaseHeading = inQuestions ? `Frage ${task.questionIndex + 1} von ${task.questions.length}` : 'Merkphase';
+    const phaseProgressLabel = inQuestions ? 'Fragenfortschritt' : 'Merkphasenfortschritt';
+    const taskActions = `<div class="actions">
+      <button id="skip" type="button">Aufgabe überspringen</button>
+      <button id="solution" type="button">Lösung anzeigen</button>
+      <button id="restart" type="button">Neustart</button>
+      <button id="pause" type="button">Pause</button>
+    </div>`;
+    let content;
+
+    if (task.memoryPhase === 'intro') {
+      content = `<p>Merke dir die Informationen. Sie werden einzeln gezeigt und können nicht zurückgerufen werden.</p>
+        <button id="memory-start" class="primary" type="button">Merkphase starten</button>`;
+    } else if (task.memoryPhase === 'showing') {
+      const lastInformation = task.informationIndex === task.information.length - 1;
+      content = `<p class="fine-print">Information ${task.informationIndex + 1} von ${task.information.length}</p>
+        <p class="question">${escapeHtml(task.information[task.informationIndex])}</p>
+        <button id="memory-next-info" class="primary" type="button">${lastInformation ? 'Fragen starten' : 'Weiter'}</button>`;
+    } else if (task.questionResult) {
+      const resultMessage = task.questionResult === 'correct'
+        ? 'Richtig.'
+        : task.questionResult === 'skipped'
+          ? 'Frage übersprungen. Dafür gibt es keine Punkte.'
+          : `Das war leider nicht richtig. Fehler: ${task.errors} von 3.`;
+      content = `<p class="question">${escapeHtml(question.question)}</p>
+        <p class="status" role="status" aria-live="polite">${resultMessage}</p>
+        <button id="memory-next-question" class="primary" type="button">Weiter</button>`;
+    } else {
+      const multiSelect = question.answers.length > 1;
+      const choices = question.options.map((option) => {
+        const selected = task.selectedAnswers.includes(option);
+        return `<button class="choice" type="button" aria-pressed="${selected}" data-memory-option="${escapeHtml(option)}">${escapeHtml(option)}</button>`;
+      }).join('');
+      const hintButton = task.hintsUsed < 2
+        ? `<button id="memory-hint" type="button">Hinweis verwenden (${2 - task.hintsUsed} übrig)</button>`
+        : '';
+      content = `<p class="question">${escapeHtml(question.question)}</p>
+        <p class="fine-print">${multiSelect ? 'Wähle alle richtigen Antworten.' : 'Wähle eine Antwort.'}</p>
+        <div class="choices">${choices}</div>
+        <p id="feedback" class="status" role="status" aria-live="polite">${escapeHtml(task.hintMessage)}</p>
+        <p class="fine-print">Fehler: ${task.errors} von 3</p>
+        <div class="actions">
+          <button id="memory-check" class="primary" type="button" ${task.selectedAnswers.length ? '' : 'disabled'}>Antwort prüfen</button>
+          ${hintButton}
+          <button id="skip-question" type="button">Frage überspringen</button>
+        </div>`;
+    }
+
+    host.innerHTML = `${alert}<section class="card">
+      <p class="fine-print">${round.kind === 'extra' ? '<strong>Weitere Runde – ohne Wertung</strong> · ' : ''}Memory Logic · ${escapeHtml(task.difficulty)}</p>
+      <h2>Aufgabe ${round.currentIndex + 1} von 5 · ${phaseHeading}</h2>
+      <div class="progress" aria-label="${phaseProgressLabel}">${progressItems}</div>
+      ${content}
+      ${taskActions}
+    </section>`;
+
+    host.querySelector('#memory-start')?.addEventListener('click', () => {
+      task.memoryPhase = 'showing';
+      persist();
+      render();
+    });
+    host.querySelector('#memory-next-info')?.addEventListener('click', () => {
+      if (task.informationIndex === task.information.length - 1) {
+        task.memoryPhase = 'questions';
+      } else {
+        task.informationIndex += 1;
+      }
+      persist();
+      render();
+    });
+    host.querySelectorAll('[data-memory-option]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const option = button.dataset.memoryOption;
+        if (question.answers.length === 1) {
+          task.selectedAnswers = [option];
+        } else if (task.selectedAnswers.includes(option)) {
+          task.selectedAnswers = task.selectedAnswers.filter((answer) => answer !== option);
+        } else {
+          task.selectedAnswers.push(option);
+        }
+        persist();
+        render();
+      });
+    });
+    host.querySelector('#memory-check')?.addEventListener('click', () => {
+      if (!task.selectedAnswers.length) return;
+      if (isMemoryAnswerCorrect(task.selectedAnswers, question.answers)) {
+        task.correctQuestions += 1;
+        task.questionResult = 'correct';
+      } else {
+        task.errors += 1;
+        if (task.errors >= 3) {
+          persist();
+          completeMemoryTask(task, 0, 'Drei Fehler – Aufgabe beendet');
+          return;
+        }
+        task.questionResult = 'wrong';
+      }
+      task.selectedAnswers = [];
+      task.hintMessage = '';
+      persist();
+      render();
+    });
+    host.querySelector('#memory-next-question')?.addEventListener('click', () => {
+      task.questionIndex += 1;
+      task.questionResult = null;
+      task.selectedAnswers = [];
+      task.hintMessage = '';
+      if (task.questionIndex === task.questions.length) {
+        completeMemoryTask(task, calculateMemoryScore(task, round.ageGroup), 'Memory Logic abgeschlossen');
+        return;
+      }
+      persist();
+      render();
+    });
+    host.querySelector('#memory-hint')?.addEventListener('click', () => {
+      task.hintMessage = question.hints[task.hintsUsed];
+      task.hintsUsed += 1;
+      persist();
+      render();
+    });
+    host.querySelector('#skip-question')?.addEventListener('click', () => {
+      if (!window.confirm('Frage überspringen? Sie erhält 0 Punkte und wird geschlossen.')) return;
+      task.questionResult = 'skipped';
+      task.selectedAnswers = [];
+      task.hintMessage = '';
+      persist();
+      render();
+    });
+    host.querySelector('#restart')?.addEventListener('click', () => {
+      if (!window.confirm('Aufgabe neu starten? Fehler und verwendete Hinweise bleiben erhalten.')) return;
+      task.memoryPhase = 'intro';
+      task.informationIndex = 0;
+      task.selectedAnswers = [];
+      task.hintMessage = '';
+      persist();
+      render();
+    });
+    host.querySelector('#skip').addEventListener('click', () => beginTaskAction('skip'));
+    host.querySelector('#solution').addEventListener('click', () => beginTaskAction('solution'));
+    host.querySelector('#pause').addEventListener('click', () => pauseRound());
   }
 
   function pauseRound(message = 'Die Runde ist pausiert.') {
@@ -448,6 +633,10 @@ if (host) {
 
     if (round) {
       const task = round.tasks[round.currentIndex];
+      if (task.mechanic === 'Memory Logic') {
+        renderMemoryTask(round, task, alert);
+        return;
+      }
       const progress = round.tasks.map((item, index) => `<span class="${index < round.currentIndex ? 'done' : ''} ${index === round.currentIndex ? 'current' : ''}" aria-current="${index === round.currentIndex ? 'step' : 'false'}">Aufgabe ${index + 1}</span>`).join('');
       const choices = task.options.map((option) => `<button class="choice" type="button" data-answer="${escapeHtml(option)}">${escapeHtml(option)}</button>`).join('');
       host.innerHTML = `${alert}<section class="card">
@@ -531,16 +720,7 @@ if (host) {
   }
 
   continueButton.addEventListener('click', advanceTask);
-  finishButton.addEventListener('click', () => {
-    completeActiveTask(pendingTaskPoints);
-    pendingTaskPoints = null;
-    state.activeRound.state = 'finished';
-    if (state.activeRound.kind === 'official') finishAttempt('completed');
-    state.activeRound = null;
-    dialog.close();
-    persist();
-    render();
-  });
+  finishButton.addEventListener('click', advanceTask);
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) pauseRound('Die Runde wurde beim Verlassen des Tabs pausiert.');
