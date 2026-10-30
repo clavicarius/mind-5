@@ -105,6 +105,228 @@ export const TASKS = [
   },
 ];
 
+export const ACTIVITY_CONTENT = {
+  'Was passt nicht?': {
+    '8-12': {
+      leicht: {
+        surface: 'odd-one-out',
+        question: 'Vier Formen haben eine gemeinsame Eigenschaft. Welches Element passt nicht dazu?',
+        rule: 'Die Form ist ein Kreis.',
+        options: ['roter Kreis', 'blauer Kreis', 'grüner Kreis', 'gelber Kreis', 'rotes Dreieck'],
+        answer: 'rotes Dreieck',
+        ruleMatches: ['roter Kreis', 'blauer Kreis', 'grüner Kreis', 'gelber Kreis'],
+        explanations: ['Kreis', 'Kreis', 'Kreis', 'Kreis', 'Dreieck'],
+      },
+      anspruchsvoll: {
+        surface: 'odd-one-out',
+        question: 'Vier Gleichungen haben auf beiden Seiten denselben Wert. Welche Gleichung passt nicht dazu?',
+        rule: 'Beide Seiten der Gleichung haben denselben Wert.',
+        options: ['8 + 7 = 10 + 5', '9 + 6 = 10 + 5', '14 − 4 = 5 + 5', '6 + 8 = 7 + 7', '18 − 7 = 6 + 6'],
+        answer: '18 − 7 = 6 + 6',
+        ruleMatches: ['8 + 7 = 10 + 5', '9 + 6 = 10 + 5', '14 − 4 = 5 + 5', '6 + 8 = 7 + 7'],
+        explanations: ['15 = 15', '15 = 15', '10 = 10', '14 = 14', '11 ≠ 12'],
+      },
+    },
+    '13-17': {
+      leicht: {
+        surface: 'odd-one-out',
+        question: 'Vier Begriffe gehören zu einer gemeinsamen Kategorie. Welcher Begriff passt nicht dazu?',
+        rule: 'Der Begriff bezeichnet einen Wochentag.',
+        options: ['Montag', 'Donnerstag', 'Samstag', 'Sonntag', 'April'],
+        answer: 'April',
+        ruleMatches: ['Montag', 'Donnerstag', 'Samstag', 'Sonntag'],
+        explanations: ['Wochentag', 'Wochentag', 'Wochentag', 'Wochentag', 'Monat'],
+      },
+      anspruchsvoll: {
+        surface: 'odd-one-out',
+        question: 'Vier Gleichungen gelten für jeden Wert von x. Welche Gleichung passt nicht dazu?',
+        rule: 'Beide Terme sind für jeden Wert von x gleich.',
+        options: ['2(x + 3) = 2x + 6', '3(x − 2) = 3x − 6', '4(x + 1) = 4x + 4', 'x + x = 2x', '5(x − 1) = 5x − 1'],
+        answer: '5(x − 1) = 5x − 1',
+        ruleMatches: ['2(x + 3) = 2x + 6', '3(x − 2) = 3x − 6', '4(x + 1) = 4x + 4', 'x + x = 2x'],
+        explanations: ['beide Seiten sind 2x + 6', 'beide Seiten sind 3x − 6', 'beide Seiten sind 4x + 4', 'beide Seiten sind 2x', 'links steht 5x − 5'],
+      },
+    },
+    '18+': {
+      leicht: {
+        surface: 'odd-one-out',
+        question: 'Vier Zahlen haben eine gemeinsame Eigenschaft. Welche Zahl passt nicht dazu?',
+        rule: 'Die Zahl ist durch 2 teilbar.',
+        options: ['12', '18', '24', '30', '35'],
+        answer: '35',
+        ruleMatches: ['12', '18', '24', '30'],
+        explanations: ['gerade', 'gerade', 'gerade', 'gerade', 'ungerade'],
+      },
+      anspruchsvoll: {
+        surface: 'odd-one-out',
+        question: 'Welche Aussage über Mengen gilt nicht immer? ∩ bedeutet gemeinsame Elemente, ∪ bedeutet Elemente aus mindestens einer Menge und ∅ ist die leere Menge.',
+        rule: 'Die Gleichheit gilt für alle Mengen A und B.',
+        options: ['A ∩ B = B ∩ A', 'A ∪ B = B ∪ A', 'A ∩ A = A', 'A ∪ ∅ = A', 'A ∩ ∅ = A'],
+        answer: 'A ∩ ∅ = A',
+        ruleMatches: ['A ∩ B = B ∩ A', 'A ∪ B = B ∪ A', 'A ∩ A = A', 'A ∪ ∅ = A'],
+        explanations: ['Schnittmengen sind vertauschbar', 'Vereinigungen sind vertauschbar', 'Schnittmenge mit sich selbst', 'leere Menge ergänzt nichts', 'Schnitt mit leerer Menge ist ∅'],
+      },
+    },
+  },
+  Reihenfolge: {
+    '8-12': {
+      leicht: {
+        surface: 'ordering',
+        question: 'Ordne die Personen von links nach rechts: Wer ist zuerst an der Reihe und wer zuletzt?',
+        items: ['Mia', 'Leo', 'Sam', 'Ali'],
+        hints: ['Leo steht unmittelbar vor Mia.', 'Sam steht nach Mia.', 'Ali steht unmittelbar nach Sam.'],
+        constraints: [
+          { type: 'immediatelyBefore', first: 'Leo', second: 'Mia' },
+          { type: 'before', first: 'Mia', second: 'Sam' },
+          { type: 'immediatelyBefore', first: 'Sam', second: 'Ali' },
+        ],
+        answer: ['Leo', 'Mia', 'Sam', 'Ali'],
+        explanation: 'Leo und Mia stehen direkt nacheinander, danach kommen Sam und Ali.',
+      },
+      anspruchsvoll: {
+        surface: 'ordering',
+        question: 'Ordne die Spielsachen von links nach rechts: Was liegt zuerst und was zuletzt?',
+        items: ['Drachen', 'Ball', 'Kreisel', 'Jo-Jo', 'Puzzle'],
+        hints: ['Das Puzzle liegt an erster Stelle.', 'Der Ball steht an dritter Stelle.', 'Der Drachen liegt unmittelbar vor dem Ball.', 'Das Jo-Jo liegt an letzter Stelle.'],
+        constraints: [
+          { type: 'position', item: 'Puzzle', position: 1 },
+          { type: 'position', item: 'Ball', position: 3 },
+          { type: 'immediatelyBefore', first: 'Drachen', second: 'Ball' },
+          { type: 'position', item: 'Jo-Jo', position: 5 },
+        ],
+        answer: ['Puzzle', 'Drachen', 'Ball', 'Kreisel', 'Jo-Jo'],
+        explanation: 'Puzzle und Jo-Jo sind festgelegt; Drachen steht direkt vor dem Ball an dritter Stelle.',
+      },
+    },
+    '13-17': {
+      leicht: {
+        surface: 'ordering',
+        question: 'Ordne die Karten von links nach rechts für die Präsentation.',
+        items: ['A', 'B', 'C', 'D'],
+        hints: ['C kommt vor A.', 'A kommt unmittelbar vor D.', 'B kommt nach D.'],
+        constraints: [
+          { type: 'before', first: 'C', second: 'A' },
+          { type: 'immediatelyBefore', first: 'A', second: 'D' },
+          { type: 'before', first: 'D', second: 'B' },
+        ],
+        answer: ['C', 'A', 'D', 'B'],
+        explanation: 'C muss vor dem direkt anschließenden Paar A, D liegen; B folgt auf D.',
+      },
+      anspruchsvoll: {
+        surface: 'ordering',
+        question: 'Ordne die Programmpunkte von links nach rechts.',
+        items: ['A', 'B', 'C', 'D', 'E'],
+        hints: ['E steht an erster Stelle.', 'C steht an dritter Stelle.', 'A steht unmittelbar vor C.', 'D steht an letzter Stelle.'],
+        constraints: [
+          { type: 'position', item: 'E', position: 1 },
+          { type: 'position', item: 'C', position: 3 },
+          { type: 'immediatelyBefore', first: 'A', second: 'C' },
+          { type: 'position', item: 'D', position: 5 },
+        ],
+        answer: ['E', 'A', 'C', 'B', 'D'],
+        explanation: 'E und D belegen Anfang und Ende; A muss direkt vor C an dritter Stelle stehen.',
+      },
+    },
+    '18+': {
+      leicht: {
+        surface: 'ordering',
+        question: 'Ordne die Arbeitsschritte von links nach rechts: Was geschieht zuerst und was zuletzt?',
+        items: ['Bericht', 'Entwurf', 'Prüfung', 'Versand'],
+        hints: ['Der Entwurf kommt vor der Prüfung.', 'Die Prüfung kommt unmittelbar vor dem Versand.', 'Der Bericht kommt vor dem Entwurf.'],
+        constraints: [
+          { type: 'before', first: 'Bericht', second: 'Entwurf' },
+          { type: 'before', first: 'Entwurf', second: 'Prüfung' },
+          { type: 'immediatelyBefore', first: 'Prüfung', second: 'Versand' },
+        ],
+        answer: ['Bericht', 'Entwurf', 'Prüfung', 'Versand'],
+        explanation: 'Bericht und Entwurf müssen vor dem Paar Prüfung, Versand stehen.',
+      },
+      anspruchsvoll: {
+        surface: 'ordering',
+        question: 'Ordne die Prozessschritte von links nach rechts.',
+        items: ['A', 'B', 'C', 'D', 'E'],
+        hints: ['E steht an erster Stelle.', 'C steht an dritter Stelle.', 'A steht unmittelbar vor C.', 'D steht an letzter Stelle.'],
+        constraints: [
+          { type: 'position', item: 'E', position: 1 },
+          { type: 'position', item: 'C', position: 3 },
+          { type: 'immediatelyBefore', first: 'A', second: 'C' },
+          { type: 'position', item: 'D', position: 5 },
+        ],
+        answer: ['E', 'A', 'C', 'B', 'D'],
+        explanation: 'E und D belegen Anfang und Ende; A muss direkt vor C an dritter Stelle stehen.',
+      },
+    },
+  },
+  Wortlogik: {
+    '8-12': {
+      leicht: {
+        surface: 'word-logic',
+        question: 'Hund : Welpe = Katze : ?',
+        examples: [['Hund', 'Welpe']],
+        target: 'Katze',
+        relation: 'Tier und Jungtier',
+        options: ['Kätzchen', 'Lamm', 'Fohlen', 'Küken'],
+        answer: 'Kätzchen',
+        explanation: 'Ein Welpe ist ein junges Tier; ein junges Tier der Katze heißt Kätzchen.',
+      },
+      anspruchsvoll: {
+        surface: 'word-logic',
+        question: 'Pferd : ?',
+        examples: [['Hund', 'Welpe'], ['Katze', 'Kätzchen']],
+        target: 'Pferd',
+        relation: 'Tier und Jungtier',
+        options: ['Fohlen', 'Kalb', 'Ferkel', 'Lamm', 'Küken'],
+        answer: 'Fohlen',
+        explanation: 'Beide Beispiele nennen das Jungtier; das Jungtier eines Pferdes ist ein Fohlen.',
+      },
+    },
+    '13-17': {
+      leicht: {
+        surface: 'word-logic',
+        question: 'heiß : kalt = schnell : ?',
+        examples: [['heiß', 'kalt']],
+        target: 'schnell',
+        relation: 'Gegensatz',
+        options: ['langsam', 'rasch', 'zügig', 'flink'],
+        answer: 'langsam',
+        explanation: 'Kalt ist das Gegenteil von heiß; langsam ist das Gegenteil von schnell.',
+      },
+      anspruchsvoll: {
+        surface: 'word-logic',
+        question: 'laut : ?',
+        examples: [['heiß', 'kalt'], ['hell', 'dunkel']],
+        target: 'laut',
+        relation: 'Gegensatz',
+        options: ['leise', 'hell', 'schnell', 'schwer', 'rund'],
+        answer: 'leise',
+        explanation: 'Beide Beispielpaare bestehen aus Gegensätzen; leise ist das Gegenteil von laut.',
+      },
+    },
+    '18+': {
+      leicht: {
+        surface: 'word-logic',
+        question: 'Problem : ?',
+        examples: [['Frage', 'Antwort']],
+        target: 'Problem',
+        relation: 'Eine passende Antwort oder Behebung',
+        options: ['Lösung', 'Ursache', 'Frage', 'Thema'],
+        answer: 'Lösung',
+        explanation: 'Eine Antwort passt zu einer Frage; eine Lösung behebt ein Problem.',
+      },
+      anspruchsvoll: {
+        surface: 'word-logic',
+        question: 'Vorteil : ?',
+        examples: [['Gewinn', 'Verlust'], ['Zustimmung', 'Ablehnung']],
+        target: 'Vorteil',
+        relation: 'Gegensatz',
+        options: ['Nachteil', 'Gewinn', 'Absicht', 'Menge', 'Vorteil'],
+        answer: 'Nachteil',
+        explanation: 'Die Beispielpaare bezeichnen Gegensätze; der Gegensatz zu Vorteil ist Nachteil.',
+      },
+    },
+  },
+};
+
 const SEQUENCE_LIMITS = { '8-12': 100, '13-17': 1_000, '18+': 10_000 };
 const SEQUENCE_SCALES = { '8-12': 1, '13-17': 5, '18+': 20 };
 
@@ -292,9 +514,61 @@ const ARITHMETIC_TEMPLATES = {
       ],
       reasoning: 'Aus x² + y = 20 und y ≥ 0 folgt x² ≤ 20. Aus y + z = 9 und z > 0 folgt x² > 11. Die einzige gerade Zahl dazwischen ist x = 4; damit y = 4 und z = 5.',
       isValid: ({ x, y, z }) => x ** 2 + y === 20 && y + z === 9 && x % 2 === 0 && y >= 0 && z > 0,
-    },
+  },
   },
 };
+
+function orderingSatisfies(order, constraints) {
+  const positions = new Map(order.map((item, index) => [item, index + 1]));
+  return constraints.every((constraint) => {
+    if (constraint.type === 'position') return positions.get(constraint.item) === constraint.position;
+    const first = positions.get(constraint.first);
+    const second = positions.get(constraint.second);
+    return constraint.type === 'immediatelyBefore' ? second === first + 1 : first < second;
+  });
+}
+
+function countValidOrderings(items, constraints) {
+  let count = 0;
+  function visit(prefix, remaining) {
+    if (!remaining.length) {
+      if (orderingSatisfies(prefix, constraints)) count += 1;
+      return;
+    }
+    remaining.forEach((item, index) => {
+      visit([...prefix, item], remaining.filter((_, remainingIndex) => remainingIndex !== index));
+    });
+  }
+  visit([], items);
+  return count;
+}
+
+export function validateTaskContent(task) {
+  if (task.surface === 'odd-one-out') {
+    return task.options.length === 5
+      && task.ruleMatches.length === 4
+      && task.options.includes(task.answer)
+      && !task.ruleMatches.includes(task.answer)
+      && task.ruleMatches.every((item) => task.options.includes(item))
+      && task.explanations.length === 5;
+  }
+  if (task.surface === 'ordering') {
+    return [4, 5].includes(task.items.length)
+      && new Set(task.items).size === task.items.length
+      && task.answer.length === task.items.length
+      && new Set(task.answer).size === task.items.length
+      && task.items.every((item) => task.answer.includes(item))
+      && countValidOrderings(task.items, task.constraints) === 1
+      && orderingSatisfies(task.answer, task.constraints);
+  }
+  if (task.surface === 'word-logic') {
+    return [1, 2].includes(task.examples.length)
+      && [4, 5, 6].includes(task.options.length)
+      && new Set(task.options).size === task.options.length
+      && task.options.includes(task.answer);
+  }
+  return true;
+}
 
 export function validateArithmeticPuzzle(puzzle) {
   if (!puzzle?.fields || typeof puzzle.isValid !== 'function') return false;
@@ -459,21 +733,43 @@ export function createRound({ kind = 'official', ageGroup, profileId, random = M
           ...createMemoryTask({ ageGroup, difficulty: taskDifficulty, random }),
         };
       }
-      const content = task.inputType === 'sequence'
+      const baseContent = task.inputType === 'sequence'
         ? createSequenceTask(ageGroup, taskDifficulty, random)
         : task.inputType === 'arithmetic'
           ? createArithmeticTask(ageGroup, taskDifficulty, random)
           : taskDifficulty === 'anspruchsvoll' ? task.challenging : task;
+      const content = ACTIVITY_CONTENT[task.mechanic]?.[ageGroup]?.[taskDifficulty] ?? baseContent;
+      if (!validateTaskContent(content)) {
+        throw new TypeError(`Ungültiger Aufgabeninhalt für ${task.mechanic}.`);
+      }
+      const optionPairs = content.surface && content.options
+        ? content.options.map((option, optionIndex) => ({
+          option,
+          explanation: content.explanations?.[optionIndex],
+        }))
+        : null;
+      const shuffledOptionPairs = optionPairs ? shuffled(optionPairs, random) : null;
+      const selectedContent = {
+        ...content,
+        ...(shuffledOptionPairs ? {
+          options: shuffledOptionPairs.map(({ option }) => option),
+          ...(content.explanations ? { explanations: shuffledOptionPairs.map(({ explanation }) => explanation) } : {}),
+        } : {}),
+        ...(content.items ? { items: shuffled(content.items, random) } : {}),
+      };
       return {
         mechanic: task.mechanic,
-        ...content,
+        ...selectedContent,
         difficulty: taskDifficulty,
         errors: 0,
         hintsUsed: [],
-        inputValue: '',
-        selectedOption: null,
-        feedback: '',
+        inputValue: selectedContent.inputValue ?? '',
+        selectedOption: selectedContent.selectedOption ?? null,
+        feedback: selectedContent.feedback ?? '',
         points: null,
+        incorrectAnswers: [],
+        ...(selectedContent.surface === 'ordering' ? { currentOrder: [...selectedContent.items] } : {}),
+        ...(selectedContent.surface && selectedContent.surface !== 'ordering' ? { selectedAnswer: null } : {}),
       };
     }),
     currentIndex: 0,
@@ -569,6 +865,7 @@ if (host) {
   let state = loadState();
   let storageAvailable = saveState(state);
   let pendingTaskPoints = null;
+  let touchDragStartIndex = null;
   let pendingTaskSolution = null;
   let solutionRevealed = false;
   let pendingRoundExit = false;
@@ -602,12 +899,28 @@ if (host) {
     persist();
   }
 
+  function taskSolution(task) {
+    if (task.surface === 'odd-one-out') {
+      const itemReasons = task.options
+        .map((option, index) => `${option}: ${task.explanations[index]}`)
+        .join('; ');
+      return `Regel: ${task.rule} Lösung: ${task.answer}. ${itemReasons}`;
+    }
+    if (task.surface === 'ordering') {
+      return `Reihenfolge: ${task.answer.join(' → ')}. ${task.explanation}`;
+    }
+    if (task.surface === 'word-logic') {
+      return `Lösung: ${task.answer}. ${task.explanation}`;
+    }
+    return `Lösung: ${task.answer}`;
+  }
+
   function showTaskResult(points, reason, detail = '', exitRound = false, revealAfterConfirm = false) {
     pendingTaskPoints = points;
     pendingRoundExit = exitRound;
     const task = state.activeRound.tasks[state.activeRound.currentIndex];
     pendingTaskSolution = revealAfterConfirm
-      ? detail || task.explanation || `Lösung: ${task.answer}`
+      ? detail || task.explanation || taskSolution(task)
       : null;
     solutionRevealed = false;
     const finalTask = exitRound || state.activeRound.currentIndex === 4;
@@ -713,6 +1026,10 @@ if (host) {
     }
     if (action === 'skip') {
       if (!window.confirm('Aufgabe überspringen? Sie wird endgültig mit 0 Punkten gewertet.')) return;
+      if (task.surface) {
+        showTaskResult(0, 'Aufgabe übersprungen', taskSolution(task), false, true);
+        return;
+      }
       if (task.inputType === 'sequence' || task.inputType === 'arithmetic') {
         showTaskResult(0, 'Aufgabe übersprungen', '', false, true);
         return;
@@ -736,7 +1053,7 @@ if (host) {
       showTaskResult(0, 'Lösung angezeigt', '', false, true);
       return;
     }
-    window.alert(`Lösung: ${task.answer}`);
+    window.alert(taskSolution(task));
     completeActiveTask(0);
     if (state.activeRound.currentIndex === 4) {
       state.activeRound.state = 'finished';
@@ -945,7 +1262,14 @@ if (host) {
       const specialized = task.inputType === 'sequence' || task.inputType === 'arithmetic';
       const choices = task.inputType === 'arithmetic'
         ? task.options.map((option, index) => `<label class="choice"><input type="radio" name="arithmetic-answer" data-option value="${index}" ${task.selectedOption === index ? 'checked' : ''}> ${escapeHtml(option.label)}</label>`).join('')
-        : task.inputType ? '' : task.options.map((option) => `<button class="choice" type="button" data-answer="${escapeHtml(option)}">${escapeHtml(option)}</button>`).join('');
+        : task.inputType ? '' : task.options?.map((option) => `<button class="choice ${task.incorrectAnswers?.includes(option) ? 'incorrect' : ''}" type="button" aria-pressed="${task.selectedAnswer === option}" data-answer="${escapeHtml(option)}">${escapeHtml(option)}${task.incorrectAnswers?.includes(option) ? '<span class="fine-print"> · zuvor falsch gewählt</span>' : ''}</button>`).join('');
+      const ordering = task.surface === 'ordering'
+        ? `<p class="fine-print">Verschiebe die Elemente per Ziehen oder mit den Schaltflächen, die auch vollständig per Tastatur bedienbar sind.</p><ol id="order-list" class="order-list" aria-label="Deine Reihenfolge">${task.currentOrder.map((item, index) => `<li class="order-item" draggable="true" data-order-index="${index}"><span class="drag-handle" aria-hidden="true">⠿</span><span>${escapeHtml(item)}</span><span class="actions"><button type="button" data-move="${index}" data-direction="-1" aria-label="${escapeHtml(item)} nach links">←</button><button type="button" data-move="${index}" data-direction="1" aria-label="${escapeHtml(item)} nach rechts">→</button></span></li>`).join('')}</ol>`
+        : '';
+      const wordExamples = task.surface === 'word-logic'
+        ? `<p class="fine-print"><strong>Beispiele:</strong> ${task.examples.map(([first, second]) => `${escapeHtml(first)} : ${escapeHtml(second)}`).join(' · ')}</p><p class="question">${escapeHtml(task.target)} : ?</p>`
+        : '';
+      const taskQuestion = task.surface === 'word-logic' ? wordExamples : `<p class="question">${escapeHtml(task.question)}</p>`;
       const arithmeticDetails = task.inputType === 'arithmetic'
         ? `<div class="puzzle-details"><h3>Gleichungen</h3><ul>${task.equations.map((equation) => `<li>${escapeHtml(equation)}</li>`).join('')}</ul><h3>Bedingungen</h3><ul>${task.conditions.map((condition) => `<li>${escapeHtml(condition)}</li>`).join('')}</ul><p>Wertebereiche: ${task.fields.map(({ name, min, max }) => `${escapeHtml(name)} ∈ {${min} … ${max}}`).join('; ')}</p></div><div class="choices" role="radiogroup" aria-label="Vollständige Feldbelegung">${choices}</div>`
         : '';
@@ -959,32 +1283,98 @@ if (host) {
         <p class="fine-print">${round.kind === 'extra' ? '<strong>Weitere Runde – ohne Wertung</strong> · ' : ''}${escapeHtml(task.mechanic)} · ${escapeHtml(task.difficulty)}</p>
         <h2>Aufgabe ${escapeHtml(round.currentIndex + 1)} von 5</h2>
         <div class="progress" aria-label="Rundenfortschritt">${progress}</div>
-        <p class="question">${escapeHtml(task.question)}</p>
-        ${arithmeticDetails}${sequenceInput}${!specialized ? `<div class="choices">${choices}</div>` : ''}
+        ${taskQuestion}
+        ${task.surface === 'odd-one-out' ? '<p class="fine-print">Wähle genau ein Element und bestätige deine Auswahl.</p>' : ''}
+        ${arithmeticDetails}${sequenceInput}${task.surface === 'ordering' ? ordering : !specialized ? `<div class="choices">${choices}</div>` : ''}
         <p id="feedback" class="status" role="status" aria-live="polite">${escapeHtml(task.feedback)}</p>
         <p id="error-count" class="fine-print">Fehler: ${escapeHtml(task.errors)} von 3</p>
         ${specializedActions}
-        <div class="actions"><button id="skip" type="button">Überspringen</button><button id="solution" type="button">Lösung anzeigen</button><button id="pause" type="button">Pause</button></div>
+        <div class="actions">${task.surface ? '<button id="check-answer" class="primary" type="button">Prüfen</button>' : ''}<button id="skip" type="button">Überspringen</button><button id="solution" type="button">Lösung anzeigen</button><button id="pause" type="button">Pause</button></div>
       </section>`;
       host.querySelectorAll('[data-answer]').forEach((button) => {
         button.addEventListener('click', () => {
-          const currentTask = state.activeRound.tasks[state.activeRound.currentIndex];
-          if (button.dataset.answer === currentTask.answer) {
-            showTaskResult(currentTask.errors >= 3 ? 0 : 100, 'Aufgabe ausgewertet');
+          if (task.surface) {
+            task.selectedAnswer = task.selectedAnswer === button.dataset.answer ? null : button.dataset.answer;
+            host.querySelectorAll('[data-answer]').forEach((choice) => {
+              choice.setAttribute('aria-pressed', String(choice.dataset.answer === task.selectedAnswer));
+            });
+            persist();
+            return;
+          }
+          if (button.dataset.answer === task.answer) {
+            showTaskResult(task.errors >= 3 ? 0 : 100, 'Aufgabe ausgewertet');
           } else {
-            currentTask.errors += 1;
-            const feedback = host.querySelector('#feedback');
-            if (currentTask.errors >= 3) {
-              feedback.textContent = 'Drei Fehler – die Aufgabe ist beendet und zählt 0 Punkte.';
+            task.errors += 1;
+            if (task.errors >= 3) {
+              host.querySelector('#feedback').textContent = 'Drei Fehler – die Aufgabe ist beendet und zählt 0 Punkte.';
               host.querySelectorAll('[data-answer]').forEach((choice) => { choice.disabled = true; });
               showTaskResult(0, 'Aufgabe beendet');
             } else {
-              feedback.textContent = `Das war leider nicht richtig. Noch ${3 - currentTask.errors} ${3 - currentTask.errors === 1 ? 'Versuch' : 'Versuche'}.`;
+              host.querySelector('#feedback').textContent = `Das war leider nicht richtig. Noch ${3 - task.errors} ${3 - task.errors === 1 ? 'Versuch' : 'Versuche'}.`;
               persist();
             }
           }
         });
       });
+      if (task.surface) {
+        host.querySelector('#check-answer').addEventListener('click', () => {
+          const answer = task.surface === 'ordering' ? task.currentOrder : task.selectedAnswer;
+          if (answer === null || answer === undefined) {
+            host.querySelector('#feedback').textContent = 'Wähle zuerst eine Antwort aus.';
+            return;
+          }
+          const correct = task.surface === 'ordering'
+            ? answer.length === task.answer.length && answer.every((item, index) => item === task.answer[index])
+            : answer === task.answer;
+          if (correct) {
+            showTaskResult(100, 'Aufgabe ausgewertet', taskSolution(task), false, true);
+            return;
+          }
+          task.errors += 1;
+          task.incorrectAnswers.push(task.surface === 'ordering' ? answer.join(' → ') : answer);
+          if (task.errors >= 3) {
+            host.querySelector('#feedback').textContent = 'Drei Fehler – die Aufgabe ist beendet und zählt 0 Punkte.';
+            showTaskResult(0, 'Aufgabe beendet', taskSolution(task), false, true);
+            return;
+          }
+          if (task.surface !== 'ordering') task.selectedAnswer = null;
+          persist();
+          render(`Das war leider nicht richtig. Noch ${3 - task.errors} ${3 - task.errors === 1 ? 'Versuch' : 'Versuche'}.`);
+          host.querySelector('#check-answer').focus();
+        });
+      }
+      host.querySelectorAll('[data-move]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const index = Number(button.dataset.move);
+          const nextIndex = index + Number(button.dataset.direction);
+          if (nextIndex < 0 || nextIndex >= task.currentOrder.length) return;
+          [task.currentOrder[index], task.currentOrder[nextIndex]] = [task.currentOrder[nextIndex], task.currentOrder[index]];
+          persist();
+          render();
+          host.querySelector(`[data-move="${nextIndex}"][data-direction="${button.dataset.direction}"]`)?.focus();
+        });
+      });
+      if (task.surface === 'ordering') {
+        let draggedIndex = null;
+        host.querySelectorAll('[data-order-index]').forEach((item) => {
+          item.addEventListener('dragstart', (event) => {
+            draggedIndex = Number(item.dataset.orderIndex);
+            event.dataTransfer?.setData('text/plain', String(draggedIndex));
+          });
+          item.addEventListener('dragover', (event) => event.preventDefault());
+          item.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const from = draggedIndex ?? Number(event.dataTransfer?.getData('text/plain'));
+            const to = Number(item.dataset.orderIndex);
+            if (!Number.isInteger(from) || from === to) return;
+            const [moved] = task.currentOrder.splice(from, 1);
+            task.currentOrder.splice(to, 0, moved);
+            draggedIndex = null;
+            persist();
+            render();
+          });
+        });
+      }
       if (task.inputType === 'sequence') {
         const answerInput = host.querySelector('#sequence-answer');
         answerInput.addEventListener('input', () => {
@@ -1065,7 +1455,7 @@ if (host) {
           task.hintsUsed.push(level + 1);
           task.hintText = task.hints[level];
           persist();
-          render();
+        render();
         });
       }
       host.querySelector('#skip').addEventListener('click', () => beginTaskAction('skip'));
@@ -1118,6 +1508,27 @@ if (host) {
     host.querySelector('#start-official').addEventListener('click', () => startRound('official'));
     host.querySelector('#start-extra').addEventListener('click', () => startRound('extra'));
   }
+
+  host.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'touch') return;
+    const handle = event.target.closest?.('.drag-handle');
+    const item = handle?.closest('[data-order-index]');
+    if (item) touchDragStartIndex = Number(item.dataset.orderIndex);
+  });
+  host.addEventListener('pointerup', (event) => {
+    if (touchDragStartIndex === null) return;
+    const from = touchDragStartIndex;
+    touchDragStartIndex = null;
+    const target = document.elementFromPoint(event.clientX, event.clientY)?.closest('#order-list [data-order-index]');
+    const to = Number(target?.dataset.orderIndex);
+    const activeTask = state.activeRound?.tasks[state.activeRound.currentIndex];
+    if (!target || from === to || activeTask?.surface !== 'ordering') return;
+    const [moved] = activeTask.currentOrder.splice(from, 1);
+    activeTask.currentOrder.splice(to, 0, moved);
+    persist();
+    render();
+  });
+  host.addEventListener('pointercancel', () => { touchDragStartIndex = null; });
 
   continueButton.addEventListener('click', confirmTaskResult);
   finishButton.addEventListener('click', confirmTaskResult);
