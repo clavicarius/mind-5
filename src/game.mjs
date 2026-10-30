@@ -117,14 +117,12 @@ const SEQUENCE_TEMPLATES = {
       kind: 'difference',
       start: 3,
       parameter: 4,
-      rule: 'Die Folge wächst jedes Mal um dieselbe Zahl.',
       patternHint: 'Addiere bei jedem Schritt dieselbe Zahl.',
     },
     {
       kind: 'factor',
       start: 1,
       parameter: 2,
-      rule: 'Jede Zahl wird mit 2 multipliziert.',
       patternHint: 'Multipliziere jeden Folgenterm mit demselben Faktor.',
     },
   ],
@@ -134,7 +132,6 @@ const SEQUENCE_TEMPLATES = {
       start: 1,
       firstDifference: 2,
       secondDifference: 5,
-      rule: 'Die Differenzen wechseln zwischen 2 und 5.',
       patternHint: 'Es wechseln sich zwei verschiedene Differenzen ab.',
     },
     {
@@ -142,7 +139,6 @@ const SEQUENCE_TEMPLATES = {
       start: 2,
       firstDifference: 1,
       secondDifference: 2,
-      rule: 'Die Differenz wächst bei jedem Schritt um 2.',
       patternHint: 'Betrachte die Differenzen zwischen benachbarten Zahlen.',
     },
   ],
@@ -204,7 +200,13 @@ export function createSequenceTask(ageGroup, difficulty, random = Math.random) {
   const shown = terms.slice(0, level === 'leicht' ? 5 : 6);
   const answer = terms.at(-1);
   const scale = SEQUENCE_SCALES[ageGroup];
-  const rule = template.rule.replaceAll(/(?<!\d)([25])(?=\D|$)/g, (value) => String(Number(value) * scale));
+  const rule = template.kind === 'difference'
+    ? `Die Folge wächst bei jedem Schritt um ${template.parameter * scale}.`
+    : template.kind === 'factor'
+      ? `Jede Zahl wird mit ${template.parameter} multipliziert.`
+      : template.kind === 'alternating'
+        ? `Die Differenzen wechseln zwischen ${template.firstDifference * scale} und ${template.secondDifference * scale}.`
+        : `Die Differenz wächst bei jedem Schritt um ${template.secondDifference * scale}.`;
   const calculation = template.kind === 'factor'
     ? `${shown.at(-1)} × ${template.parameter} = ${answer}`
     : `${shown.at(-1)} + ${answer - shown.at(-1)} = ${answer}`;
@@ -230,20 +232,22 @@ const ARITHMETIC_TEMPLATES = {
     leicht: {
       fields: [{ name: 'x', min: 0, max: 10 }, { name: 'y', min: 0, max: 10 }],
       equations: ['x + y = 11'],
-      conditions: ['x < y', 'x ist gerade', 'y > 8'],
+      conditions: ['x < y', 'x ist gerade (durch 2 teilbar)', 'y > 8'],
       solution: { x: 2, y: 9 },
       options: [{ x: 3, y: 8 }, { x: 4, y: 7 }, { x: 1, y: 10 }],
+      reasoning: 'Weil y größer als 8 ist und x + y = 11 gilt, bleiben nur y = 9 mit x = 2 oder y = 10 mit x = 1. x muss gerade sein, daher ist nur (2, 9) möglich.',
       isValid: ({ x, y }) => x + y === 11 && x < y && x % 2 === 0 && y > 8,
     },
     anspruchsvoll: {
       fields: ['x', 'y', 'z'].map((name) => ({ name, min: 0, max: 12 })),
       equations: ['x + y = 12', 'y + z = 9'],
-      conditions: ['y ist gerade', 'x ≤ 8', 'z > 4'],
+      conditions: ['y ist gerade (durch 2 teilbar)', 'x ≤ 8', 'z > 4'],
       solution: { x: 8, y: 4, z: 5 },
       options: [
         { x: 6, y: 6, z: 3 }, { x: 8, y: 4, z: 4 }, { x: 10, y: 2, z: 7 },
         { x: 7, y: 5, z: 4 },
       ],
+      reasoning: 'Aus y + z = 9 und z > 4 folgt y < 5. Mit geradem y, x + y = 12 und x ≤ 8 bleibt y = 4, also x = 8 und z = 5.',
       isValid: ({ x, y, z }) => x + y === 12 && y + z === 9 && y % 2 === 0 && x <= 8 && z > 4,
     },
   },
@@ -251,9 +255,10 @@ const ARITHMETIC_TEMPLATES = {
     leicht: {
       fields: [{ name: 'x', min: -10, max: 10 }, { name: 'y', min: -10, max: 10 }],
       equations: ['2 × x + y = 8'],
-      conditions: ['x ≥ 2', 'x < y', 'x ist gerade'],
+      conditions: ['x ≥ 2', 'x < y', 'x ist gerade (durch 2 teilbar)'],
       solution: { x: 2, y: 4 },
       options: [{ x: 4, y: 0 }, { x: 3, y: 2 }, { x: 2, y: 3 }],
+      reasoning: 'Aus 2 × x + y = 8 und x ≥ 2 sowie x < y folgt x = 2 und y = 4. Beide Bedingungen und die Gleichung sind damit erfüllt.',
       isValid: ({ x, y }) => 2 * x + y === 8 && x >= 2 && x < y && x % 2 === 0,
     },
     anspruchsvoll: {
@@ -265,6 +270,7 @@ const ARITHMETIC_TEMPLATES = {
         { x: 2, y: 10, z: 0 }, { x: 4, y: 6, z: 4 }, { x: 1, y: 10, z: 0 },
         { x: 3, y: 6, z: 4 },
       ],
+      reasoning: 'Aus y + z = 10 und z > 0 folgt y < 10. Mit 2 × x + y = 14 und x ≤ 3 bleibt x = 3, y = 8 und z = 2.',
       isValid: ({ x, y, z }) => 2 * x + y === 14 && y + z === 10 && x <= 3 && z > 0,
     },
   },
@@ -272,20 +278,22 @@ const ARITHMETIC_TEMPLATES = {
     leicht: {
       fields: [{ name: 'x', min: -10, max: 10 }, { name: 'y', min: -10, max: 10 }],
       equations: ['x² + y = 13'],
-      conditions: ['x > 0', 'x ist gerade', 'y > 0'],
+      conditions: ['x > 0', 'x ist gerade (durch 2 teilbar)', 'y > 0'],
       solution: { x: 2, y: 9 },
       options: [{ x: 4, y: -3 }, { x: 2, y: 8 }, { x: 3, y: 4 }],
+      reasoning: 'Aus x² + y = 13 und y > 0 folgt x² < 13. Die einzige positive gerade Zahl dafür ist x = 2, also y = 9.',
       isValid: ({ x, y }) => x ** 2 + y === 13 && x > 0 && x % 2 === 0 && y > 0,
     },
     anspruchsvoll: {
       fields: [{ name: 'x', min: 1, max: 10 }, { name: 'y', min: -20, max: 20 }, { name: 'z', min: -20, max: 20 }],
       equations: ['x² + y = 20', 'y + z = 9'],
-      conditions: ['x ist gerade', 'y ≥ 0', 'z > 0'],
+      conditions: ['x ist gerade (durch 2 teilbar)', 'y ≥ 0', 'z > 0'],
       solution: { x: 4, y: 4, z: 5 },
       options: [
         { x: 2, y: 16, z: -7 }, { x: 6, y: -16, z: 15 }, { x: 4, y: 3, z: 6 },
         { x: 2, y: 15, z: -6 },
       ],
+      reasoning: 'Aus x² + y = 20 und y ≥ 0 folgt x² ≤ 20. Aus y + z = 9 und z > 0 folgt x² > 11. Die einzige gerade Zahl dazwischen ist x = 4; damit y = 4 und z = 5.',
       isValid: ({ x, y, z }) => x ** 2 + y === 20 && y + z === 9 && x % 2 === 0 && y >= 0 && z > 0,
     },
   },
@@ -339,7 +347,7 @@ export function createArithmeticTask(ageGroup, difficulty, random = Math.random)
       level === 'leicht' ? 'Prüfe zuerst die angezeigte Gleichung.' : 'Beginne mit der Gleichung, die die meisten Felder verbindet.',
       level === 'leicht' ? `Prüfe zusätzlich: ${puzzle.conditions[0]}.` : 'Prüfe, welche Zusatzbedingungen beide Gleichungen gemeinsam einschränken.',
     ],
-    explanation: `Gleichungen: ${puzzle.equations.join('; ')}. Bedingungen: ${puzzle.conditions.join('; ')}. Lösung: ${answer}.`,
+    explanation: `${puzzle.reasoning} Lösung: ${answer}.`,
   };
 }
 
@@ -792,6 +800,12 @@ if (host) {
         const answerInput = host.querySelector('#sequence-answer');
         answerInput.addEventListener('input', () => {
           task.inputValue = answerInput.value;
+        });
+        answerInput.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            host.querySelector('#check').click();
+          }
         });
         host.querySelector('#undo').addEventListener('click', () => {
           task.inputValue = undoSequenceInput(task.inputValue);

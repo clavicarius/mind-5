@@ -104,6 +104,9 @@ test('creates profile-conformant number sequences and arithmetic assignments', (
       ))));
     }
   }
+  const multiplicationSequence = createSequenceTask('18+', 'leicht', () => 0.99);
+  assert.equal(multiplicationSequence.answer, 640);
+  assert.match(multiplicationSequence.rule, /mit 2 multipliziert/);
 });
 
 test('validates number entry and undo without accepting partial or formatted values', () => {
