@@ -2,12 +2,14 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const {
   AGE_GROUPS,
+  ACTIVITY_CONTENT,
   DIFFICULTY_PROFILES,
   TASKS,
   berlinDay,
   calculateDailyScore,
   createRound,
   recordTaskResult,
+  validateTaskContent,
 } = require('../src/game.mjs');
 
 test('offers all age groups and six exact difficulty profiles', () => {
@@ -82,4 +84,40 @@ test('each included question has one answer present among its choices', () => {
   }
   assert.ok(easy.tasks.every(({ difficulty, answer, options }) => difficulty === 'leicht' && options.includes(answer)));
   assert.ok(challenging.tasks.every(({ difficulty, answer, options }) => difficulty === 'anspruchsvoll' && options.includes(answer)));
+});
+
+test('each text and ordering activity has valid age- and difficulty-specific content', () => {
+  for (const mechanic of ['Was passt nicht?', 'Reihenfolge', 'Wortlogik']) {
+    assert.deepEqual(Object.keys(ACTIVITY_CONTENT[mechanic]).sort(), [...AGE_GROUPS].sort());
+    for (const ageGroup of AGE_GROUPS) {
+      for (const difficulty of ['leicht', 'anspruchsvoll']) {
+        const content = ACTIVITY_CONTENT[mechanic][ageGroup][difficulty];
+        assert.ok(validateTaskContent(content), `${mechanic}, ${ageGroup}, ${difficulty} must be valid`);
+
+        if (content.surface === 'odd-one-out') {
+          assert.equal(content.options.length, 5);
+          assert.equal(content.ruleMatches.length, 4);
+          assert.ok(!content.ruleMatches.includes(content.answer));
+        } else if (content.surface === 'ordering') {
+          assert.equal(content.items.length, difficulty === 'leicht' ? 4 : 5);
+          assert.equal(content.answer.length, content.items.length);
+        } else {
+          assert.equal(content.examples.length, difficulty === 'leicht' ? 1 : 2);
+          assert.equal(content.options.length, difficulty === 'leicht' ? 4 : 5);
+          assert.ok(content.options.includes(content.answer));
+        }
+      }
+    }
+  }
+});
+
+test('rejects ambiguous ordering and incomplete odd-one-out content', () => {
+  const ordering = ACTIVITY_CONTENT.Reihenfolge['8-12'].leicht;
+  assert.equal(validateTaskContent({
+    ...ordering,
+    constraints: [{ type: 'before', first: 'Leo', second: 'Mia' }],
+  }), false);
+
+  const oddOneOut = ACTIVITY_CONTENT['Was passt nicht?']['8-12'].leicht;
+  assert.equal(validateTaskContent({ ...oddOneOut, options: oddOneOut.options.slice(1) }), false);
 });

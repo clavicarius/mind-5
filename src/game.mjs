@@ -122,7 +122,7 @@ export const TASKS = [
   },
 ];
 
-const SPECIAL_TASK_CONTENT = {
+export const ACTIVITY_CONTENT = {
   'Was passt nicht?': {
     '8-12': {
       leicht: {
@@ -462,13 +462,21 @@ export function createRound({ kind = 'official', ageGroup, profileId, random = M
     tasks: selectedTasks.map((task, index) => {
       const taskDifficulty = difficulty[index];
       const baseContent = taskDifficulty === 'anspruchsvoll' ? task.challenging : task;
-      const content = SPECIAL_TASK_CONTENT[task.mechanic]?.[ageGroup]?.[taskDifficulty] ?? baseContent;
+      const content = ACTIVITY_CONTENT[task.mechanic]?.[ageGroup]?.[taskDifficulty] ?? baseContent;
       if (!validateTaskContent(content)) {
         throw new TypeError(`Ungültiger Aufgabeninhalt für ${task.mechanic}.`);
       }
+      const optionPairs = content.options?.map((option, optionIndex) => ({
+        option,
+        explanation: content.explanations?.[optionIndex],
+      }));
+      const shuffledOptionPairs = optionPairs ? shuffled(optionPairs, random) : null;
       const selectedContent = {
         ...content,
-        ...(content.options ? { options: shuffled(content.options, random) } : {}),
+        ...(shuffledOptionPairs ? {
+          options: shuffledOptionPairs.map(({ option }) => option),
+          ...(content.explanations ? { explanations: shuffledOptionPairs.map(({ explanation }) => explanation) } : {}),
+        } : {}),
         ...(content.items ? { items: shuffled(content.items, random) } : {}),
       };
       return {
@@ -604,13 +612,30 @@ if (host) {
     persist();
   }
 
+  function taskSolution(task) {
+    if (task.surface === 'odd-one-out') {
+      const itemReasons = task.options
+        .map((option, index) => `${option}: ${task.explanations[index]}`)
+        .join('; ');
+      return `Regel: ${task.rule} Lösung: ${task.answer}. ${itemReasons}`;
+    }
+    if (task.surface === 'ordering') {
+      return `Reihenfolge: ${task.answer.join(' → ')}. ${task.explanation}`;
+    }
+    if (task.surface === 'word-logic') {
+      return `Lösung: ${task.answer}. ${task.explanation}`;
+    }
+    return `Lösung: ${task.answer}`;
+  }
+
   function showTaskResult(points, reason) {
     pendingTaskPoints = points;
     const finalTask = state.activeRound.currentIndex === 4;
     document.querySelector('#dialog-title').textContent = reason;
-    dialogMessage.textContent = points === 0
+    const result = points === 0
       ? 'Diese Aufgabe zählt mit 0 Punkten.'
       : `Gut gemacht! Diese Aufgabe zählt mit ${points} Punkten.`;
+    dialogMessage.textContent = `${result} ${taskSolution(state.activeRound.tasks[state.activeRound.currentIndex])}`;
     continueButton.textContent = 'Weiter';
     continueButton.hidden = finalTask;
     finishButton.hidden = !finalTask;
@@ -691,7 +716,7 @@ if (host) {
       return;
     }
     if (!window.confirm('Lösung anzeigen? Die Aufgabe wird endgültig mit 0 Punkten gewertet.')) return;
-    window.alert(`Lösung: ${task.answer}`);
+    window.alert(taskSolution(task));
     completeActiveTask(0);
     if (state.activeRound.currentIndex === 4) {
       state.activeRound.state = 'finished';
