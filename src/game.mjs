@@ -483,7 +483,7 @@ if (host) {
         ? 'Richtig.'
         : task.questionResult === 'skipped'
           ? 'Frage übersprungen. Dafür gibt es keine Punkte.'
-          : `Das war leider nicht richtig. Fehler: ${task.errors} von 3.`;
+          : `Das war leider nicht richtig. Fehler: ${escapeHtml(task.errors)} von 3.`;
       content = `<p class="question">${escapeHtml(question.question)}</p>
         <p class="status" role="status" aria-live="polite">${resultMessage}</p>
         <button id="memory-next-question" class="primary" type="button">Weiter</button>`;
@@ -500,7 +500,7 @@ if (host) {
         <p class="fine-print">${multiSelect ? 'Wähle alle richtigen Antworten.' : 'Wähle eine Antwort.'}</p>
         <div class="choices">${choices}</div>
         <p id="feedback" class="status" role="status" aria-live="polite">${escapeHtml(task.hintMessage)}</p>
-        <p class="fine-print">Fehler: ${task.errors} von 3</p>
+        <p class="fine-print">Fehler: ${escapeHtml(task.errors)} von 3</p>
         <div class="actions">
           <button id="memory-check" class="primary" type="button" ${task.selectedAnswers.length ? '' : 'disabled'}>Antwort prüfen</button>
           ${hintButton}
