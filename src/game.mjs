@@ -196,7 +196,7 @@ export function validateNumberSequence(terms, answer, difficulty) {
   return candidates.length > 0 && candidates.every((candidate) => candidate === answer);
 }
 
-function createSequenceTask(ageGroup, difficulty, random) {
+export function createSequenceTask(ageGroup, difficulty, random = Math.random) {
   const level = difficulty === 'leicht' ? 'leicht' : 'anspruchsvoll';
   const templates = SEQUENCE_TEMPLATES[level];
   const template = templates[Math.floor(random() * templates.length)];
@@ -284,7 +284,7 @@ const ARITHMETIC_TEMPLATES = {
       solution: { x: 4, y: 4, z: 5 },
       options: [
         { x: 2, y: 16, z: -7 }, { x: 6, y: -16, z: 15 }, { x: 4, y: 3, z: 6 },
-        { x: 4, y: 4, z: 5 },
+        { x: 2, y: 15, z: -6 },
       ],
       isValid: ({ x, y, z }) => x ** 2 + y === 20 && y + z === 9 && x % 2 === 0 && y >= 0 && z > 0,
     },
@@ -317,13 +317,10 @@ function assignmentLabel(fields, values) {
   return fields.map(({ name }) => `${name} = ${values[name]}`).join(', ');
 }
 
-function createArithmeticTask(ageGroup, difficulty, random) {
+export function createArithmeticTask(ageGroup, difficulty, random = Math.random) {
   const level = difficulty === 'leicht' ? 'leicht' : 'anspruchsvoll';
   const puzzle = { ...ARITHMETIC_TEMPLATES[ageGroup][level] };
   puzzle.options = shuffled([puzzle.solution, ...puzzle.options], random);
-  if (level === 'anspruchsvoll' && puzzle.options.length < 5) {
-    puzzle.options.push({ ...puzzle.options[0], x: puzzle.options[0].x + 1 });
-  }
   if (!validateArithmeticPuzzle(puzzle)) throw new TypeError('Die Rechenlogik-Aufgabe ist nicht eindeutig lösbar.');
   const options = puzzle.options.map((values) => ({
     values,
@@ -367,6 +364,22 @@ export function hintCost(ageGroup, level) {
 
 export function pointsAfterHints(ageGroup, hintsUsed) {
   return Math.max(0, 100 - hintsUsed.reduce((total, level) => total + hintCost(ageGroup, level), 0));
+}
+
+export function resetMechanicAttempt(task) {
+  task.inputValue = '';
+  task.selectedOption = null;
+  task.feedback = '';
+}
+
+export function registerMechanicError(task) {
+  task.errors += 1;
+  task.inputValue = '';
+  task.selectedOption = null;
+  task.feedback = task.errors === 3
+    ? 'Drei Fehler – die Aufgabe ist beendet und zählt 0 Punkte.'
+    : `Das war leider nicht richtig. Noch ${3 - task.errors} ${3 - task.errors === 1 ? 'Versuch' : 'Versuche'}.`;
+  return task.errors >= 3;
 }
 
 export function berlinDay(date = new Date()) {
@@ -743,7 +756,7 @@ if (host) {
         ? `<label for="sequence-answer">Nächste Zahl</label><input id="sequence-answer" type="text" inputmode="numeric" autocomplete="off" maxlength="6" aria-describedby="sequence-range" value="${escapeHtml(task.inputValue)}"><p id="sequence-range" class="fine-print">Ganze Zahl von 0 bis ${SEQUENCE_LIMITS[round.ageGroup]}.</p>`
         : '';
       const specializedActions = specialized
-        ? `<div class="actions"><button id="restart" type="button" ${task.errors >= 3 ? 'disabled' : ''}>Neustart</button>${task.inputType === 'sequence' ? '<button id="undo" type="button">Rückgängig</button>' : ''}<button id="hint" type="button" ${task.hintsUsed.length >= 2 ? 'disabled' : ''}>${task.hintsUsed.length >= 2 ? 'Keine Hinweise mehr' : 'Nächsten Hinweis anzeigen'}</button><button id="check" class="primary" type="button">Prüfen</button></div><p class="fine-print">Mögliche Punkte: ${pointsAfterHints(round.ageGroup, task.hintsUsed)} von 100</p>${task.hintText ? `<p class="status" role="status">Hinweis ${task.hintsUsed.length}: ${escapeHtml(task.hintText)}</p>` : ''}`
+        ? `<div class="actions"><button id="restart" type="button" ${task.errors >= 3 ? 'disabled' : ''}>Neustart</button>${task.inputType === 'sequence' ? '<button id="undo" type="button">Rückgängig</button>' : `<button id="clear-selection" type="button" ${task.selectedOption === null ? 'disabled' : ''}>Auswahl aufheben</button>`}<button id="hint" type="button" ${task.hintsUsed.length >= 2 ? 'disabled' : ''}>${task.hintsUsed.length >= 2 ? 'Keine Hinweise mehr' : 'Nächsten Hinweis anzeigen'}</button><button id="check" class="primary" type="button">Prüfen</button></div><p class="fine-print">Mögliche Punkte: ${pointsAfterHints(round.ageGroup, task.hintsUsed)} von 100</p>${task.hintText ? `<p class="status" role="status">Hinweis ${task.hintsUsed.length}: ${escapeHtml(task.hintText)}</p>` : ''}`
         : '';
       host.innerHTML = `${alert}<section class="card">
         <p class="fine-print">${round.kind === 'extra' ? '<strong>Weitere Runde – ohne Wertung</strong> · ' : ''}${escapeHtml(task.mechanic)} · ${escapeHtml(task.difficulty)}</p>
@@ -793,8 +806,15 @@ if (host) {
           input.addEventListener('change', () => {
             task.selectedOption = Number(input.value);
             task.feedback = '';
+            host.querySelector('#clear-selection').disabled = false;
             persist();
           });
+        });
+        host.querySelector('#clear-selection').addEventListener('click', () => {
+          task.selectedOption = null;
+          task.feedback = '';
+          persist();
+          render();
         });
       }
       if (specialized) {
@@ -817,17 +837,13 @@ if (host) {
             correct = task.options[task.selectedOption]?.label === task.answer;
           }
           if (correct) {
+            task.feedback = '';
             showTaskResult(pointsAfterHints(round.ageGroup, task.hintsUsed), 'Richtig', true);
             return;
           }
-          task.errors += 1;
-          task.inputValue = '';
-          task.selectedOption = null;
-          task.feedback = task.errors === 3
-            ? 'Drei Fehler – die Aufgabe ist beendet und zählt 0 Punkte.'
-            : `Das war leider nicht richtig. Noch ${3 - task.errors} ${3 - task.errors === 1 ? 'Versuch' : 'Versuche'}.`;
+          const taskEnded = registerMechanicError(task);
           persist();
-          if (task.errors === 3) {
+          if (taskEnded) {
             showTaskResult(0, 'Aufgabe beendet', true);
           } else {
             render();
@@ -835,9 +851,7 @@ if (host) {
         });
         host.querySelector('#restart').addEventListener('click', () => {
           if (!window.confirm('Aufgabe neu starten? Fehler und verwendete Hinweise bleiben erhalten.')) return;
-          task.inputValue = '';
-          task.selectedOption = null;
-          task.feedback = '';
+          resetMechanicAttempt(task);
           persist();
           render();
           host.querySelector(task.inputType === 'sequence' ? '#sequence-answer' : '[data-option]')?.focus();
