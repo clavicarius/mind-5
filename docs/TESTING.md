@@ -13,7 +13,9 @@ npm test
 
 The tests check the page landmarks and logo, the age groups and six exact
 difficulty profiles, five-task round composition, daily score calculation,
-Berlin calendar dates, selectable answers, and Memory Logic content and scoring.
+Berlin calendar dates, sequence input and undo, hint costs and attempt resets,
+profile-conformant number sequences and arithmetic assignments, selectable
+answers, and Memory Logic content and scoring.
 
 GitHub Actions runs the same command for pull requests targeting `main` and
 when changes are pushed to `main`.

@@ -6,8 +6,17 @@ const {
   TASKS,
   berlinDay,
   calculateDailyScore,
+  createArithmeticTask,
   createRound,
+  createSequenceTask,
+  hintCost,
+  pointsAfterHints,
+  registerMechanicError,
   recordTaskResult,
+  resetMechanicAttempt,
+  undoSequenceInput,
+  validateNumberSequence,
+  validateSequenceInput,
 } = require('../src/game.mjs');
 const {
   calculateMemoryScore,
@@ -77,24 +86,100 @@ test('uses the Berlin calendar day rather than UTC', () => {
   assert.equal(berlinDay(new Date('2026-10-28T23:30:00Z')), '2026-10-29');
 });
 
+test('creates profile-conformant number sequences and arithmetic assignments', () => {
+  assert.equal(TASKS.length, 10);
+  const maximums = { '8-12': 100, '13-17': 1_000, '18+': 10_000 };
+  for (const ageGroup of AGE_GROUPS) {
+    for (const [difficulty, count, optionCount, equationCount] of [
+      ['leicht', 5, 4, 1],
+      ['anspruchsvoll', 6, 5, 2],
+    ]) {
+      const sequence = createSequenceTask(ageGroup, difficulty, () => 0.37);
+      assert.equal(sequence.sequence.length, count);
+      assert.ok([...sequence.sequence, sequence.answer].every((term) => term <= maximums[ageGroup]));
+      assert.ok(validateNumberSequence(sequence.sequence, sequence.answer, difficulty));
+
+      const arithmetic = createArithmeticTask(ageGroup, difficulty, () => 0.37);
+      assert.equal(arithmetic.options.length, optionCount);
+      assert.equal(arithmetic.equations.length, equationCount);
+      assert.equal(new Set(arithmetic.options.map(({ label }) => label)).size, optionCount);
+      assert.equal(arithmetic.options.filter(({ label }) => label === arithmetic.answer).length, 1);
+      assert.ok(arithmetic.options.every(({ values }) => arithmetic.fields.every(({ name, min, max }) => (
+        Number.isInteger(values[name]) && values[name] >= min && values[name] <= max
+      ))));
+    }
+  }
+  const multiplicationSequence = createSequenceTask('18+', 'leicht', () => 0.99);
+  assert.equal(multiplicationSequence.answer, 640);
+  assert.match(multiplicationSequence.rule, /mit 2 multipliziert/);
+});
+
+test('validates number entry and undo without accepting partial or formatted values', () => {
+  assert.deepEqual(validateSequenceInput(' +30 ', 100), { valid: true, value: 30 });
+  for (const input of ['', '+', '3.5', '1,000', 'abc', '-1', '101']) {
+    assert.equal(validateSequenceInput(input, 100).valid, false, input);
+  }
+  assert.equal(undoSequenceInput('123'), '12');
+  assert.equal(undoSequenceInput('+12'), '+1');
+  assert.equal(undoSequenceInput('+'), '');
+  assert.equal(undoSequenceInput('03'), '');
+  assert.equal(undoSequenceInput('0'), '');
+});
+
+test('applies hint costs and preserves them across an attempt reset', () => {
+  assert.equal(hintCost('8-12', 1), 0);
+  assert.equal(hintCost('18+', 1), 10);
+  assert.equal(hintCost('13-17', 2), 20);
+  assert.equal(pointsAfterHints('18+', [1, 2]), 70);
+  assert.equal(pointsAfterHints('8-12', [1, 2]), 80);
+
+  const task = {
+    errors: 1,
+    hintsUsed: [1],
+    inputValue: '48',
+    selectedOption: 2,
+    feedback: 'wrong',
+  };
+  resetMechanicAttempt(task);
+  assert.equal(task.inputValue, '');
+  assert.equal(task.selectedOption, null);
+  assert.equal(task.feedback, '');
+  assert.equal(task.errors, 1);
+  assert.deepEqual(task.hintsUsed, [1]);
+});
+
+test('counts only confirmed wrong mechanic answers and ends on the third error', () => {
+  const task = { errors: 0, inputValue: '99', selectedOption: 1, hintsUsed: [1] };
+  assert.equal(registerMechanicError(task), false);
+  assert.equal(task.errors, 1);
+  assert.equal(task.inputValue, '');
+  assert.equal(task.selectedOption, null);
+  assert.equal(registerMechanicError(task), false);
+  assert.equal(registerMechanicError(task), true);
+  assert.equal(task.errors, 3);
+  assert.deepEqual(task.hintsUsed, [1]);
+});
+
 test('all included mechanic answers are selectable', () => {
   assert.equal(TASKS.length, 10);
   const easy = createRound({ ageGroup: '13-17', profileId: 1, random: () => 0 });
   const challenging = createRound({ ageGroup: '13-17', profileId: 6, random: () => 0 });
   for (const task of TASKS) {
-    if (task.mechanic === 'Memory Logic') continue;
+    if (task.mechanic === 'Memory Logic' || task.inputType) continue;
     assert.ok(task.options.includes(task.answer), `${task.mechanic} answer must be selectable`);
     assert.ok(task.challenging.options.includes(task.challenging.answer), `${task.mechanic} challenging answer must be selectable`);
   }
   assert.ok(easy.tasks.every(({ mechanic, difficulty, answer, options }) => (
-    mechanic === 'Memory Logic'
-      ? difficulty === 'leicht' && answer === undefined && options === undefined
-      : difficulty === 'leicht' && options.includes(answer)
+    mechanic === 'Memory Logic' ? difficulty === 'leicht' && options === undefined
+      : mechanic === 'Zahlenfolge' ? difficulty === 'leicht' && answer !== undefined && options === undefined
+        : mechanic === 'Rechenlogik' ? difficulty === 'leicht' && options.length === 4 && options.some(({ label }) => label === answer)
+          : difficulty === 'leicht' && options.includes(answer)
   )));
   assert.ok(challenging.tasks.every(({ mechanic, difficulty, answer, options }) => (
-    mechanic === 'Memory Logic'
-      ? difficulty === 'anspruchsvoll' && answer === undefined && options === undefined
-      : difficulty === 'anspruchsvoll' && options.includes(answer)
+    mechanic === 'Memory Logic' ? difficulty === 'anspruchsvoll' && options === undefined
+      : mechanic === 'Zahlenfolge' ? difficulty === 'anspruchsvoll' && answer !== undefined && options === undefined
+        : mechanic === 'Rechenlogik' ? difficulty === 'anspruchsvoll' && options.length >= 5 && options.some(({ label }) => label === answer)
+          : difficulty === 'anspruchsvoll' && options.includes(answer)
   )));
 });
 
