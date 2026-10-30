@@ -45,7 +45,7 @@
       gap: 0.75rem;
     }
     .choices { margin: 1rem 0; }
-    .choice, button, select {
+    .choice, button, select, input[type="text"] {
       min-height: 2.8rem;
       border: 1px solid #65728d;
       border-radius: 0.6rem;
@@ -54,6 +54,7 @@
       background: #26344f;
       font: inherit;
     }
+    input[type="text"] { width: min(100%, 16rem); }
     button { cursor: pointer; font-weight: 650; }
     button:hover, .choice:hover { background: #354765; }
     button:disabled { cursor: not-allowed; opacity: 0.6; }
@@ -105,10 +106,14 @@
     .drag-handle { padding: 0.35rem; cursor: grab; touch-action: none; user-select: none; }
     .order-item .actions { flex-wrap: nowrap; gap: 0.35rem; }
     .order-item button { min-width: 2.8rem; padding-inline: 0.55rem; }
-    .choice:focus-visible, button:focus-visible, select:focus-visible, a:focus-visible {
+    label.choice { display: flex; align-items: center; justify-content: center; gap: 0.65rem; margin: 0; }
+    .choice:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible {
       outline: 3px solid #fff;
       outline-offset: 3px;
     }
+    .puzzle-details { margin: 1rem 0; padding: 0.8rem 1rem; border: 1px solid #46516b; border-radius: 0.65rem; }
+    .puzzle-details h3 { margin: 0.4rem 0; font-size: 1rem; }
+    .puzzle-details ul { margin: 0.3rem 0 0.8rem; }
     dialog {
       width: min(calc(100% - 2rem), 30rem);
       border: 1px solid #65728d;
@@ -118,6 +123,7 @@
       background: #1c263b;
     }
     dialog::backdrop { background: rgb(5 10 20 / 75%); }
+    #dialog-message { white-space: pre-line; }
     nav { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
     a { color: #b7d2ff; font-weight: 600; }
     @media (prefers-reduced-motion: reduce) {
