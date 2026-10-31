@@ -105,6 +105,76 @@
     .puzzle-details { margin: 1rem 0; padding: 0.8rem 1rem; border: 1px solid #46516b; border-radius: 0.65rem; }
     .puzzle-details h3 { margin: 0.4rem 0; font-size: 1rem; }
     .puzzle-details ul { margin: 0.3rem 0 0.8rem; }
+    .visual-sequence {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 3.5rem), 1fr));
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .visual-slot, .visual-grid td {
+      min-width: 0;
+      min-height: 3.8rem;
+      padding: 0.35rem;
+      border: 1px solid #65728d;
+      border-radius: 0.55rem;
+      text-align: center;
+      vertical-align: middle;
+      background: #202c42;
+    }
+    .visual-grid {
+      width: min(100%, 22rem);
+      margin: 1rem auto;
+      border-spacing: 0.4rem;
+      table-layout: fixed;
+    }
+    .visual-grid td { height: 4.5rem; }
+    .missing-slot { color: #fff; font-size: 1.8rem; font-weight: 700; }
+    .pattern-token, .grid-token { display: grid; justify-items: center; gap: 0.15rem; }
+    .shape-token { display: inline-block; font-size: clamp(1.7rem, 6vw, 2.5rem); line-height: 1.1; }
+    .shape-token.size-klein { font-size: 1.25rem; }
+    .shape-token.size-mittel { font-size: 1.8rem; }
+    .shape-token.size-groß { font-size: 2.25rem; }
+    .pattern-token small, .grid-token small, .compare-item small { color: #d0d5e2; font-size: 0.75rem; }
+    .visual-choices { justify-content: center; }
+    .visual-option { display: flex; min-width: 5rem; flex-direction: column; align-items: center; justify-content: center; }
+    .visual-option[aria-pressed="true"], .compare-item[aria-pressed="true"] {
+      border-color: #b7d2ff;
+      box-shadow: 0 0 0 2px #b7d2ff;
+    }
+    .shape-canvas { display: block; width: min(100%, 8rem); margin: 0 auto; aspect-ratio: 1; }
+    .scene-cell { fill: #b7d2ff; stroke: #f5f6fa; stroke-width: 0.08; }
+    .component-1 { fill: #8ed3b1; }
+    .component-2 { fill: #ffdda1; }
+    .rotation-puzzle { display: grid; grid-template-columns: minmax(5rem, 1fr) auto minmax(0, 2fr); align-items: center; gap: 0.8rem; }
+    .rotation-puzzle figure { min-width: 0; margin: 0; text-align: center; }
+    .rotation-puzzle figcaption { margin-bottom: 0.4rem; font-weight: 650; }
+    .rotation-arrow { font-size: 1.2rem; white-space: nowrap; }
+    .rotation-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+    .rotation-options .visual-option { min-width: 0; }
+    .compare-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .compare-panels h3 { font-size: 1rem; }
+    .compare-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+    .compare-item {
+      display: grid;
+      min-width: 0;
+      min-height: 4.4rem;
+      padding: 0.25rem;
+      place-items: center;
+      align-content: center;
+      border: 1px solid #65728d;
+      border-radius: 0.55rem;
+      background: #202c42;
+    }
+    button.compare-item { width: 100%; }
+    .compare-item .shape-token { font-size: clamp(1.4rem, 5vw, 2rem); }
+    .fill-gestreift { text-decoration: underline; text-decoration-style: double; text-underline-offset: 0.15em; }
+    .fill-leer { -webkit-text-stroke: 1px #b7d2ff; color: transparent; }
+    @media (max-width: 34rem) {
+      .compare-panels { grid-template-columns: 1fr; }
+      .rotation-puzzle { grid-template-columns: minmax(4rem, 1fr) auto minmax(0, 1.5fr); gap: 0.4rem; }
+      .visual-sequence { gap: 0.3rem; }
+      .visual-slot { min-height: 3.2rem; }
+    }
     dialog {
       width: min(calc(100% - 2rem), 30rem);
       border: 1px solid #65728d;

@@ -4,6 +4,11 @@ import {
   isMemoryAnswerCorrect,
   memorySolution,
 } from './memory-logic.mjs';
+import {
+  createVisualTask,
+  isVisualAnswerCorrect,
+  renderVisualPrompt,
+} from './visual-logic.mjs';
 
 export const AGE_GROUPS = ['8-12', '13-17', '18+'];
 
@@ -22,17 +27,7 @@ export const TASKS = [
     mechanic: 'Zahlenfolge',
     inputType: 'sequence',
   },
-  {
-    mechanic: 'Muster fortsetzen',
-    question: 'Welches Zeichen kommt als Nächstes? ○ △ ○ △ ○ ?',
-    options: ['○', '△', '□'],
-    answer: '△',
-    challenging: {
-      question: 'Welches Zeichen kommt als Nächstes? ○ △ △ ○ △ △ ○ ?',
-      options: ['○', '△', '□'],
-      answer: '△',
-    },
-  },
+  { mechanic: 'Muster fortsetzen', inputType: 'visual' },
   {
     mechanic: 'Was passt nicht?',
     question: 'Welche Zahl passt nicht in die Reihe?',
@@ -44,28 +39,8 @@ export const TASKS = [
       answer: '20',
     },
   },
-  {
-    mechanic: 'Raster-Logik',
-    question: 'In jeder Zeile wechseln sich A und B ab: A B / B ?',
-    options: ['A', 'B', 'C'],
-    answer: 'A',
-    challenging: {
-      question: 'Jede Zahl rechts ist doppelt so groß wie die links: 2 → 4, 3 → 6, 4 → ?',
-      options: ['6', '8', '10'],
-      answer: '8',
-    },
-  },
-  {
-    mechanic: 'Drehen & Denken',
-    question: 'Ein Pfeil ↑ wird um 90° im Uhrzeigersinn gedreht. Wohin zeigt er?',
-    options: ['←', '→', '↓'],
-    answer: '→',
-    challenging: {
-      question: 'Ein Pfeil ↗ wird um 90° im Uhrzeigersinn gedreht. Wohin zeigt er?',
-      options: ['↖', '↘', '↙'],
-      answer: '↘',
-    },
-  },
+  { mechanic: 'Raster-Logik', inputType: 'visual' },
+  { mechanic: 'Drehen & Denken', inputType: 'visual' },
   {
     mechanic: 'Reihenfolge',
     question: 'Welche Zahlenfolge ist aufsteigend geordnet?',
@@ -77,17 +52,7 @@ export const TASKS = [
       answer: 'Bo',
     },
   },
-  {
-    mechanic: 'Visueller Vergleich',
-    question: 'Was hat sich verändert? ● ◆ ●  →  ● ○ ●',
-    options: ['Das mittlere Zeichen', 'Das linke Zeichen', 'Das rechte Zeichen'],
-    answer: 'Das mittlere Zeichen',
-    challenging: {
-      question: 'Was hat sich verändert? ● ◆ ▲  →  ● ○ ■',
-      options: ['Die letzten beiden Zeichen', 'Das letzte Zeichen', 'Nur das mittlere Zeichen'],
-      answer: 'Die letzten beiden Zeichen',
-    },
-  },
+  { mechanic: 'Visueller Vergleich', inputType: 'visual' },
   {
     mechanic: 'Wortlogik',
     question: 'Katze verhält sich zu Kätzchen wie Hund zu …',
@@ -104,6 +69,7 @@ export const TASKS = [
     inputType: 'arithmetic',
   },
 ];
+const VISUAL_MECHANICS = ['Muster fortsetzen', 'Raster-Logik', 'Drehen & Denken', 'Visueller Vergleich'];
 
 const SEQUENCE_LIMITS = { '8-12': 100, '13-17': 1_000, '18+': 10_000 };
 const SEQUENCE_SCALES = { '8-12': 1, '13-17': 5, '18+': 20 };
@@ -374,6 +340,7 @@ export function pointsAfterHints(ageGroup, hintsUsed) {
 export function resetMechanicAttempt(task) {
   task.inputValue = '';
   task.selectedOption = null;
+  task.selectedPositions = [];
   task.feedback = '';
 }
 
@@ -381,6 +348,7 @@ export function registerMechanicError(task) {
   task.errors += 1;
   task.inputValue = '';
   task.selectedOption = null;
+  task.selectedPositions = [];
   task.feedback = task.errors === 3
     ? 'Drei Fehler – die Aufgabe ist beendet und zählt 0 Punkte.'
     : `Das war leider nicht richtig. Noch ${3 - task.errors} ${3 - task.errors === 1 ? 'Versuch' : 'Versuche'}.`;
@@ -463,7 +431,9 @@ export function createRound({ kind = 'official', ageGroup, profileId, random = M
         ? createSequenceTask(ageGroup, taskDifficulty, random)
         : task.inputType === 'arithmetic'
           ? createArithmeticTask(ageGroup, taskDifficulty, random)
-          : taskDifficulty === 'anspruchsvoll' ? task.challenging : task;
+          : VISUAL_MECHANICS.includes(task.mechanic)
+            ? createVisualTask(task.mechanic, ageGroup, taskDifficulty, random)
+            : taskDifficulty === 'anspruchsvoll' ? task.challenging : task;
       return {
         mechanic: task.mechanic,
         ...content,
@@ -472,6 +442,7 @@ export function createRound({ kind = 'official', ageGroup, profileId, random = M
         hintsUsed: [],
         inputValue: '',
         selectedOption: null,
+        selectedPositions: [],
         feedback: '',
         points: null,
       };
@@ -713,7 +684,7 @@ if (host) {
     }
     if (action === 'skip') {
       if (!window.confirm('Aufgabe überspringen? Sie wird endgültig mit 0 Punkten gewertet.')) return;
-      if (task.inputType === 'sequence' || task.inputType === 'arithmetic') {
+      if (task.inputType === 'sequence' || task.inputType === 'arithmetic' || task.inputType?.startsWith('visual-')) {
         showTaskResult(0, 'Aufgabe übersprungen', '', false, true);
         return;
       }
@@ -732,7 +703,7 @@ if (host) {
       return;
     }
     if (!window.confirm('Lösung anzeigen? Die Aufgabe wird endgültig mit 0 Punkten gewertet.')) return;
-    if (task.inputType === 'sequence' || task.inputType === 'arithmetic') {
+    if (task.inputType === 'sequence' || task.inputType === 'arithmetic' || task.inputType?.startsWith('visual-')) {
       showTaskResult(0, 'Lösung angezeigt', '', false, true);
       return;
     }
@@ -942,10 +913,12 @@ if (host) {
         return;
       }
       const progress = round.tasks.map((item, index) => `<span class="${index < round.currentIndex ? 'done' : ''} ${index === round.currentIndex ? 'current' : ''}" aria-current="${index === round.currentIndex ? 'step' : 'false'}">Aufgabe ${index + 1}</span>`).join('');
-      const specialized = task.inputType === 'sequence' || task.inputType === 'arithmetic';
+      const visualTask = task.inputType === 'visual-choice' || task.inputType === 'visual-comparison';
+      const specialized = task.inputType === 'sequence' || task.inputType === 'arithmetic' || visualTask;
       const choices = task.inputType === 'arithmetic'
         ? task.options.map((option, index) => `<label class="choice"><input type="radio" name="arithmetic-answer" data-option value="${index}" ${task.selectedOption === index ? 'checked' : ''}> ${escapeHtml(option.label)}</label>`).join('')
         : task.inputType ? '' : task.options.map((option) => `<button class="choice" type="button" data-answer="${escapeHtml(option)}">${escapeHtml(option)}</button>`).join('');
+      const visualPrompt = visualTask ? renderVisualPrompt(task, task.selectedPositions) : '';
       const arithmeticDetails = task.inputType === 'arithmetic'
         ? `<div class="puzzle-details"><h3>Gleichungen</h3><ul>${task.equations.map((equation) => `<li>${escapeHtml(equation)}</li>`).join('')}</ul><h3>Bedingungen</h3><ul>${task.conditions.map((condition) => `<li>${escapeHtml(condition)}</li>`).join('')}</ul><p>Wertebereiche: ${task.fields.map(({ name, min, max }) => `${escapeHtml(name)} ∈ {${min} … ${max}}`).join('; ')}</p></div><div class="choices" role="radiogroup" aria-label="Vollständige Feldbelegung">${choices}</div>`
         : '';
@@ -953,14 +926,14 @@ if (host) {
         ? `<label for="sequence-answer">Nächste Zahl</label><input id="sequence-answer" type="text" inputmode="numeric" autocomplete="off" maxlength="6" aria-describedby="sequence-range" value="${escapeHtml(task.inputValue)}"><p id="sequence-range" class="fine-print">Ganze Zahl von 0 bis ${SEQUENCE_LIMITS[round.ageGroup]}.</p>`
         : '';
       const specializedActions = specialized
-        ? `<div class="actions"><button id="restart" type="button" ${task.errors >= 3 ? 'disabled' : ''}>Neustart</button>${task.inputType === 'sequence' ? '<button id="undo" type="button">Rückgängig</button>' : `<button id="clear-selection" type="button" ${task.selectedOption === null ? 'disabled' : ''}>Auswahl aufheben</button>`}<button id="hint" type="button" ${task.hintsUsed.length >= 2 ? 'disabled' : ''}>${task.hintsUsed.length >= 2 ? 'Keine Hinweise mehr' : 'Nächsten Hinweis anzeigen'}</button><button id="check" class="primary" type="button">Prüfen</button></div><p class="fine-print">Mögliche Punkte: ${pointsAfterHints(round.ageGroup, task.hintsUsed)} von 100</p>${task.hintText ? `<p class="status" role="status">Hinweis ${task.hintsUsed.length}: ${escapeHtml(task.hintText)}</p>` : ''}`
+        ? `<div class="actions"><button id="restart" type="button" ${task.errors >= 3 ? 'disabled' : ''}>Neustart</button>${task.inputType === 'sequence' ? '<button id="undo" type="button">Rückgängig</button>' : `<button id="clear-selection" type="button" ${(task.inputType === 'visual-comparison' ? task.selectedPositions.length === 0 : task.selectedOption === null) ? 'disabled' : ''}>Auswahl aufheben</button>`}<button id="hint" type="button" ${task.hintsUsed.length >= 2 ? 'disabled' : ''}>${task.hintsUsed.length >= 2 ? 'Keine Hinweise mehr' : 'Nächsten Hinweis anzeigen'}</button><button id="check" class="primary" type="button">Prüfen</button></div><p class="fine-print">Mögliche Punkte: ${pointsAfterHints(round.ageGroup, task.hintsUsed)} von 100</p>${task.hintText ? `<p class="status" role="status">Hinweis ${task.hintsUsed.length}: ${escapeHtml(task.hintText)}</p>` : ''}`
         : '';
       host.innerHTML = `${alert}<section class="card">
         <p class="fine-print">${round.kind === 'extra' ? '<strong>Weitere Runde – ohne Wertung</strong> · ' : ''}${escapeHtml(task.mechanic)} · ${escapeHtml(task.difficulty)}</p>
         <h2>Aufgabe ${escapeHtml(round.currentIndex + 1)} von 5</h2>
         <div class="progress" aria-label="Rundenfortschritt">${progress}</div>
         <p class="question">${escapeHtml(task.question)}</p>
-        ${arithmeticDetails}${sequenceInput}${!specialized ? `<div class="choices">${choices}</div>` : ''}
+        ${visualPrompt}${arithmeticDetails}${sequenceInput}${!specialized ? `<div class="choices">${choices}</div>` : ''}
         <p id="feedback" class="status" role="status" aria-live="polite">${escapeHtml(task.feedback)}</p>
         <p id="error-count" class="fine-print">Fehler: ${escapeHtml(task.errors)} von 3</p>
         ${specializedActions}
@@ -1020,6 +993,34 @@ if (host) {
           render();
         });
       }
+      if (visualTask) {
+        host.querySelectorAll('[data-visual-option]').forEach((button) => {
+          button.addEventListener('click', () => {
+            task.selectedOption = Number(button.dataset.visualOption);
+            task.feedback = '';
+            persist();
+            render();
+          });
+        });
+        host.querySelectorAll('[data-compare-position]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const position = Number(button.dataset.comparePosition);
+            task.selectedPositions = task.selectedPositions.includes(position)
+              ? task.selectedPositions.filter((selected) => selected !== position)
+              : [...task.selectedPositions, position].sort((a, b) => a - b);
+            task.feedback = '';
+            persist();
+            render();
+          });
+        });
+        host.querySelector('#clear-selection').addEventListener('click', () => {
+          task.selectedOption = null;
+          task.selectedPositions = [];
+          task.feedback = '';
+          persist();
+          render();
+        });
+      }
       if (specialized) {
         host.querySelector('#check').addEventListener('click', () => {
           let correct = false;
@@ -1031,13 +1032,25 @@ if (host) {
               return;
             }
             correct = result.value === task.answer;
-          } else {
+          } else if (task.inputType === 'arithmetic') {
             if (task.selectedOption === null) {
               task.feedback = 'Wähle zuerst eine vollständige Belegung aus.';
               host.querySelector('#feedback').textContent = task.feedback;
               return;
             }
             correct = task.options[task.selectedOption]?.label === task.answer;
+          } else {
+            const selectionEmpty = task.inputType === 'visual-comparison'
+              ? task.selectedPositions.length === 0
+              : task.selectedOption === null;
+            if (selectionEmpty) {
+              task.feedback = task.inputType === 'visual-comparison'
+                ? 'Wähle zuerst mindestens eine Position aus.'
+                : 'Wähle zuerst eine Kachel aus.';
+              host.querySelector('#feedback').textContent = task.feedback;
+              return;
+            }
+            correct = isVisualAnswerCorrect(task, task.selectedOption, task.selectedPositions);
           }
           if (correct) {
             task.feedback = '';
@@ -1057,7 +1070,9 @@ if (host) {
           resetMechanicAttempt(task);
           persist();
           render();
-          host.querySelector(task.inputType === 'sequence' ? '#sequence-answer' : '[data-option]')?.focus();
+          host.querySelector(task.inputType === 'sequence'
+            ? '#sequence-answer'
+            : '[data-option], [data-visual-option], [data-compare-position]')?.focus();
         });
         host.querySelector('#hint').addEventListener('click', () => {
           const level = task.hintsUsed.length;
