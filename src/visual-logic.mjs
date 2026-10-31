@@ -20,6 +20,13 @@ const SHAPES = {
 };
 const FILLS = ['voll', 'gestreift', 'leer'];
 const SIZES = ['klein', 'mittel', 'groß'];
+const ROTATION_SHAPES = [
+  [[0, 0], [0, 1], [1, 1], [2, 1], [2, 2], [3, 2]],
+  [[0, 0], [1, 0], [1, 1], [2, 1], [2, 2], [3, 2]],
+  [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [2, 1]],
+  [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2], [3, 2]],
+  [[0, 0], [0, 1], [1, 1], [1, 2], [2, 2], [3, 2]],
+];
 
 function choose(items, random) {
   return items[Math.floor(random() * items.length)];
@@ -107,10 +114,7 @@ function createGridTask(ageGroup, difficulty, random) {
   const shapes = shuffled(SHAPES[ageGroup].map(({ name }) => name), random).slice(0, 3);
   const fills = hard ? shuffled(FILLS, random) : undefined;
   const grid = latinGrid(shapes, choose([1, 2], random), choose([1, 2], random))
-    .map((row, rowIndex) => row.map((shape, columnIndex) => gridModel(
-      shape,
-      fills?.[(rowIndex * choose([1, 2], random) + columnIndex) % 3],
-    )));
+    .map((row) => row.map((shape) => gridModel(shape)));
   if (hard) {
     const fillGrid = latinGrid(fills, choose([1, 2], random), choose([1, 2], random));
     grid.forEach((row, rowIndex) => row.forEach((cell, columnIndex) => {
@@ -176,27 +180,16 @@ function createRotationTask(ageGroup, difficulty, random) {
   const hard = difficulty === 'anspruchsvoll';
   const ageIndex = ['8-12', '13-17', '18+'].indexOf(ageGroup);
   const size = (hard ? 6 : 5) + ageIndex;
-  const easyShape = [
-    [[0, 0], [0, 1], [1, 1], [2, 1]],
-    [[0, 0], [0, 1], [1, 1], [2, 1], [2, 2]],
-    [[0, 0], [0, 1], [1, 1], [2, 1], [2, 2], [3, 1]],
-  ][ageIndex];
-  const hardShape = [
-    [[0, 0], [0, 1], [1, 1]],
-    [[0, 0], [0, 1], [1, 1], [2, 1]],
-    [[0, 0], [0, 1], [1, 1], [2, 1], [2, 2]],
-  ][ageIndex];
-  const secondShape = [
-    [[0, 0], [1, 0], [1, 1]],
-    [[0, 0], [1, 0], [1, 1], [2, 1]],
-    [[0, 0], [1, 0], [1, 1], [2, 1], [2, 2]],
-  ][ageIndex];
+  const variant = Math.floor(random() * ROTATION_SHAPES.length);
+  const shapeCells = hard ? [3, 4, 5][ageIndex] : [4, 5, 6][ageIndex];
+  const firstShape = ROTATION_SHAPES[variant].slice(0, shapeCells);
+  const secondShape = ROTATION_SHAPES[(variant + 2) % ROTATION_SHAPES.length].slice(0, shapeCells);
   const source = hard
     ? [
-      { cells: hardShape },
+      { cells: firstShape },
       { cells: secondShape.map(([row, column]) => [row + 3, column + 3]) },
     ]
-    : [{ cells: easyShape }];
+    : [{ cells: firstShape }];
   const angle = choose([90, 180, 270], random);
   const correct = rotateScene(source, size, angle);
   const options = shuffled([
@@ -284,8 +277,7 @@ function validatePattern(task) {
   const expectedLength = hard ? 7 : 5;
   if (sequence.length !== expectedLength || sequence.at(-1) !== null
     || sequence.slice(0, -1).some((item) => !item)
-    || options.length !== (hard ? options.length : 4)
-    || (hard && ![5, 6].includes(options.length))
+    || (hard ? ![5, 6].includes(options.length) : options.length !== 4)
     || new Set(options.map(modelKey)).size !== options.length) return false;
   const expected = shapeModel(
     rule.shapeCycle[(expectedLength - 1) % rule.shapeCycle.length],
@@ -306,8 +298,7 @@ function validateGrid(task) {
     || grid.flat().filter((cell) => cell === null).length !== 1
     || grid[missing.row][missing.column] !== null
     || features.length !== (hard ? 2 : 1)
-    || options.length !== (hard ? options.length : 4)
-    || (hard && ![5, 6].includes(options.length))
+    || (hard ? ![5, 6].includes(options.length) : options.length !== 4)
     || new Set(options.map(modelKey)).size !== options.length) return false;
   for (const feature of features) {
     for (let index = 0; index < 3; index += 1) {
@@ -327,10 +318,17 @@ function validateGrid(task) {
 function validateRotation(task) {
   const { size, source, angle, options } = task.visual;
   const hard = task.difficulty === 'anspruchsvoll';
+  const ageIndex = ['8-12', '13-17', '18+'].indexOf(task.ageGroup);
+  const expectedCells = hard ? [3, 4, 5][ageIndex] : [4, 5, 6][ageIndex];
   const expected = rotateScene(source, size, angle);
-  return [90, 180, 270].includes(angle)
+  return ageIndex >= 0
+    && size === (hard ? 6 : 5) + ageIndex
+    && [90, 180, 270].includes(angle)
     && source.length === (hard ? 2 : 1)
-    && source.every(({ cells }) => cells.length >= (hard ? 3 : 3))
+    && source.every(({ cells }) => cells.length === expectedCells
+      && new Set(cells.map(([row, column]) => `${row},${column}`)).size === cells.length
+      && cells.every(([row, column]) => Number.isInteger(row) && Number.isInteger(column)
+        && row >= 0 && row < size && column >= 0 && column < size))
     && options.length === 4
     && new Set(options.map(sceneKey)).size === 4
     && options.filter((option) => sceneKey(option) === sceneKey(expected)).length === 1
@@ -358,11 +356,15 @@ function validateComparison(task) {
 
 export function validateVisualTask(task) {
   if (!task?.visual || !task.difficulty) return false;
-  if (task.visualType === 'pattern') return validatePattern(task);
-  if (task.visualType === 'grid') return validateGrid(task);
-  if (task.visualType === 'rotation') return validateRotation(task);
-  if (task.visualType === 'comparison') return validateComparison(task);
-  return false;
+  try {
+    if (task.visualType === 'pattern') return validatePattern(task);
+    if (task.visualType === 'grid') return validateGrid(task);
+    if (task.visualType === 'rotation') return validateRotation(task);
+    if (task.visualType === 'comparison') return validateComparison(task);
+    return false;
+  } catch {
+    return false;
+  }
 }
 
 export function createVisualTask(mechanic, ageGroup, difficulty, random = Math.random) {
@@ -386,8 +388,11 @@ export function createVisualTask(mechanic, ageGroup, difficulty, random = Math.r
 }
 
 export function isVisualAnswerCorrect(task, selectedOption, selectedPositions = []) {
-  if (task.inputType === 'visual-choice') return selectedOption === task.answer;
-  if (task.inputType !== 'visual-comparison') return false;
+  if (task?.inputType === 'visual-choice') {
+    return Number.isInteger(selectedOption) && selectedOption === task.answer;
+  }
+  if (task?.inputType !== 'visual-comparison') return false;
+  if (!Array.isArray(selectedPositions)) return false;
   return selectedPositions.length === task.answer.length
     && new Set(selectedPositions).size === selectedPositions.length
     && task.answer.every((position) => selectedPositions.includes(position));

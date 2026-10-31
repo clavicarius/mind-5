@@ -14,8 +14,8 @@ const mechanics = ['Muster fortsetzen', 'Raster-Logik', 'Drehen & Denken', 'Visu
 function seededRandom(seed) {
   let state = seed;
   return () => {
-    state = (state * 1_103_515_245 + 12_345) % 2 ** 31;
-    return state / 2 ** 31;
+    state = (state * 48_271) % 2_147_483_647;
+    return state / 2_147_483_647;
   };
 }
 
@@ -50,8 +50,9 @@ test('uses the profile counts for sequence, grid, rotation, and comparison tasks
   for (const difficulty of difficulties) {
     const pattern = createVisualTask('Muster fortsetzen', '13-17', difficulty, seededRandom(3));
     assert.equal(pattern.visual.sequence.length, difficulty === 'leicht' ? 5 : 7);
-    assert.equal(pattern.visual.options.length, difficulty === 'leicht' ? 4 : pattern.visual.options.length);
-    assert.ok(difficulty === 'leicht' || [5, 6].includes(pattern.visual.options.length));
+    assert.ok(difficulty === 'leicht'
+      ? pattern.visual.options.length === 4
+      : [5, 6].includes(pattern.visual.options.length));
 
     const grid = createVisualTask('Raster-Logik', '13-17', difficulty, seededRandom(4));
     assert.equal(grid.visual.grid.length, 3);
@@ -77,4 +78,31 @@ test('rejects invalid profiles and requires complete visual-comparison selection
   const task = createVisualTask('Visueller Vergleich', '18+', 'leicht', seededRandom(7));
   assert.equal(isVisualAnswerCorrect(task, null, []), false);
   assert.equal(isVisualAnswerCorrect(task, null, [...task.answer, task.answer[0]]), false);
+  assert.equal(validateVisualTask(null), false);
+  assert.equal(validateVisualTask({ visualType: 'grid', visual: { grid: [] }, difficulty: 'leicht' }), false);
+  assert.equal(isVisualAnswerCorrect(null, null), false);
+});
+
+test('adapts rotation silhouettes to the age-group profile', () => {
+  const expectedCells = { '8-12': 4, '13-17': 5, '18+': 6 };
+  for (const [ageGroup, count] of Object.entries(expectedCells)) {
+    for (const difficulty of difficulties) {
+      const variants = Array.from({ length: 5 }, (_, variant) => {
+        let first = true;
+        const random = () => {
+          if (first) {
+            first = false;
+            return variant / 5;
+          }
+          return 0.37;
+        };
+        return createVisualTask('Drehen & Denken', ageGroup, difficulty, random);
+      });
+      assert.equal(new Set(variants.map(({ visual }) => JSON.stringify(visual.source))).size, 5);
+      const cells = variants[0].visual.source.map(({ cells: points }) => points.length);
+      assert.deepEqual(cells, Array(difficulty === 'leicht' ? 1 : 2).fill(
+        difficulty === 'leicht' ? count : count - 1,
+      ));
+    }
+  }
 });
