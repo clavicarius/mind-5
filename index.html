@@ -97,6 +97,15 @@
     .progress .done { border-color: #8ed3b1; color: #c6f2da; }
     .question { margin: 1.5rem 0; font-size: clamp(1.2rem, 4vw, 1.6rem); font-weight: 650; }
     .choice { flex: 1 1 8rem; text-align: center; }
+    .choice[aria-pressed="true"] { border-color: #b7d2ff; box-shadow: 0 0 0 2px #b7d2ff; }
+    .choice.incorrect { border-style: dashed; }
+    .order-list { display: grid; gap: 0.65rem; margin: 1rem 0; padding-left: 2.5rem; }
+    .order-item { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 3.2rem; padding: 0.45rem 0.6rem; border: 1px solid #65728d; border-radius: 0.6rem; background: #26344f; touch-action: manipulation; }
+    .order-item[draggable="true"] { cursor: grab; }
+    .order-item:active { cursor: grabbing; }
+    .drag-handle { padding: 0.35rem; cursor: grab; touch-action: none; user-select: none; }
+    .order-item .actions { flex-wrap: nowrap; gap: 0.35rem; }
+    .order-item button { min-width: 2.8rem; padding-inline: 0.55rem; }
     label.choice { display: flex; align-items: center; justify-content: center; gap: 0.65rem; margin: 0; }
     .choice:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible {
       outline: 3px solid #fff;

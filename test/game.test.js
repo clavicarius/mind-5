@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const {
   AGE_GROUPS,
+  ACTIVITY_CONTENT,
   DIFFICULTY_PROFILES,
   TASKS,
   berlinDay,
@@ -13,6 +14,7 @@ const {
   pointsAfterHints,
   registerMechanicError,
   recordTaskResult,
+  validateTaskContent,
   resetMechanicAttempt,
   undoSequenceInput,
   validateNumberSequence,
@@ -43,6 +45,21 @@ test('creates five tasks with the selected profile distribution', () => {
     assert.equal(round.tasks.filter(({ difficulty }) => difficulty === 'leicht').length, profile.easy);
     assert.equal(round.tasks.filter(({ difficulty }) => difficulty === 'anspruchsvoll').length, profile.challenging);
   }
+});
+
+test('creates ordering tasks without requiring answer options', () => {
+  let value = 10;
+  const round = createRound({
+    kind: 'extra',
+    ageGroup: '13-17',
+    profileId: 3,
+    random: () => {
+      value = (value * 16_807) % 2_147_483_647;
+      return (value - 1) / 2_147_483_646;
+    },
+  });
+  assert.equal(round.tasks[0].surface, 'ordering');
+  assert.equal(round.tasks[0].currentOrder.length, round.tasks[0].items.length);
 });
 
 test('validates round settings and marks further rounds consistently', () => {
@@ -225,4 +242,40 @@ test('checks complete answer sets and calculates Memory Logic points and hint pe
   assert.equal(calculateMemoryScore({ ...task, hintsUsed: 2 }, '8-12'), 60);
   assert.equal(calculateMemoryScore({ ...task, hintsUsed: 2 }, '18+'), 50);
   assert.equal(calculateMemoryScore({ ...task, errors: 3 }, '13-17'), 0);
+});
+
+test('each text and ordering activity has valid age- and difficulty-specific content', () => {
+  for (const mechanic of ['Was passt nicht?', 'Reihenfolge', 'Wortlogik']) {
+    assert.deepEqual(Object.keys(ACTIVITY_CONTENT[mechanic]).sort(), [...AGE_GROUPS].sort());
+    for (const ageGroup of AGE_GROUPS) {
+      for (const difficulty of ['leicht', 'anspruchsvoll']) {
+        const content = ACTIVITY_CONTENT[mechanic][ageGroup][difficulty];
+        assert.ok(validateTaskContent(content), `${mechanic}, ${ageGroup}, ${difficulty} must be valid`);
+
+        if (content.surface === 'odd-one-out') {
+          assert.equal(content.options.length, 5);
+          assert.equal(content.ruleMatches.length, 4);
+          assert.ok(!content.ruleMatches.includes(content.answer));
+        } else if (content.surface === 'ordering') {
+          assert.equal(content.items.length, difficulty === 'leicht' ? 4 : 5);
+          assert.equal(content.answer.length, content.items.length);
+        } else {
+          assert.equal(content.examples.length, difficulty === 'leicht' ? 1 : 2);
+          assert.equal(content.options.length, difficulty === 'leicht' ? 4 : 5);
+          assert.ok(content.options.includes(content.answer));
+        }
+      }
+    }
+  }
+});
+
+test('rejects ambiguous ordering and incomplete odd-one-out content', () => {
+  const ordering = ACTIVITY_CONTENT.Reihenfolge['8-12'].leicht;
+  assert.equal(validateTaskContent({
+    ...ordering,
+    constraints: [{ type: 'before', first: 'Leo', second: 'Mia' }],
+  }), false);
+
+  const oddOneOut = ACTIVITY_CONTENT['Was passt nicht?']['8-12'].leicht;
+  assert.equal(validateTaskContent({ ...oddOneOut, options: oddOneOut.options.slice(1) }), false);
 });
